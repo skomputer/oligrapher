@@ -1,15 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import BaseComponent from './BaseComponent';
 import { CompactPicker } from 'react-color';
+import ds from '../NodeDisplaySettings';
+
 
 export default class ChangeColorInput extends BaseComponent {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      displayColorPicker: false,
-      color: "#cccccc"
- 	 },
+      displayColorPicker: false 	 
+    };
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleValueChange = this.handleValueChange.bind(this);
@@ -27,7 +28,7 @@ export default class ChangeColorInput extends BaseComponent {
 
   handleClearClick() {
   	this.handleClose();
-  	this.onChange("#cccccc");
+  	this.onChange(ds.circleColor[this.props.parent.props.data.display.status]);
   }
 
   handleValueChange(color) {
@@ -36,7 +37,7 @@ export default class ChangeColorInput extends BaseComponent {
 
   onChange(newColor) {
   	this.setState({ color: newColor });
-    this.props.parent.apply(newColor);
+    this.props.onChange(newColor)
   }
 
   render() {
@@ -44,7 +45,7 @@ export default class ChangeColorInput extends BaseComponent {
 
       <div id= "nodeColorInputWrapper">
 	      <div id="swatch"  className="input-sm form-control">
-	         <div id="color" style={{background: this.state.color }} onClick={ this.handleClick }/>
+	         <div id="color" style={{background: this.props.value }} onClick={ this.handleClick }/>
 	         <button id="nodeColorInputClearer" onClick={ () => this.handleClearClick() }>
 	         	<span className="glyphicon glyphicon-remove-sign"></span>
 	         </button>

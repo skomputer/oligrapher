@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import BaseComponent from './BaseComponent';
 import { HotKeys } from 'react-hotkeys';
 import merge from 'lodash/object/merge';
-import ChangeColorInput from './ChangeColorInput'
+import ChangeColorInput from './ChangeColorInput';
+import ds from '../NodeDisplaySettings';
 
 export default class UpdateNodeForm extends BaseComponent {
 
@@ -12,9 +13,9 @@ export default class UpdateNodeForm extends BaseComponent {
     let { display } = this.props.data;
 
     if (!display.color){
-      display.color = "#cccccc";
+      display.color = ds.circleColor[display.status];
     }
-
+    
     const keyMap = { 
       'esc': 'esc'
     };
@@ -54,7 +55,8 @@ export default class UpdateNodeForm extends BaseComponent {
             <ChangeColorInput
             parent={this}
             ref="color"
-            value={display.color} />
+            value={display.color}
+            onChange={color => this.apply(color)} />
             &nbsp;
             <select 
               value={display.scale} 
