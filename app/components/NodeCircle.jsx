@@ -43,7 +43,7 @@ export default class NodeCircle extends BaseComponent {
 
   _circle() {
     const n = this.props.node;
-    const { scale, status, image } = n.display;
+    const { scale, status, color, image } = n.display;
     const r = ds.circleRadius * scale;
     const clipId = `image-clip-${n.id}`;
     const clipPath = `url(#${clipId})`;
@@ -65,13 +65,12 @@ export default class NodeCircle extends BaseComponent {
          clip-path="${clipPath}">
        </image>`
     };
-
     return image ? 
       <g dangerouslySetInnerHTML={innerHTML} /> :
       <circle 
         className="handle" 
         r={r}
-        fill={ds.circleColor[status]}
+        fill={color ? color : ds.circleColor[status]}
         opacity={ds.circleOpacity[status]}>
       </circle>;
   }
