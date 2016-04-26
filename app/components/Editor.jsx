@@ -4,6 +4,7 @@ import { HotKeys } from 'react-hotkeys';
 import BaseComponent from './BaseComponent';
 import ZoomButtons from './ZoomButtons';
 import EditTools from './EditTools';
+import HelpScreen from './HelpScreen';
 import merge from 'lodash/object/merge';
 import values from 'lodash/object/values';
 import cloneDeep from 'lodash/lang/cloneDeep';
@@ -148,7 +149,7 @@ export default class Editor extends BaseComponent {
   }
 
   _toggleHelpScreen() {
-    this.setState({ addForm: null, helpScreen: !this.state.helpScreen });
+    this.props.toggleHelpScreen();
   }
 
   _clearGraph() {
