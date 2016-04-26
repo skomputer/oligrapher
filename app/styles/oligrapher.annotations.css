@@ -2,10 +2,6 @@
   position: relative;
 }
 
-#oligrapherGraphContainer {
-  position: relative;
-}
-
 #oligrapherHeader {
   margin-bottom: 10px;  
 }
@@ -85,7 +81,7 @@
 }
 
 #oligrapherSaveButton {
-  position: fixed;
+  position: absolute;
   bottom: 20px;
   left: 20px;
   background-color: #f8f8f8;
@@ -149,6 +145,12 @@
   0%   { color: #666; background-color:#eee; text-shadow: 0 0 9px rgba(255,255,255,0); }
   50%  { color: #666; background-color:#ffd; text-shadow: 0 0 9px rgba(255,255,128,0.75); }
   100% { color: #666; background-color:#eee; text-shadow: 0 0 9px rgba(255,255,255,0); }
+}
+
+#oligrapherGraphAnnotations{
+  height: 100%;
+  overflow-y: auto; 
+  margin-bottom: 20px;
 }
 
 #oligrapherAnnotationListItems {
