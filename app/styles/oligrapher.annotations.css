@@ -158,8 +158,7 @@
 
 #oligrapherGraphAnnotations{
   max-height: 95%;
-  overflow-y: hidden;
-  /*overflow-y: auto;*/
+  overflow-y: auto;
 }
 
 #oligrapherAnnotationListItems {
