@@ -23,6 +23,13 @@ export default class GraphAnnotationForm extends BaseComponent {
 
     return (
       <div id="oligrapherGraphAnnotationForm">
+        { this.props.isEditor ? 
+            <button 
+              id="oligrapherCreateGraphAnnotationButton"
+              className="btn btn-sm btn-default" 
+              onClick={this.props.create}>
+              New Annotation
+            </button> : null }
         <textarea
           id="oligrapherGraphAnnotationFormHeader"
           ref="header"
