@@ -76,6 +76,11 @@
   margin-bottom: 10px;
 }
 
+#oligrapherEditorContainer{
+  position: absolute;
+  top: 0px;
+}
+
 #oligrapherEditButton.editContentMode {
   background-color: rgba(0, 255, 0, 0.5);
 }
@@ -152,8 +157,9 @@
 }
 
 #oligrapherGraphAnnotations{
-  max-height: 100%;
-  overflow-y: auto;
+  max-height: 95%;
+  overflow-y: hidden;
+  /*overflow-y: auto;*/
 }
 
 #oligrapherAnnotationListItems {

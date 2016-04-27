@@ -58,10 +58,16 @@ a.nodeLabel text tspan {
 #oligrapherGraphContainer {
   position: relative;
   border: 1px solid #f8f8f8;
+  height: calc(100% - 80px); /*accounting for oligrapherHeader*/
+}
+
+#oligrapherGraphCol{
+  height: 100%;
 }
 
 #oligrapherHeader {
   margin-bottom: 10px;  
+  height:70px; /*hate to do this but prefer this to table model if we're keeping this semi-legacy compatible*/
 }
 
 #oligrapherTitle {
