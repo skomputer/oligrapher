@@ -1,5 +1,17 @@
+html, body{
+  width:100%;
+  height:100%;
+  padding: 0px;
+}
+
 #oligrapherContainer:focus, #oligrapherContainer :focus {
   outline: none;
+}
+
+#oligrapher{
+  position: relative;
+  width: 100%;
+  height:100%;
 }
 
 a.nodeLabel {
@@ -38,6 +50,8 @@ a.nodeLabel text tspan {
 /* from annotations app */
 
 #oligrapherContainer {
+  position: relative;
+  height: 100%;
   position: relative;
 }
 
@@ -78,6 +92,14 @@ a.nodeLabel text tspan {
 
 #oligrapherDate {
   color: #888;
+}
+
+#oligrapherWrapper{
+  height: 100%;
+}
+
+#hotKeyWrapper{
+  height: 100%;
 }
 
 #oligrapherGraphLinks {

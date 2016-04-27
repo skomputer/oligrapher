@@ -151,6 +151,11 @@
   100% { color: #666; background-color:#eee; text-shadow: 0 0 9px rgba(255,255,255,0); }
 }
 
+#oligrapherGraphAnnotations{
+  max-height: 100%;
+  overflow-y: auto;
+}
+
 #oligrapherAnnotationListItems {
   padding: 0;
   list-style-type: none;

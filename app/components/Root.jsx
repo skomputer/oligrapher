@@ -140,8 +140,8 @@ class Root extends Component {
 
     return (
       <div id="oligrapherContainer" style={{ height: '100%' }}>
-        <HotKeys focused={true} attach={window} keyMap={keyMap} handlers={keyHandlers}>
-          <div className="row">
+        <HotKeys focused={true} attach={window} keyMap={keyMap} handlers={keyHandlers} id = "hotKeyWrapper">
+          <div className="row" id = "oligrapherWrapper">
             <div id="oligrapherGraphCol" className={showAnnotations ? "col-md-8" : "col-md-12"}>
               { (isEditor || title) && 
                 <GraphHeader
@@ -188,7 +188,7 @@ class Root extends Component {
                   { isEditor && 
                     <HelpButton toggleHelpScreen={() => dispatch(toggleHelpScreen())} /> }
                 </div>
-
+                { showSaveButton && isEditor && onSave && <SaveButton save={() => this.handleSave()} /> }
                 { showSettings && hasSettings && <GraphSettingsForm settings={graphSettings} updateSettings={updateSettings} /> }
               </div>
             </div>
@@ -220,7 +220,6 @@ class Root extends Component {
               </button>
             </div> 
           }
-          { showSaveButton && isEditor && onSave && <SaveButton save={() => this.handleSave()} /> }
           { showHelpScreen && <HelpScreen source={this.props.dataSource} close={() => dispatch(toggleHelpScreen(false))} /> }
         </HotKeys>
       </div>
