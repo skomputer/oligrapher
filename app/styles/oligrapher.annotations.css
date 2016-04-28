@@ -114,6 +114,7 @@
 #oligrapherNavButtons {
   margin-top: 5px;
   margin-bottom: 25px;
+  flex: 0 1 10%;
 }
 
 #oligrapherNavButtons button {
@@ -158,7 +159,9 @@
 
 #oligrapherGraphAnnotations{
   max-height: 95%;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
 }
 
 #oligrapherAnnotationListItems {
@@ -193,9 +196,18 @@
   background-color: #eee;
 }
 
+#oligrapherAnnotationList {
+  flex: 1 1 auto;
+  overflow-y: scroll;
+}
+
 #oligrapherAnnotationList button {
   margin-top: 0px;
   margin-bottom: 5px;
+}
+
+#oligrapherCreateGraphAnnotationButton{
+  margin-bottom: 10px;
 }
 
 #oligrapherGraphAnnotationEditButton {
@@ -204,6 +216,7 @@
 
 #oligrapherGraphAnnotationForm {
   margin-top: 10px;
+  flex: 0 1 10%;
 }
 
 #oligrapherGraphAnnotationForm textarea {
