@@ -17,10 +17,6 @@ export default class GraphAnnotations extends Component {
       <GraphNavButtons {...this.props} />
     );
 
-    let formComponent = (
-      <GraphAnnotationForm {...this.props} />
-    );
-
     let annotationComponent = (
       <GraphAnnotation {...this.props} />
     );
@@ -33,7 +29,6 @@ export default class GraphAnnotations extends Component {
       <div id="oligrapherGraphAnnotations" className="col-md-4">
         { (annotation || isEditor) && navComponent }
         { isEditor && navList && navListComponent }
-        { annotation && (isEditor ? formComponent : annotationComponent) }
       </div>
     );
   }

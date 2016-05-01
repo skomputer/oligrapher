@@ -180,17 +180,22 @@
 #oligrapherAnnotationListItems li {
   font-size: 18px;
   line-height: 34px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-left: -10px;
   border-bottom: 1px solid #eee;
   cursor: pointer;
   width: 100%;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   border-radius: 3px;
 }
+
+#oligrapherAnnotationListItems li input{
+  border: none;
+  width: calc(100% - 20px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 10px;
+}
+
+
 
 #oligrapherAnnotationListItems li.active {
   background-color: #eee;
