@@ -1,32 +1,36 @@
-// import React, { Component, PropTypes } from 'react';
-// import BaseComponent from './BaseComponent';
+import React, { Component, PropTypes } from 'react';
+import BaseComponent from './BaseComponent';
 
-// export default class GraphAnnotationListItem extends BaseComponent {
-//   constructor(props) {
-//     super(props);
-//     this.bindAll('_handleDragStart', '_handleDragEnd', '_handleChange');
-//   }
+export default class GraphAnnotationListItem extends BaseComponent {
+  constructor(props) {
+    super(props);
+    // this.bindAll('_handleDragStart', '_handleDragEnd', '_handleChange');
+  }
 
-//   render() {
-//     let active = this.props.currentIndex == this.props.index;
+  render() {
+    return (
+      <li
+        className={this.props.childClass}
+        onDrag={this.props.onDrag}
+        onDragEnd={this.props.onDragEnd}
+        onClick={this.props.onClick}
+        draggable={true}
+        id={"a" + this.props.index}
+        >
+        <span className="glyphicon glyphicon-edit"></span>
+        <input
+          onChange={this._handleChange}
+          value={this.props.annotationAttributes.header}
+          readOnly={true} />
+      </li>
+    );
+  }
 
-//     return (
-//       <li></li>
-//     );
-//   }
+  
 
-//   _handleChange() {
+  _handleChange() {
 
-//   }
+  }
 
-//   _handleDragStart() {
 
-//   }
-
-//   _handleDragEnd() {
-    
-//   }
-
-//   _handleClick() {
-//   }
-// }
+}

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BaseComponent from './BaseComponent';
+import GraphAnnotationListItem from './GraphAnnotationListItem';
 
 export default class GraphAnnotationList extends BaseComponent {
   constructor(props) {
@@ -13,21 +14,15 @@ export default class GraphAnnotationList extends BaseComponent {
     return (
       <div id="oligrapherAnnotationList">
         <ul id="oligrapherAnnotationListItems" onDragOver={this._handleDragOver}>
-          { this.props.annotations.map((annotation, index) =>
-          <li key={annotation.id}
-              onDragStart={this._handleDragStart}
-              onDragEnd={this._handleDragEnd}
-              draggable={true} 
-              className={index == this.props.currentIndex ? "active" : null}
-              data-id={index} >
-            <span className="glyphicon glyphicon-edit"></span>
-            <input
-              draggable={false}
+          { this.props.annotations.map(function(annotation, index) {
+            return <GraphAnnotationListItem
+              key={annotation.id}
+              annotationAttributes={annotation}
               onClick={this._handleClick}
-              onChange={this._handleChange}
-              value={annotation.header.trim().length > 0 ? annotation.header : "Untitled Annotation"}
-              readOnly={true} />
-          </li>
+              onDrag={this._handleDragStart}
+              onDragEnd={this._handleDragEnd}
+              index={index}/>
+          }, this
           ) }
         </ul>
       </div>
@@ -35,7 +30,7 @@ export default class GraphAnnotationList extends BaseComponent {
   }
 
   _handleChange(e) {
-    // console.log(annotation.header);
+  
   }
 
   _handleClick(e) {
@@ -47,12 +42,9 @@ export default class GraphAnnotationList extends BaseComponent {
   }
 
   _handleDragStart(e) {
-    if (!e.currentTarget.draggable){
-      e.currentTarget = e.target.parentNode;
-    }
     this._startY = e.clientY;
     this._dragged = e.currentTarget;
-    this._placeholder.innerHTML = '<span className="glyphicon glyphicon-edit"></span>';
+    this._placeholder.innerHTML = "<span class='glyphicon glyphicon-edit'></span><input readonly value='" + (this._dragged.children[1].value) + "'/></span>";
 
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData("text/html", e.currentTarget);
@@ -61,38 +53,38 @@ export default class GraphAnnotationList extends BaseComponent {
   _handleDragEnd(e) {
     this._dragged.style.display = "block";
     this._placeholder.parentNode.removeChild(this._placeholder);
-
-    // update store
-    let from = Number(this._dragged.dataset.id);
-    let to = Number(this._over.dataset.id);
-
+    let from = Number(this._dragged.id.split("a")[1]);
+    let to = Number(this._over.id.split("a")[1]);
     this.props.move(from, to);
-
     this._startY = undefined;
   }
 
   _handleDragOver(e) {
     e.preventDefault();
-    if (!e.target.draggable){
-      e.target = e.target.parentNode;
+    var theTarg;
+    if (e.target.value == 0){
+      theTarg = e.target;
+    } else {
+      theTarg = e.target.parentNode;
     }
 
     let thisHeight = this._dragged.offsetHeight;
     this._dragged.style.display = "none";
 
     if (e.target.className == "placeholder") return;
-    this._over = e.target;
+
+    this._over = theTarg;
 
     let relY = e.clientY - this._startY;
     let height = (this._over.offsetHeight || thisHeight) / 2;
-
-    let parent = e.target.parentNode;
+    let parent = theTarg.parentNode;
 
     if (relY > height) {
-      parent.insertBefore(this._placeholder, e.target.nextElementSibling);
+
+      parent.insertBefore(this._placeholder, theTarg.nextElementSibling);
     }
     else if (relY < height) {
-      parent.insertBefore(this._placeholder, e.target);
+      parent.insertBefore(this._placeholder, theTarg);
     } 
   }
 }
