@@ -4,33 +4,48 @@ import BaseComponent from './BaseComponent';
 export default class GraphAnnotationListItem extends BaseComponent {
   constructor(props) {
     super(props);
-    // this.bindAll('_handleDragStart', '_handleDragEnd', '_handleChange');
+    this.bindAll('_handleShowClick', '_handleEditClick');
+    this.state = {
+      active: false
+    };
+  }
+
+
+
+  _handleShowClick(e){
+    this.setState({ active: !this.state.active });
+    this.props.onChange(this.props.index);
+  }
+
+  _handleEditClick(e){
+
+  }
+
+  _handleChange() {
+
   }
 
   render() {
     return (
       <li
-        className={this.props.childClass}
+        className={this.props.sendClass}
         onDragStart={this.props.onDrag}
         onDragEnd={this.props.onDragEnd}
-        onClick={this.props.onClick}
+        onClick={() => this._handleShowClick(event)}
         draggable={true}
         id={"annotationIndex" + this.props.index}
         >
-        <span className="glyphicon glyphicon-edit"></span>
+        <span 
+          className="glyphicon glyphicon-edit"
+          onClick={() => this._handleEditClick(event)}
+        ></span>
         <input
-          onChange={this._handleChange}
           value={this.props.annotationAttributes.header}
           readOnly={true} />
       </li>
     );
   }
 
-  
-
-  _handleChange() {
-
-  }
 
 
 }

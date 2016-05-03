@@ -5,7 +5,7 @@ import GraphAnnotationListItem from './GraphAnnotationListItem';
 export default class GraphAnnotationList extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleClick', '_handleDragOver', '_handleDragStart', '_handleDragEnd', '_handleChange');
+    this.bindAll('_handleDragOver', '_handleDragStart', '_handleDragEnd', '_handleChange');
     this._placeholder = document.createElement("li");
     this._placeholder.className = "placeholder";
   }
@@ -16,12 +16,14 @@ export default class GraphAnnotationList extends BaseComponent {
         <ul id="oligrapherAnnotationListItems" onDragOver={this._handleDragOver}>
           { this.props.annotations.map(function(annotation, index) {
             return <GraphAnnotationListItem
+              onChange={(index) => this._handleChange(index)}
+              sendClass={index == this.props.currentIndex ? "active" : null}
               key={annotation.id}
               annotationAttributes={annotation}
-              onClick={this._handleClick}
               onDrag={this._handleDragStart}
               onDragEnd={this._handleDragEnd}
-              index={index}/>
+              index={index}
+              />
           }, this
           ) }
         </ul>
@@ -29,17 +31,13 @@ export default class GraphAnnotationList extends BaseComponent {
     );
   }
 
-  _handleChange(e) {
-  
+  _handleChange(index) {
+    this.props.update(this.props.currentIndex, index);
+    console.log(this.props.update);
+    console.log(this.props.currentIndex, index);
+    // this.props.currentIndex = index;
   }
 
-  _handleClick(e) {
-    this.props.show(parseInt(e.target.dataset.id));
-
-    if (this.props.isEditor) { 
-      this.props.hideEditTools();
-    };
-  }
 
   _handleDragStart(e) {
     this._startY = e.clientY;
