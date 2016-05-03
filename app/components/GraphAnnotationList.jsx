@@ -61,7 +61,13 @@ export default class GraphAnnotationList extends BaseComponent {
 
   _handleDragOver(e) {
     e.preventDefault();
+
     var theTarg;
+
+    if (e.target.className == "placeholder" || e.target.dataset.reactid == undefined){
+      return;
+    } 
+
     if (e.target.value == 0){
       theTarg = e.target;
     } else {
@@ -71,7 +77,6 @@ export default class GraphAnnotationList extends BaseComponent {
     let thisHeight = this._dragged.offsetHeight;
     this._dragged.style.display = "none";
 
-    if (e.target.className == "placeholder") return;
 
     this._over = theTarg;
 

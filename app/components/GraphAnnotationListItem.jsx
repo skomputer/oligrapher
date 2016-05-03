@@ -11,7 +11,7 @@ export default class GraphAnnotationListItem extends BaseComponent {
     return (
       <li
         className={this.props.childClass}
-        onDrag={this.props.onDrag}
+        onDragStart={this.props.onDrag}
         onDragEnd={this.props.onDragEnd}
         onClick={this.props.onClick}
         draggable={true}
