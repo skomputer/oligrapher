@@ -14,7 +14,8 @@ export default class GraphAnnotationListItem extends BaseComponent {
 
   _handleShowClick(e){
     this.setState({ active: !this.state.active });
-    this.props.onChange(this.props.index);
+    this.props.doChange(this.props.index);
+
   }
 
   _handleEditClick(e){
@@ -26,26 +27,32 @@ export default class GraphAnnotationListItem extends BaseComponent {
   }
 
   render() {
+    var theClass = this.props.sendClass ? ("annotationParent " + this.props.sendClass) : "annotationParent";
     return (
       <li
-        className={this.props.sendClass}
+        className={theClass}
         onDragStart={this.props.onDrag}
         onDragEnd={this.props.onDragEnd}
+        onClick={this.props.doClick}
         onClick={() => this._handleShowClick(event)}
         draggable={true}
         id={"annotationIndex" + this.props.index}
         >
         <span 
           className="glyphicon glyphicon-edit"
-          onClick={() => this._handleEditClick(event)}
         ></span>
-        <input
-          value={this.props.annotationAttributes.header}
-          readOnly={true} />
+        <div
+          className = {"annotationHeaderWrapper"}
+          dangerouslySetInnerHTML={{ __html: this.props.annotationAttributes.header }}
+          onClick={() => this._handleEditClick(event)}>
+        </div>
+        <div
+          className={"annotationBodyWrapper"}
+          dangerouslySetInnerHTML={{ __html: this.props.annotationAttributes.text }}>
+        </div>
       </li>
     );
   }
-
 
 
 }

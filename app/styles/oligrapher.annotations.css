@@ -185,17 +185,36 @@
   width: 100%;
   white-space: nowrap;
   border-radius: 3px;
+  overflow: hidden;
 }
 
-#oligrapherAnnotationListItems li input{
+#oligrapherAnnotationListItems li span{
+  top: -8px;
+}
+
+#oligrapherAnnotationListItems li .annotationHeaderWrapper{
   border: none;
   width: calc(100% - 20px);
   overflow: hidden;
   text-overflow: ellipsis;
   margin-left: 10px;
   background-color: initial;
+  display: inline-block;
 }
 
+#oligrapherAnnotationListItems li:not(.active) .annotationBodyWrapper{
+  height: 0;
+}
+
+.annotationBodyWrapper{
+    width: 100%;
+    white-space: initial;
+    line-height: initial;
+    font-size: 0.9em;
+    max-height: 200px;
+    overflow-y: auto;
+    margin: 0 15px 10px 30px;
+}
 
 
 #oligrapherAnnotationListItems li.active {

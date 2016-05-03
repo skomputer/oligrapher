@@ -22,6 +22,7 @@ export default class GraphAnnotationList extends BaseComponent {
               annotationAttributes={annotation}
               onDrag={this._handleDragStart}
               onDragEnd={this._handleDragEnd}
+              doChange={this._handleChange}
               index={index}
               />
           }, this
@@ -31,15 +32,16 @@ export default class GraphAnnotationList extends BaseComponent {
     );
   }
 
+
   _handleChange(index) {
-    
+    this.props.show(parseInt(index));
   }
 
 
   _handleDragStart(e) {
     this._startY = e.clientY;
     this._dragged = e.currentTarget;
-    this._placeholder.innerHTML = "<span class='glyphicon glyphicon-edit'></span><input readonly value='" + (this._dragged.children[1].value) + "'/></span>";
+    this._placeholder.innerHTML = "<span class='glyphicon glyphicon-edit'></span><div>" + (this._dragged.children[1].innerHTML) + "</div>";
 
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData("text/html", e.currentTarget);
@@ -63,7 +65,8 @@ export default class GraphAnnotationList extends BaseComponent {
       return;
     } 
 
-    if (e.target.value == 0){
+    //ensure this isn't a child element of the li
+    if (e.target.className.split("annotationParent").length > 1){
       theTarg = e.target;
     } else {
       theTarg = e.target.parentNode;
