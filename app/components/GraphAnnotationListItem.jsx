@@ -15,7 +15,7 @@ export default class GraphAnnotationListItem extends BaseComponent {
         onDragEnd={this.props.onDragEnd}
         onClick={this.props.onClick}
         draggable={true}
-        id={"a" + this.props.index}
+        id={"annotationIndex" + this.props.index}
         >
         <span className="glyphicon glyphicon-edit"></span>
         <input

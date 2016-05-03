@@ -53,8 +53,8 @@ export default class GraphAnnotationList extends BaseComponent {
   _handleDragEnd(e) {
     this._dragged.style.display = "block";
     this._placeholder.parentNode.removeChild(this._placeholder);
-    let from = Number(this._dragged.id.split("a")[1]);
-    let to = Number(this._over.id.split("a")[1]);
+    let from = Number(this._dragged.id.split("annotationIndex")[1]);
+    let to = Number(this._over.id.split("annotationIndex")[1]);
     this.props.move(from, to);
     this._startY = undefined;
   }
@@ -80,7 +80,6 @@ export default class GraphAnnotationList extends BaseComponent {
     let parent = theTarg.parentNode;
 
     if (relY > height) {
-
       parent.insertBefore(this._placeholder, theTarg.nextElementSibling);
     }
     else if (relY < height) {
