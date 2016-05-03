@@ -32,10 +32,7 @@ export default class GraphAnnotationList extends BaseComponent {
   }
 
   _handleChange(index) {
-    this.props.update(this.props.currentIndex, index);
-    console.log(this.props.update);
-    console.log(this.props.currentIndex, index);
-    // this.props.currentIndex = index;
+    
   }
 
 
