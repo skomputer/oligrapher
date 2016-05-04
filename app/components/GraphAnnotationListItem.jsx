@@ -6,20 +6,16 @@ export default class GraphAnnotationListItem extends BaseComponent {
     super(props);
     this.bindAll('_handleShowClick', '_handleEditClick');
     this.state = {
-      active: false
+      editable: false
     };
   }
 
-
-
   _handleShowClick(e){
-    this.setState({ active: !this.state.active });
     this.props.doChange(this.props.index);
-
   }
 
   _handleEditClick(e){
-
+    this.setState({ editable: !this.state.editable });
   }
 
   _handleChange() {
@@ -28,6 +24,10 @@ export default class GraphAnnotationListItem extends BaseComponent {
 
   render() {
     var theClass = this.props.sendClass ? ("annotationParent " + this.props.sendClass) : "annotationParent";
+    if (this.state.editable){
+      theClass = theClass + " editableAnnotation";
+    }
+
     return (
       <li
         className={theClass}
@@ -38,17 +38,19 @@ export default class GraphAnnotationListItem extends BaseComponent {
         draggable={true}
         id={"annotationIndex" + this.props.index}
         >
-        <span 
+        <div 
           className="glyphicon glyphicon-edit"
-        ></span>
+          onClick={() => this._handleEditClick(event)} >
+        </div>
         <div
           className = {"annotationHeaderWrapper"}
           dangerouslySetInnerHTML={{ __html: this.props.annotationAttributes.header }}
-          onClick={() => this._handleEditClick(event)}>
+          contentEditable={this.state.editable}>
         </div>
         <div
           className={"annotationBodyWrapper"}
-          dangerouslySetInnerHTML={{ __html: this.props.annotationAttributes.text }}>
+          dangerouslySetInnerHTML={{ __html: this.props.annotationAttributes.text }}
+          contentEditable={this.state.editable}>
         </div>
       </li>
     );

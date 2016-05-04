@@ -39,9 +39,12 @@ export default class GraphAnnotationList extends BaseComponent {
 
 
   _handleDragStart(e) {
+    if (e.currentTarget.className == "annotationParent active"){
+      e.currentTarget.className = "annotationParent";
+    }
     this._startY = e.clientY;
     this._dragged = e.currentTarget;
-    this._placeholder.innerHTML = "<span class='glyphicon glyphicon-edit'></span><div>" + (this._dragged.children[1].innerHTML) + "</div>";
+    this._placeholder.innerHTML = "<span class='glyphicon glyphicon-edit'></span><div class='annotationParent'>" + (this._dragged.children[1].innerHTML) + "</div>";
 
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData("text/html", e.currentTarget);
