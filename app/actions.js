@@ -50,6 +50,7 @@ export const SET_TITLE = 'SET_TITLE';
 export const SET_SETTINGS = 'SET_SETTINGS';
 export const TOGGLE_HELP_SCREEN = 'TOGGLE_HELP_SCREEN';
 export const TOGGLE_SETTINGS = 'TOGGLE_SETTINGS';
+export const TOGGLE_NODE_SELECTABLE = 'TOGGLE_NODE_SELECTABLE';
 
 /*
  * action creators
@@ -248,3 +249,8 @@ export function toggleHelpScreen(value) {
 export function toggleSettings(value) {
   return { type: TOGGLE_SETTINGS, value };
 }
+
+// export function toggleNodeSelectable(value) {
+//   console.log(value);
+//   return { type: TOGGLE_NODE_SELECTABLE, value };
+// }

@@ -18,7 +18,7 @@ import { loadGraph, showGraph,
          loadAnnotations, showAnnotation, createAnnotation,
          toggleAnnotations, updateAnnotation,
          deleteAnnotation, moveAnnotation,
-         toggleHelpScreen, setSettings, toggleSettings } from '../actions';
+         toggleHelpScreen, setSettings, toggleSettings, toggleNodeSelectable } from '../actions';
 import Graph from './Graph';
 import Editor from './Editor';
 import GraphHeader from './GraphHeader';
@@ -46,7 +46,7 @@ class Root extends Component {
 
   render() {
     let { dispatch, graph, selection, isEditor, isLocked, title,
-          showEditTools, showSaveButton, showHelpScreen, 
+          showEditTools, showSaveButton, showHelpScreen, allowEditNodes, 
           hasSettings, graphSettings, showSettings, onSave,
           currentIndex, annotation, annotations, visibleAnnotations } = this.props;
     let that = this;
@@ -194,6 +194,7 @@ class Root extends Component {
             </div>
             { showAnnotations &&
               <GraphAnnotations 
+                allowEditNodes={allowEditNodes}
                 isEditor={isEditor}
                 navList={isEditor}
                 prevClick={prevClick}
@@ -210,7 +211,10 @@ class Root extends Component {
                 move={move}
                 remove={remove}
                 editForm={true}
-                hideEditTools={() => dispatch(toggleEditTools(false))} />
+                hideEditTools={() => dispatch(toggleEditTools(false))}
+                enableNodeSelectable={() => dispatch(toggleNodeSelectable(true))}
+                disableNodeSelectable={() => dispatch(toggleNodeSelectable(false))}
+                 />
             }
           </div>
           { !showAnnotations && this.enableAnnotations() &&
@@ -284,11 +288,6 @@ class Root extends Component {
 
   }
 
-  toggleEditor(value) {
-    value = typeof value === "undefined" ? !this.state.isEditor : value;
-    this.setState({ isEditor: value });
-    this.props.dispatch(deselectAll(this.props.graph.id));
-  }
 
   toggleLocked(value) {
     this.setState({ isLocked: value });
@@ -297,6 +296,12 @@ class Root extends Component {
   toggleEditTools(value)  { 
     this.props.dispatch(toggleEditTools(value));
   };
+
+  toggleNodeSelectable(value){
+    console.log("hiiiiii");
+    value = typeof value === "undefined" ? !this.state.allowEditNodes : value;
+    this.setState({ allowEditNodes: value });
+  }
 
 
   prevIndex() {

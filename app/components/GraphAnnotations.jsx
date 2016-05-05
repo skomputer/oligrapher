@@ -11,7 +11,7 @@ export default class GraphAnnotations extends Component {
     let { prevClick, nextClick, isEditor, editForm, navList, 
           swapAnnotations, annotation, currentIndex, 
           update, remove, swapEditForm, annotations, show, 
-          create, move, canClickPrev, canClickNext } = this.props;
+          create, move, canClickPrev, canClickNext, allowEditNodes  } = this.props;
 
     let navComponent = (
       <GraphNavButtons {...this.props} />

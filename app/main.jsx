@@ -27,9 +27,12 @@ class Oligrapher {
 
     config = merge({ 
       isEditor: false, 
-      isLocked: true, 
+      isLocked: true,
+      annotationNodeEditable: false, 
       logActions: false, 
-      viewOnlyHighlighted: true 
+      viewOnlyHighlighted: true,
+      allowEditNodes: false
+
     }, config);
     config.height = config.graphHeight || config.root.offsetHeight;
 
@@ -77,9 +80,10 @@ class Oligrapher {
     this.root.dispatchProps.dispatch(toggleEditTools(value));
   }
 
-  toggleEditor(value) {
-    value = typeof value === "undefined" ? !this._currentProps().isEditor : value;
-    this.update({ isEditor: value });
+  toggleNodeSelectable(value){
+    console.log("hiii");
+    value = typeof value === "undefined" ? !this.state.allowEditNodes : value;
+    this.setState({ allowEditNodes: value });
   }
 
   toggleLocked(value) {

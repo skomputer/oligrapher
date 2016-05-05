@@ -7,7 +7,7 @@ export default class GraphAnnotationList extends BaseComponent {
     super(props);
     this.bindAll('_handleDragOver', '_handleDragStart', '_handleDragEnd', '_handleChange');
     this._placeholder = document.createElement("li");
-    this._placeholder.className = "placeholder";
+    this._placeholder.className = "placeholder annotationParent";
   }
 
   render() {
@@ -34,6 +34,11 @@ export default class GraphAnnotationList extends BaseComponent {
 
 
   _handleChange(index) {
+    // console.log(this.props);
+    // console.log(this.props.allowEditNodes);
+    // this.props.enableNodeSelectable();
+    console.log(this.props.allowEditNodes);
+    // this.props.disableNodeSelectable();
     this.props.show(parseInt(index));
   }
 
@@ -44,13 +49,16 @@ export default class GraphAnnotationList extends BaseComponent {
     }
     this._startY = e.clientY;
     this._dragged = e.currentTarget;
-    this._placeholder.innerHTML = "<span class='glyphicon glyphicon-edit'></span><div class='annotationParent'>" + (this._dragged.children[1].innerHTML) + "</div>";
+    this._placeholder.innerHTML = "<div class='glyphicon glyphicon-edit'></div><div class='annotationHeaderWrapper'>" + (this._dragged.children[1].innerHTML) + "</div>";
 
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData("text/html", e.currentTarget);
   }
 
   _handleDragEnd(e) {
+    if (this.props.currentIndex == this._dragged.id.split("annotationIndex")[1]){
+      e.currentTarget.className = "annotationParent active";
+    }
     this._dragged.style.display = "block";
     this._placeholder.parentNode.removeChild(this._placeholder);
     let from = Number(this._dragged.id.split("annotationIndex")[1]);
