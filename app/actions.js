@@ -250,7 +250,6 @@ export function toggleSettings(value) {
   return { type: TOGGLE_SETTINGS, value };
 }
 
-// export function toggleNodeSelectable(value) {
-//   console.log(value);
-//   return { type: TOGGLE_NODE_SELECTABLE, value };
-// }
+export function toggleNodeSelectable(value) {
+  return { type: TOGGLE_NODE_SELECTABLE, value };
+}

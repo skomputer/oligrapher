@@ -18,7 +18,7 @@ import { loadGraph, showGraph,
          loadAnnotations, showAnnotation, createAnnotation,
          toggleAnnotations, updateAnnotation,
          deleteAnnotation, moveAnnotation,
-         toggleHelpScreen, setSettings, toggleSettings, toggleNodeSelectable } from '../actions';
+         toggleHelpScreen, setSettings, toggleSettings, toggleNodeSelectable, allowEditNodes } from '../actions';
 import Graph from './Graph';
 import Editor from './Editor';
 import GraphHeader from './GraphHeader';
@@ -193,8 +193,8 @@ class Root extends Component {
               </div>
             </div>
             { showAnnotations &&
-              <GraphAnnotations 
-                allowEditNodes={allowEditNodes}
+              <GraphAnnotations
+                allowEditNodes={allowEditNodes} 
                 isEditor={isEditor}
                 navList={isEditor}
                 prevClick={prevClick}
@@ -238,6 +238,7 @@ class Root extends Component {
     if (isEditor && (!data || !data.graph)) {
       // show edit tools if isEditor and there's no initial graph
       this.toggleEditTools(true);
+      this.toggleNodeSelectable(false);
     }
 
     if (settings) {
@@ -288,6 +289,12 @@ class Root extends Component {
 
   }
 
+  toggleEditor(value) {
+    console.log("hi");
+    value = typeof value === "undefined" ? !this.state.isEditor : value;
+    this.setState({ isEditor: value });
+    this.props.dispatch(deselectAll(this.props.graph.id));
+  }
 
   toggleLocked(value) {
     this.setState({ isLocked: value });
@@ -298,9 +305,7 @@ class Root extends Component {
   };
 
   toggleNodeSelectable(value){
-    console.log("hiiiiii");
-    value = typeof value === "undefined" ? !this.state.allowEditNodes : value;
-    this.setState({ allowEditNodes: value });
+    this.props.dispatch(toggleNodeSelectable(value));
   }
 
 
@@ -374,7 +379,9 @@ function select(state) {
     graphSettings: state.settings,
     hasSettings: Object.keys(state.settings).length > 0,
     showHelpScreen: state.showHelpScreen,
-    showSettings: state.showSettings
+    showSettings: state.showSettings,
+    allowEditNodes: state.allowEditNodes
+
   };
 }
 

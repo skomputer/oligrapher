@@ -34,11 +34,8 @@ export default class GraphAnnotationList extends BaseComponent {
 
 
   _handleChange(index) {
-    // console.log(this.props);
-    // console.log(this.props.allowEditNodes);
-    // this.props.enableNodeSelectable();
     console.log(this.props.allowEditNodes);
-    // this.props.disableNodeSelectable();
+    this.props.enableNodeSelectable();
     this.props.show(parseInt(index));
   }
 

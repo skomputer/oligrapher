@@ -80,12 +80,6 @@ class Oligrapher {
     this.root.dispatchProps.dispatch(toggleEditTools(value));
   }
 
-  toggleNodeSelectable(value){
-    console.log("hiii");
-    value = typeof value === "undefined" ? !this.state.allowEditNodes : value;
-    this.setState({ allowEditNodes: value });
-  }
-
   toggleLocked(value) {
     value = typeof value === "undefined" ? !this._currentProps().isLocked : value;
     this.update({ isLocked: value });

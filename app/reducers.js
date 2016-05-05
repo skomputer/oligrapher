@@ -8,6 +8,7 @@ import annotations from './reducers/annotations';
 import settings from './reducers/settings';
 import showHelpScreen from './reducers/showHelpScreen';
 import showSettings from './reducers/showSettings';
+import allowEditNodes from './reducers/allowEditNodes';
 
 export default combineReducers({
   graph,
@@ -18,5 +19,6 @@ export default combineReducers({
   annotations,
   settings,
   showHelpScreen,
-  showSettings
+  showSettings,
+  allowEditNodes
 });
