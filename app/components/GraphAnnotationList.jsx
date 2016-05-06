@@ -5,7 +5,7 @@ import GraphAnnotationListItem from './GraphAnnotationListItem';
 export default class GraphAnnotationList extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleDragOver', '_handleDragStart', '_handleDragEnd', '_handleChange');
+    this.bindAll('_handleDragOver', '_handleDragStart', '_handleDragEnd', '_handleChange', '_handleMakeEditable');
     this._placeholder = document.createElement("li");
     this._placeholder.className = "placeholder annotationParent";
   }
@@ -23,6 +23,7 @@ export default class GraphAnnotationList extends BaseComponent {
               onDrag={this._handleDragStart}
               onDragEnd={this._handleDragEnd}
               doChange={this._handleChange}
+              turnOnEditable={() => this._handleMakeEditable()}
               index={index}
               />
           }, this
@@ -32,10 +33,12 @@ export default class GraphAnnotationList extends BaseComponent {
     );
   }
 
+  _handleMakeEditable(){
+    this.props.enableNodeSelectable();
+  }
+
 
   _handleChange(index) {
-    console.log(this.props.allowEditNodes);
-    this.props.enableNodeSelectable();
     this.props.show(parseInt(index));
   }
 

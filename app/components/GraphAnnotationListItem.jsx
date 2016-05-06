@@ -16,6 +16,7 @@ export default class GraphAnnotationListItem extends BaseComponent {
 
   _handleEditClick(e){
     this.setState({ editable: !this.state.editable });
+    this.props.turnOnEditable();
   }
 
   _handleChange() {

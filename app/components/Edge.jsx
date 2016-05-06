@@ -18,6 +18,7 @@ export default class Edge extends BaseComponent {
   render() {
     let e = this.props.edge;
     let sp = this._getSvgParams(e);
+    console.log(sp);
     let width = 1 + (e.display.scale - 1) * 5;
     let selected = this.props.selected;
     let highlighted = e.display.status == "highlighted";

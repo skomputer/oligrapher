@@ -22,13 +22,14 @@ module.exports = {
   },
   bgColor: {
     normal: "#fff",
+    editable: "#ff9800",
     highlighted: "#ff0",
     faded: "#fff"
   },
   selectColor: "#0f0",
   bgOpacity: {
     normal: 0,
-    highlighted: 0.5,
+    highlighted: 0.75,
     faded: 0
   },
   imageOpacity: {

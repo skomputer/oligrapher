@@ -95,9 +95,13 @@ class Root extends Component {
     };
 
     let clickNode = (nodeId) => { 
-      isEditor && showEditTools ? 
-      dispatch(swapNodeSelection(nodeId, !that.state.shiftKey)) : 
-      (isLocked ? null : dispatch(swapNodeHighlight(nodeId))) 
+      if (isEditor && showEditTools && allowEditNodes){
+        dispatch(swapNodeSelection(nodeId, !that.state.shiftKey));
+      } else {
+        if (allowEditNodes){
+          isLocked ? null : dispatch(swapNodeHighlight(nodeId));
+        }
+      }
     }
     let clickEdge = (edgeId) => { 
       isEditor && showEditTools ? 
