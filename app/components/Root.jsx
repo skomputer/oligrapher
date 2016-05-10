@@ -104,14 +104,22 @@ class Root extends Component {
       }
     }
     let clickEdge = (edgeId) => { 
-      isEditor && showEditTools ? 
-      dispatch(swapEdgeSelection(edgeId, !that.state.shiftKey)) : 
-      (isLocked ? null : dispatch(swapEdgeHighlight(edgeId)))
+      if (isEditor && showEditTools && allowEditNodes){
+        dispatch(swapEdgeSelection(edgeId, !that.state.shiftKey));
+      } else {
+        if (allowEditNodes){
+          isLocked ? null : dispatch(swapEdgeHighlight(edgeId));
+        }
+      }
     }
     let clickCaption = (captionId) => { 
-      isEditor && showEditTools ? 
-      dispatch(swapCaptionSelection(captionId, !that.state.shiftKey)) : 
-      (isLocked ? null : dispatch(swapCaptionHighlight(captionId)))
+      if (isEditor && showEditTools && allowEditNodes){
+        dispatch(swapCaptionSelection(captionId, !that.state.shiftKey));
+      } else {
+        if (allowEditNodes){
+          isLocked ? null : dispatch(swapCaptionHighlight(captionId));
+        }
+      }
     }
 
     // annotations stuff
@@ -218,8 +226,9 @@ class Root extends Component {
                 hideEditTools={() => dispatch(toggleEditTools(false))}
                 enableNodeSelectable={() => dispatch(toggleNodeSelectable(true))}
                 disableNodeSelectable={() => dispatch(toggleNodeSelectable(false))}
+                isEditMode={showEditTools}
                  />
-            }
+                }
           </div>
           { !showAnnotations && this.enableAnnotations() &&
             <div id="oligrapherShowAnnotations">
