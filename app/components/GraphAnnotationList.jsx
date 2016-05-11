@@ -5,9 +5,12 @@ import GraphAnnotationListItem from './GraphAnnotationListItem';
 export default class GraphAnnotationList extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleDragOver', '_handleDragStart', '_handleDragEnd', '_handleChange', '_handleMakeEditable', '_handleDisableEditable');
+    this.bindAll('_handleDragOver', '_handleDragStart', '_handleDragEnd', '_handleChange', '_handleMakeEditable', '_handleDisableEditable', '_setEditIndex');
     this._placeholder = document.createElement("li");
     this._placeholder.className = "placeholder annotationParent";
+    this.state = {
+      editIndex: null
+    };
   }
 
   render() {
@@ -26,13 +29,19 @@ export default class GraphAnnotationList extends BaseComponent {
               turnOnEditable={() => this._handleMakeEditable()}
               turnOffEditable={() => this._handleDisableEditable()}
               index={index}
-              canEdit={this.props.isEditMode}
+              isEditTools={this.props.isEditMode}
+              setEditIndex={(num) => this._setEditIndex(num)}
+              getEditIndex={this.state.editIndex}
               />
           }, this
           ) }
         </ul>
       </div>
     );
+  }
+
+  _setEditIndex(num){
+    this.setState({ editIndex: num });
   }
 
   _handleMakeEditable(){

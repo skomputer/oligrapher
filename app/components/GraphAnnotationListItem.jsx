@@ -4,49 +4,61 @@ import BaseComponent from './BaseComponent';
 export default class GraphAnnotationListItem extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleShowClick', '_handleEditClick');
+    this.bindAll('_handleShowClick', '_handleEditClick', 'componentDidUpdate');
     this.state = {
-      editable: false
+      editable: false,
+      prevIndex: null
     };
   }
 
-  _handleShowClick(e){
-    //check if was previously editable and turn off if returning
-    if (this.state.editable) {
+  componentDidUpdate(){
+    if (this.props.getEditIndex == null && this.state.editable){
+      this.props.setEditIndex(null);
+      this.props.turnOffEditable();
       this.setState({ editable: false });
     }
+  }
+
+
+
+  _handleShowClick(e){
     this.props.doChange(this.props.index);
-    this.props.turnOffEditable();
+    if (!this.state.editable){
+      this.props.turnOffEditable();
+      this.props.setEditIndex(null);
+    } 
   }
 
   _handleEditClick(e){
-    if (!this.props.isEditMode){
+    this.props.doChange(this.props.index);
+    if (!this.props.isEditTools){
       this.setState({ editable: !this.state.editable });
-      if (this.state.editable) {
-        this.props.turnOnEditable();
-      } else { 
+      if (this.state.editable){
+        this.props.setEditIndex(null);
         this.props.turnOffEditable();
+      } else {
+        this.props.setEditIndex(this.props.index);
+        this.props.turnOnEditable();
       }
     }
   }
 
   _handleChange() {
-
   }
 
   render() {
-    var theClass;
-    if (!this.props.isEditMode){
-      if (this.props.sendClass){
-        theClass = "annotationParent " + this.props.sendClass;
-        if (this.state.editable){
-          theClass = theClass + " editableAnnotation";
+      var theClass;
+      if (!this.props.isEditTools){
+        if (this.props.sendClass){
+          theClass = "annotationParent " + this.props.sendClass;
+          if (this.state.editable){
+            theClass = theClass + " editableAnnotation"
+          }
+        } else {
+          theClass = "annotationParent";
         }
       } else {
         theClass = "annotationParent";
-      }
-    } else {
-      theClass = "annotationParent";
     }
 
     return (
@@ -55,7 +67,6 @@ export default class GraphAnnotationListItem extends BaseComponent {
         onDragStart={this.props.onDrag}
         onDragEnd={this.props.onDragEnd}
         onClick={this.props.doClick}
-        onClick={() => this._handleShowClick(event)}
         draggable={true}
         id={"annotationIndex" + this.props.index}
         >
@@ -64,11 +75,13 @@ export default class GraphAnnotationListItem extends BaseComponent {
           onClick={() => this._handleEditClick(event)} >
         </div>
         <div
+          onClick={() => this._handleShowClick(event)}
           className = {"annotationHeaderWrapper"}
           dangerouslySetInnerHTML={{ __html: this.props.annotationAttributes.header }}
           contentEditable={this.state.editable}>
         </div>
         <div
+          onClick={() => this._handleShowClick(event)}
           className={"annotationBodyWrapper"}
           dangerouslySetInnerHTML={{ __html: this.props.annotationAttributes.text }}
           contentEditable={this.state.editable}>
