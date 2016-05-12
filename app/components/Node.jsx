@@ -21,7 +21,6 @@ export default class Node extends BaseComponent {
     const { x, y, name } = this.state;
     const groupId = `node-${n.id}`;
     const transform = `translate(${x}, ${y})`;
-
     return (
       <DraggableCore
         handle=".handle"

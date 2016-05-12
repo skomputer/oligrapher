@@ -95,7 +95,7 @@ class Root extends Component {
     };
 
     let clickNode = (nodeId) => { 
-      if (isEditor && showEditTools && allowEditNodes){
+      if (isEditor && showEditTools){
         dispatch(swapNodeSelection(nodeId, !that.state.shiftKey));
       } else {
         if (allowEditNodes){
@@ -104,7 +104,7 @@ class Root extends Component {
       }
     }
     let clickEdge = (edgeId) => { 
-      if (isEditor && showEditTools && allowEditNodes){
+      if (isEditor && showEditTools){
         dispatch(swapEdgeSelection(edgeId, !that.state.shiftKey));
       } else {
         if (allowEditNodes){
@@ -303,7 +303,6 @@ class Root extends Component {
   }
 
   toggleEditor(value) {
-    console.log("hi");
     value = typeof value === "undefined" ? !this.state.isEditor : value;
     this.setState({ isEditor: value });
     this.props.dispatch(deselectAll(this.props.graph.id));
@@ -314,6 +313,7 @@ class Root extends Component {
   }
 
   toggleEditTools(value)  { 
+    this.props.dispatch(toggleNodeSelectable(false));
     this.props.dispatch(toggleEditTools(value));
   };
 

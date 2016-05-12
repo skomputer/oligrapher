@@ -4,7 +4,7 @@ import BaseComponent from './BaseComponent';
 export default class GraphAnnotationListItem extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleShowClick', '_handleEditClick', 'componentDidUpdate');
+    this.bindAll('_handleShowClick', '_handleEditClick', 'componentDidUpdate', 'componentWillReceiveProps' );
     this.state = {
       editable: false,
       prevIndex: null
@@ -16,9 +16,15 @@ export default class GraphAnnotationListItem extends BaseComponent {
       this.props.setEditIndex(null);
       this.props.turnOffEditable();
       this.setState({ editable: false });
-    }
+    } 
+
   }
 
+  componentWillReceiveProps(){
+    if (this.props.isEditTools){
+      this.setState({ editable: false });
+    }
+  }
 
 
   _handleShowClick(e){
