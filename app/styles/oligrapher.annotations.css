@@ -6,9 +6,6 @@
   position: relative;
 }
 
-#oligrapherHeader {
-  margin-bottom: 10px;  
-}
 
 #oligrapherTitle {
   font-size: 50px;
@@ -86,7 +83,7 @@
 }
 
 #oligrapherEditButton.editAnnotationsMode {
-  background-color: rgba(255, 255, 0, 0.5);
+  background-color: #fff;
 }
 
 #oligrapherSaveButton {
@@ -162,6 +159,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  background-color: #f6f6f6;
 }
 
 #oligrapherAnnotationListItems {
@@ -179,7 +177,7 @@
 
 #oligrapherAnnotationListItems li {
   font-size: 17px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ccc;
   cursor: pointer;
   width: 100%;
   white-space: nowrap;
@@ -245,7 +243,7 @@
 
 
 #oligrapherAnnotationListItems li.active {
-  background-color: #eee;
+  background-color: #DCDCDC;
 }
 
 #oligrapherAnnotationList {

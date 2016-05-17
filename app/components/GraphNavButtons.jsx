@@ -13,14 +13,6 @@ export default class GraphNavButtons extends Component {
           className="clickplz btn btn-lg btn-default" 
           onClick={this.props.nextClick} 
           disabled={!this.props.canClickNext}>Next</button>
-        <div style={{ float: "right" }}>
-          <button
-            id="oligrapherHideAnnotationsButton"
-            className="btn btn-lg btn-default"
-            onClick={() => this.props.swapAnnotations()}>
-            <span className="glyphicon glyphicon-font"></span>
-          </button>
-        </div>
       </div>
     );
   }

@@ -54,19 +54,14 @@ export default class GraphAnnotationListItem extends BaseComponent {
 
   render() {
       var theClass;
-      if (!this.props.isEditTools){
-        if (this.props.sendClass){
-          theClass = "annotationParent " + this.props.sendClass;
-          if (this.state.editable){
-            theClass = theClass + " editableAnnotation"
-          }
-        } else {
-          theClass = "annotationParent";
+      if (this.props.sendClass){
+        theClass = "annotationParent " + this.props.sendClass;
+        if (this.state.editable && !this.props.isEditTools){
+          theClass = theClass + " editableAnnotation"
         }
       } else {
         theClass = "annotationParent";
-    }
-
+      }
     return (
       <li
         className={theClass}

@@ -3,6 +3,7 @@ import GraphNavButtons from './GraphNavButtons';
 import GraphAnnotationList from './GraphAnnotationList';
 import GraphAnnotation from './GraphAnnotation';
 import GraphAnnotationForm from './GraphAnnotationForm';
+import ShowHideAnnotations from './ShowHideAnnotations';
 require('../styles/oligrapher.annotations.css');
 
 export default class GraphAnnotations extends Component {
@@ -25,10 +26,15 @@ export default class GraphAnnotations extends Component {
       <GraphAnnotationList {...this.props} />
     );
 
+    let showHideAnnotation = (
+      <ShowHideAnnotations {...this.props} />
+    );
+
     return (
       <div id="oligrapherGraphAnnotations" className="col-md-4">
-        { (annotation || isEditor) && navComponent }
+        { showHideAnnotation }
         { isEditor && navList && navListComponent }
+        { (annotation || isEditor) && navComponent }
       </div>
     );
   }

@@ -68,7 +68,7 @@ a.nodeLabel text tspan {
 
 #oligrapherHeader {
   margin-bottom: 10px;  
-  flex: 1 auto;
+  flex: 0 1 30px;
 }
 
 #oligrapherTitle {
