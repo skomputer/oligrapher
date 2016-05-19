@@ -50,8 +50,14 @@
 
 #oligrapherMetaButtons {
   position: absolute;
-  top: 180px;
-  left: 20px;
+  top: 85px;
+  left: 15px;
+}
+
+#oligrapherMetaButtons {
+  position: absolute;
+  top: 85px;
+  left: 15px;
 }
 
 #oligrapherMetaButtons button {
@@ -60,13 +66,12 @@
   background-color: rgba(255, 255, 255, 0.8);
   width: 32px;
   padding-top: 7px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 #oligrapherEditorContainer{
   position: absolute;
-  top: 100px;
-  left: 20px;
+  top: 0px;
 }
 
 #oligrapherEditButton.editContentMode {
@@ -102,8 +107,6 @@
 #oligrapherNavButtons {
   margin-top: 5px;
   margin-bottom: 5px;
-  -webkit-box-flex: 0 1 10%;
-  -moz-box-flex:  0 1 10%;
   flex: 0 1 10%;
 }
 
@@ -297,8 +300,8 @@
 
 #oligrapherGraphAnnotationForm {
   margin-top: 10px;
-  -webkit-box-flex: 0 1 10%;
-  -moz-box-flex:  0 1 10%;
+  -webkit-box-flex: 1 200px;
+  -moz-box-flex:  1 200px;
   flex: 0 1 10%;
 }
 

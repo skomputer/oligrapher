@@ -56,27 +56,18 @@ a.nodeLabel text tspan {
 
 #oligrapherGraphContainer {
   border: 1px solid #f8f8f8;
-  height: 90%;
-  -webkit-box-flex: 4 auto;
-  -moz-box-flex:  4 auto;
-  flex: 4 auto;
+  height: calc(100% - 80px);
+  position: relative;
 }
 
 #oligrapherGraphCol{
   height: calc(100% - 15px);
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-direction: column;
   padding-left: 15px;
   padding-top: 15px;
 }
 
 #oligrapherHeader {
-  -webkit-box-flex: 0 0 30px;
-  -moz-box-flex:  0 0 30px;
-  flex: 0 0 30px;
+  height: 80px;
 }
 
 #oligrapherTitle {
