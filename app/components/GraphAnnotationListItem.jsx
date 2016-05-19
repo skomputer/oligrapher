@@ -4,23 +4,36 @@ import BaseComponent from './BaseComponent';
 export default class GraphAnnotationListItem extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleShowClick', '_handleEditClick', 'componentDidUpdate', 'componentWillReceiveProps' );
-    this.state = {
-      editable: false,
-      prevIndex: null
-    };
+    this.bindAll('_handleShowClick', '_handleEditClick', 'componentDidMount', 'componentWillReceiveProps', '_handleRemove' );
+    
+    if (this.props.annotationAttributes.header == "Untitled Annotation"){
+      this.state = {
+        isNew: true,
+        editable: true
+      };
+    } else {
+      this.state = {
+        isNew: false,
+        editable: false
+      };
+    }
   }
 
-  componentDidUpdate(){
-    if (this.props.getEditIndex == null && this.state.editable){
+
+  componentDidMount(){
+    this.setState({ isNew: false });
+    if (this.props.getEditIndex == null && this.state.editable && this.state.isNew == false){
       this.props.setEditIndex(null);
       this.props.turnOffEditable();
       this.setState({ editable: false });
     } 
-
   }
 
+
   componentWillReceiveProps(){
+    if (this.state.editable){
+      this.setState({ editable: false });
+    }
     if (this.props.isEditTools){
       this.setState({ editable: false });
     }
@@ -49,6 +62,12 @@ export default class GraphAnnotationListItem extends BaseComponent {
     }
   }
 
+  _handleRemove() {
+    if (confirm("Are you sure you want to delete this annotation?")) {
+      this.props.doRemove(this.props.index);
+    }
+  }
+
   _handleChange() {
   }
 
@@ -74,6 +93,10 @@ export default class GraphAnnotationListItem extends BaseComponent {
         <div 
           className="glyphicon glyphicon-edit"
           onClick={() => this._handleEditClick(event)} >
+        </div>
+        <div 
+          className="glyphicon glyphicon-remove-sign"
+          onClick={() => this._handleRemove(event)} >
         </div>
         <div
           onClick={() => this._handleShowClick(event)}

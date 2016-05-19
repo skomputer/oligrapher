@@ -8,9 +8,10 @@ export default class ShowHideAnnotations extends Component {
 				<div style={{ float: "left" }}>
 					<button
 						id="oligrapherHideAnnotationsButton"
-						className="btn btn-lg btn-default"
+						className="btn btn-sm btn-default"
 						onClick={() => this.props.swapAnnotations()}>
 						<span className="glyphicon glyphicon-font"></span>
+						<span className="annotationTitle">nnotations</span>
 					</button>
 				</div>
 			</div>

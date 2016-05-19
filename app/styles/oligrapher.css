@@ -64,6 +64,8 @@ a.nodeLabel text tspan {
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding-left: 15px;
+  padding-top: 15px;
 }
 
 #oligrapherHeader {
@@ -103,6 +105,8 @@ a.nodeLabel text tspan {
 
 #oligrapherWrapper{
   height: 100%;
+  width: 100%;
+  margin:0px;
 }
 
 #hotKeyWrapper{

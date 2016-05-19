@@ -16,4 +16,5 @@ export default class Annotation {
   static setDefaults(annotation) {
     return merge({}, this.defaults(), annotation);
   } 
+
 }

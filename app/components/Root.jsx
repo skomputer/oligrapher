@@ -134,7 +134,8 @@ class Root extends Component {
     let update = (index, data) => dispatch(updateAnnotation(index, data));
     let remove = (index) => dispatch(deleteAnnotation(index));
     let show = (index) => dispatch(showAnnotation(index));
-    let create = () => { 
+    let create = () => {
+       
       dispatch(createAnnotation(this.props.annotations.length)); 
     };
     let move = (from, to) => dispatch(moveAnnotation(from, to));
@@ -232,7 +233,7 @@ class Root extends Component {
           </div>
           { !showAnnotations && this.enableAnnotations() &&
             <div id="oligrapherShowAnnotations">
-              <button onClick={() => swapAnnotations()} className="btn btn-lg btn-default">
+              <button onClick={() => swapAnnotations()} className="btn btn-sm btn-default">
                 <span className="glyphicon glyphicon-font"></span>
               </button>
             </div> 
@@ -270,7 +271,6 @@ class Root extends Component {
     }
 
     if (JSON.stringify(prevProps.graph) !== JSON.stringify(this.props.graph)) {
-      // this.updateAnnotationHighlights();
 
       // fire update callback if graph changed
       if (this.props.onUpdate) {      

@@ -32,6 +32,7 @@ export default class GraphAnnotationList extends BaseComponent {
               isEditTools={this.props.isEditMode}
               setEditIndex={(num) => this._setEditIndex(num)}
               getEditIndex={this.state.editIndex}
+              doRemove={this.props.remove}
               />
           }, this
           ) }
@@ -58,12 +59,12 @@ export default class GraphAnnotationList extends BaseComponent {
 
 
   _handleDragStart(e) {
-    if (e.currentTarget.className == "annotationParent active"){
+    if (e.currentTarget.className != "annotationParent active"){
       e.currentTarget.className = "annotationParent";
     }
     this._startY = e.clientY;
     this._dragged = e.currentTarget;
-    this._placeholder.innerHTML = "<div class='glyphicon glyphicon-edit'></div><div class='annotationHeaderWrapper'>" + (this._dragged.children[1].innerHTML) + "</div>";
+    this._placeholder.innerHTML = "<div class='glyphicon glyphicon-edit'></div><div class='glyphicon glyphicon-remove-sign'></div><div class='annotationHeaderWrapper'>" + (this._dragged.children[2].innerHTML) + "</div>";
 
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData("text/html", e.currentTarget);
