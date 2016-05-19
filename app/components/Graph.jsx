@@ -130,7 +130,7 @@ export default class Graph extends BaseComponent {
     }
   }
 
-  _computeViewbox(graph, zoom = 1.2, viewOnlyHighlighted = true) {
+  _computeViewbox(graph, zoom = 1, viewOnlyHighlighted = true) {
     let rect = this._computeRect(graph, viewOnlyHighlighted);
     let w = rect.w / zoom;
     let h = rect.h / zoom;

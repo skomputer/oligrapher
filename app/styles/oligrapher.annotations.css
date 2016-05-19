@@ -2,9 +2,6 @@
   position: relative;
 }
 
-#oligrapherGraphContainer {
-  position: relative;
-}
 
 #oligrapherTitle {
   font-size: 50px;
@@ -53,14 +50,8 @@
 
 #oligrapherMetaButtons {
   position: absolute;
-  top: 85px;
-  left: 15px;
-}
-
-#oligrapherMetaButtons {
-  position: absolute;
-  top: 85px;
-  left: 15px;
+  top: 180px;
+  left: 20px;
 }
 
 #oligrapherMetaButtons button {
@@ -69,12 +60,13 @@
   background-color: rgba(255, 255, 255, 0.8);
   width: 32px;
   padding-top: 7px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 #oligrapherEditorContainer{
   position: absolute;
-  top: 0px;
+  top: 100px;
+  left: 20px;
 }
 
 #oligrapherEditButton.editContentMode {
@@ -110,6 +102,8 @@
 #oligrapherNavButtons {
   margin-top: 5px;
   margin-bottom: 5px;
+  -webkit-box-flex: 0 1 10%;
+  -moz-box-flex:  0 1 10%;
   flex: 0 1 10%;
 }
 
@@ -167,11 +161,13 @@
 }
 
 #oligrapherGraphAnnotations{
-  /*max-height: 95%;*/
   height:100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
   background-color: #f6f6f6;
   padding-top: 11px;
 }
@@ -280,6 +276,8 @@
 }
 
 #oligrapherAnnotationList {
+  -webkit-box-flex: 1 1 auto;
+  -moz-box-flex:  1 1 auto;
   flex: 1 1 auto;
   overflow-y: scroll;
 }
@@ -299,6 +297,8 @@
 
 #oligrapherGraphAnnotationForm {
   margin-top: 10px;
+  -webkit-box-flex: 0 1 10%;
+  -moz-box-flex:  0 1 10%;
   flex: 0 1 10%;
 }
 
