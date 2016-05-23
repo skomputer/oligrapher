@@ -4,7 +4,7 @@ import BaseComponent from './BaseComponent';
 export default class GraphAnnotationListItem extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleShowClick', '_handleEditClick', 'componentDidMount', 'componentWillReceiveProps', '_handleRemove' );
+    this.bindAll('_handleShowClick', '_handleEditClick', 'componentDidMount', 'componentWillReceiveProps', '_handleRemove', 'componentDidUpdate' );
     
     if (this.props.annotationAttributes.header == "Untitled Annotation"){
       this.state = {
@@ -19,6 +19,13 @@ export default class GraphAnnotationListItem extends BaseComponent {
     }
   }
 
+  componentDidUpdate(){
+    if (this.state.editable){
+      if (this.props.getEditIndex != this.props.index){
+        this.setState({editable: false});
+      }
+    }
+  }
 
   componentDidMount(){
     this.setState({ isNew: false });
@@ -31,7 +38,7 @@ export default class GraphAnnotationListItem extends BaseComponent {
 
 
   componentWillReceiveProps(){
-    if (this.state.editable){
+    if (this.state.editable && this.props.getEditIndex == null){
       this.setState({ editable: false });
     }
     if (this.props.isEditTools){
@@ -72,6 +79,7 @@ export default class GraphAnnotationListItem extends BaseComponent {
   }
 
   render() {
+
       var theClass;
       if (this.props.sendClass){
         theClass = "annotationParent " + this.props.sendClass;
