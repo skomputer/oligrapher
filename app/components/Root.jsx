@@ -224,7 +224,7 @@ class Root extends Component {
                 move={move}
                 remove={remove}
                 editForm={true}
-                hideEditTools={() => dispatch(toggleEditTools(false))}
+                toggle={() => this.toggleEditTools(false)}
                 enableNodeSelectable={() => dispatch(toggleNodeSelectable(true))}
                 disableNodeSelectable={() => dispatch(toggleNodeSelectable(false))}
                 isEditMode={showEditTools}

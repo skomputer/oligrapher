@@ -238,6 +238,7 @@
 #oligrapherAnnotationListItems .editableAnnotation div:not(.glyphicon){
   background-color: #fff;
   border: 1px solid #bbb;
+  cursor: text;
 }
 
 #oligrapherAnnotationListItems li .annotationHeaderWrapper{

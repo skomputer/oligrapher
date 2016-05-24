@@ -10,6 +10,11 @@
   background-color: #f8f8f8;
 }
 
+#oligrapherEditorContainer{
+  pointer-events: none;
+  width: 100%;
+}
+
 #zoomButtons {
   position: absolute;
   top: 15px;

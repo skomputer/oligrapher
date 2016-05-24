@@ -5,7 +5,7 @@ import GraphAnnotationListItem from './GraphAnnotationListItem';
 export default class GraphAnnotationList extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleDragOver', '_handleDragStart', '_handleDragEnd', '_handleChange', '_handleMakeEditable', '_handleDisableEditable', '_setEditIndex');
+    this.bindAll('_handleDragOver', '_handleDragStart', '_handleDragEnd', '_handleChange', '_handleMakeEditable', '_handleDisableEditable', '_setEditIndex', '_handleRemoveEditTools');
     this._placeholder = document.createElement("li");
     this._placeholder.className = "placeholder annotationParent";
     this.state = {
@@ -32,6 +32,7 @@ export default class GraphAnnotationList extends BaseComponent {
               isEditTools={this.props.isEditMode}
               setEditIndex={(num) => this._setEditIndex(num)}
               getEditIndex={this.state.editIndex}
+              turnOffEditTools={() => this._handleRemoveEditTools()}
               doRemove={this.props.remove}
               />
           }, this
@@ -51,6 +52,10 @@ export default class GraphAnnotationList extends BaseComponent {
 
   _handleDisableEditable(){
     this.props.disableNodeSelectable();
+  }
+
+  _handleRemoveEditTools(){
+    this.props.toggle();
   }
 
   _handleChange(index) {

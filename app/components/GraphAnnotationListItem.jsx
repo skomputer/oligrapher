@@ -1,20 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import BaseComponent from './BaseComponent';
+import Editor from 'react-medium-editor';
+
 
 export default class GraphAnnotationListItem extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleShowClick', '_handleEditClick', 'componentDidMount', 'componentWillReceiveProps', '_handleRemove', 'componentDidUpdate' );
-    
+    this.bindAll('componentDidMount', 'componentWillReceiveProps', 'componentDidUpdate', '_handleShowClick', '_handleEditClick', '_handleRemove', '_handleHeaderChange', '_handleTextChange' );
     if (this.props.annotationAttributes.header == "Untitled Annotation"){
       this.state = {
         isNew: true,
-        editable: true
+        editable: true,
+        header: this.props.annotationAttributes.header,
+        text: this.props.annotationAttributes.text
       };
     } else {
       this.state = {
         isNew: false,
-        editable: false
+        editable: false,
+        header: this.props.annotationAttributes.header,
+        text: this.props.annotationAttributes.text
       };
     }
   }
@@ -23,6 +28,10 @@ export default class GraphAnnotationListItem extends BaseComponent {
     if (this.state.editable){
       if (this.props.getEditIndex != this.props.index){
         this.setState({editable: false});
+      }
+      if (this.props.isEditTools){
+        this.setState({editable: false});
+        this.props.setEditIndex(null);
       }
     }
   }
@@ -33,15 +42,20 @@ export default class GraphAnnotationListItem extends BaseComponent {
       this.props.setEditIndex(null);
       this.props.turnOffEditable();
       this.setState({ editable: false });
+    }
+    if (this.state.editable){
+      this.refs.editorHeader.medium.subscribe("blur", () => {
+        this.saveText();
+      });
+
+      this.refs.editorBody.medium.subscribe("blur", () => {
+        this.saveText();
+      });
     } 
   }
 
-
   componentWillReceiveProps(){
     if (this.state.editable && this.props.getEditIndex == null){
-      this.setState({ editable: false });
-    }
-    if (this.props.isEditTools){
       this.setState({ editable: false });
     }
   }
@@ -56,17 +70,27 @@ export default class GraphAnnotationListItem extends BaseComponent {
   }
 
   _handleEditClick(e){
-    this.props.doChange(this.props.index);
-    if (!this.props.isEditTools){
-      this.setState({ editable: !this.state.editable });
-      if (this.state.editable){
-        this.props.setEditIndex(null);
-        this.props.turnOffEditable();
-      } else {
-        this.props.setEditIndex(this.props.index);
-        this.props.turnOnEditable();
-      }
+    if (this.props.isEditTools){
+      this.props.turnOffEditTools();
     }
+    this.props.doChange(this.props.index);
+    this.setState({ editable: !this.state.editable });
+    if (this.state.editable){
+      this.props.setEditIndex(null);
+      this.props.turnOffEditable();
+    } else {
+      this.props.setEditIndex(this.props.index);
+      this.props.turnOnEditable();
+    }
+
+  }
+
+  _handleHeaderChange(value, medium) {
+    this.setState({ header: value });
+  }
+
+  _handleTextChange(value, medium) {
+    this.setState({ text: value });
   }
 
   _handleRemove() {
@@ -75,11 +99,12 @@ export default class GraphAnnotationListItem extends BaseComponent {
     }
   }
 
-  _handleChange() {
+  saveText() {
+    this.props.update(this.props.currentIndex, this.state);
   }
 
-  render() {
 
+  render() {
       var theClass;
       if (this.props.sendClass){
         theClass = "annotationParent " + this.props.sendClass;
@@ -89,6 +114,23 @@ export default class GraphAnnotationListItem extends BaseComponent {
       } else {
         theClass = "annotationParent";
       }
+
+    let editorHeaderOptions = { 
+      toolbar: { buttons: [
+        'bold', 'italic', 'underline', 'anchor'
+      ] },
+      targetBlank: true, 
+      placeholder: { text: "Annotation title" }
+    }
+
+    let editorBodyOptions = { 
+      toolbar: { buttons: [
+        'bold', 'italic', 'underline', 'anchor', 'h3', 'h4', 'quote', 'unorderedlist', 'orderedlist'
+      ] },
+      targetBlank: true, 
+      placeholder: { text: "Annotation text" }
+    }
+
     return (
       <li
         className={theClass}
@@ -106,18 +148,34 @@ export default class GraphAnnotationListItem extends BaseComponent {
           className="glyphicon glyphicon-remove-sign"
           onClick={() => this._handleRemove(event)} >
         </div>
-        <div
-          onClick={() => this._handleShowClick(event)}
-          className = {"annotationHeaderWrapper"}
-          dangerouslySetInnerHTML={{ __html: this.props.annotationAttributes.header }}
-          contentEditable={this.state.editable}>
-        </div>
-        <div
-          onClick={() => this._handleShowClick(event)}
-          className={"annotationBodyWrapper"}
-          dangerouslySetInnerHTML={{ __html: this.props.annotationAttributes.text }}
-          contentEditable={this.state.editable}>
-        </div>
+         { this.state.editable == true ? 
+            <Editor
+              ref="editorHeader" 
+              onClick={() => this._handleShowClick(event)}
+              className="annotationHeaderWrapper"
+              text={this.state.header}
+              options={editorHeaderOptions}
+              onChange={this._handleHeaderChange} >
+            </Editor> : 
+            <div
+              onClick={() => this._handleShowClick(event)}
+              className = {"annotationHeaderWrapper"}
+              dangerouslySetInnerHTML={{ __html: this.state.header }}>
+          </div> }
+          { this.state.editable == true ? 
+            <Editor
+              ref="editorBody" 
+              onClick={() => this._handleShowClick(event)}
+              className="annotationBodyWrapper"
+              text={this.state.text}
+              options={editorBodyOptions}
+              onChange={this._handleTextChange} >
+            </Editor> : 
+            <div
+              onClick={() => this._handleShowClick(event)}
+              className = {"annotationBodyWrapper"}
+              dangerouslySetInnerHTML={{ __html: this.state.text }}>
+          </div> }
       </li>
     );
   }
