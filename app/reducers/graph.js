@@ -96,7 +96,7 @@ export default function graph(state = null, action) {
     return Graph.prepareEdges(Graph.circleLayout(state, true));
 
   case SET_HIGHLIGHTS:
-    return Graph.setHighlights(state, action.highlights, action.otherwiseFaded);
+    return Graph.setHighlights(state, action.highlights, action.otherwiseFaded, showEditTools, allowEditNodes);
 
   default:
     return state;

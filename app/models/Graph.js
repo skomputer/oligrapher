@@ -469,11 +469,10 @@ class Graph {
 
   // HIGHLIGHTING
 
-  static setHighlights(graph, highlights, otherwiseFaded = false) {
+  static setHighlights(graph, highlights, otherwiseFaded = false, showEditTools, allowEditNodes) {
     if (highlights.nodeIds.length + highlights.edgeIds.length + highlights.captionIds.length == 0) {
       otherwiseFaded = false;
     }
-
     let { nodeIds, edgeIds, captionIds } = highlights;
     let otherwise = otherwiseFaded ? "faded" : "normal";
     let newGraph = cloneDeep(graph);
@@ -484,15 +483,27 @@ class Graph {
     captionIds = captionIds.map(id => String(id));
 
     values(newGraph.nodes).forEach(node => {
-      newGraph.nodes[node.id].display.status = includes(nodeIds, String(node.id)) ? "highlighted" : otherwise;
+      if (!allowEditNodes){
+        newGraph.nodes[node.id].display.status = includes(nodeIds, String(node.id)) ? "highlighted" : otherwise;
+      } else {
+        newGraph.nodes[node.id].display.status = includes(nodeIds, String(node.id)) ? "editable" : otherwise;
+      }
     });
 
     values(newGraph.edges).forEach(edge => {
-      newGraph.edges[edge.id].display.status = includes(edgeIds, String(edge.id)) ? "highlighted" : otherwise;
+      if (!allowEditNodes){
+        newGraph.edges[edge.id].display.status = includes(edgeIds, String(edge.id)) ? "highlighted" : otherwise;
+      } else {
+        newGraph.edges[edge.id].display.status = includes(edgeIds, String(edge.id)) ? "editable" : otherwise;
+      }
     });
 
     values(newGraph.captions).forEach(caption => {
-      newGraph.captions[caption.id].display.status = includes(captionIds, String(caption.id)) ? "highlighted" : otherwise;
+      if (!allowEditNodes){
+        newGraph.captions[caption.id].display.status = includes(captionIds, String(caption.id)) ? "highlighted" : otherwise;
+      } else {
+        newGraph.captions[caption.id].display.status = includes(captionIds, String(caption.id)) ? "editable" : otherwise;
+      }
     });
 
     return newGraph;

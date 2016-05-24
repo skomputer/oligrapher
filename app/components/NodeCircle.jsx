@@ -7,7 +7,7 @@ export default class NodeCircle extends BaseComponent {
   render() {
     return (
       <g className="nodeCircle">
-        { this.props.selected ? this._selectionCirlce() : null }
+        { this.props.selected ? this._selectionCircle() : null }
         {this._bgCircle()}
         {this._circle()}
       </g>
@@ -23,13 +23,15 @@ export default class NodeCircle extends BaseComponent {
     }
   }
 
-  _selectionCirlce() {
-    const { scale } = this.props.node.display;
-    const r = ds.circleRadius * scale;
-    const bgColor = ds.selectColor;
-    const bgOpacity = 0.5;
-    const bgRadius = r + (ds.selectionRadiusDiff * scale);
-    return <circle className="node-selection" r={bgRadius} fill={bgColor} opacity={bgOpacity}></circle>;
+  _selectionCircle() {
+    if (this.props.showEditTools){
+      const { scale } = this.props.node.display;
+      const r = ds.circleRadius * scale;
+      const bgColor = ds.selectColor;
+      const bgOpacity = 0.5;
+      const bgRadius = r + (ds.selectionRadiusDiff * scale);
+      return <circle className="node-selection" r={bgRadius} fill={bgColor} opacity={bgOpacity}></circle>;
+    }
   }
 
   _bgCircle() {

@@ -182,7 +182,7 @@ class Oligrapher {
   }
 
   setHighlights(highlights, otherwiseFaded = false) {
-    this.root.dispatchProps.dispatch(setHighlights(highlights, otherwiseFaded));
+    this.root.dispatchProps.dispatch(setHighlights(highlights, otherwiseFaded, showEditTools, allowEditNodes));
     return this.root.getWrappedInstance().props.graph;
   }
 

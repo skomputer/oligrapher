@@ -128,7 +128,7 @@ export default class GraphAnnotationListItem extends BaseComponent {
         'bold', 'italic', 'underline', 'h3', 'h4', 'quote', 'unorderedlist', 'orderedlist'
       ] },
       targetBlank: true, 
-      placeholder: { text: "Annotation text" }
+      placeholder: { text: "Type your annotation here..." }
     }
 
     return (

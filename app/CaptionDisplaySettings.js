@@ -5,6 +5,7 @@ module.exports = {
   selectFillColor: "#0f0",
   textOpacity: {
     "normal": 1,
+    "editable": 1,
     "highlighted": 1,
     "faded": 0.2
   },

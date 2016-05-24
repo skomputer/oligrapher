@@ -52,7 +52,7 @@ class Root extends Component {
     let that = this;
 
     // apply annotation highlights to graph if available
-    let annotatedGraph = graph && annotation ? GraphModel.setHighlights(graph, annotation, !isEditor) : graph;
+    let annotatedGraph = graph && annotation ? GraphModel.setHighlights(graph, annotation, !isEditor, showEditTools, allowEditNodes) : graph;
 
     const keyMap = { 
       'undo': 'ctrl+,',
@@ -175,7 +175,8 @@ class Root extends Component {
                     clickCaption={clickCaption}
                     moveNode={(graphId, nodeId, x, y) => dispatch(moveNode(graphId, nodeId, x, y))} 
                     moveEdge={(graphId, edgeId, cx, cy) => dispatch(moveEdge(graphId, edgeId, cx, cy))} 
-                    moveCaption={(graphId, captionId, x, y) => dispatch(moveCaption(graphId, captionId, x, y))} /> 
+                    moveCaption={(graphId, captionId, x, y) => dispatch(moveCaption(graphId, captionId, x, y))}
+                    allowEditNodes={allowEditNodes} /> 
                 }
 
                 { graph &&

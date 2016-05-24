@@ -185,8 +185,8 @@ export function layoutCircle() {
   return { type: LAYOUT_CIRCLE };
 }
 
-export function setHighlights(highlights, otherwiseFaded = false) {
-  return { type: SET_HIGHLIGHTS, highlights, otherwiseFaded };
+export function setHighlights(highlights, otherwiseFaded = false, showEditTools, allowEditNodes) {
+  return { type: SET_HIGHLIGHTS, highlights, otherwiseFaded, showEditTools, allowEditNodes };
 }
 
 export function clearHighlights() {

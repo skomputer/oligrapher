@@ -33,7 +33,10 @@ export default class Node extends BaseComponent {
           className="node" 
           transform={transform}
           onClick={this._handleClick}>
-          <NodeCircle node={n} selected={this.props.selected} />
+          <NodeCircle node={n}
+            selected={this.props.selected}
+            showEditTools={this.props.showEditTools}
+            allowEditNodes={this.props.allowEditNodes} />
           { this.state.name ?  <NodeLabel node={n} /> : null }
         </g>
       </DraggableCore>

@@ -83,7 +83,9 @@ export default class Graph extends BaseComponent {
         selected={this.props.selection && includes(this.props.selection.nodeIds, n.id)}
         clickNode={this.props.clickNode} 
         moveNode={this.props.moveNode} 
-        isLocked={this.props.isLocked} />);
+        isLocked={this.props.isLocked}
+        showEditTools={this.props.showEditTools}
+        allowEditNodes={this.props.allowEditNodes} />);
   }
 
   _renderCaptions() {
