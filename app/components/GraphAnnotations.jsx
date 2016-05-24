@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import GraphNavButtons from './GraphNavButtons';
 import GraphAnnotationList from './GraphAnnotationList';
 import GraphAnnotation from './GraphAnnotation';
-import GraphAnnotationForm from './GraphAnnotationForm';
 import ShowHideAnnotations from './ShowHideAnnotations';
 require('../styles/oligrapher.annotations.css');
 

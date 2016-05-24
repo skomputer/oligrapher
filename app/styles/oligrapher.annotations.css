@@ -306,29 +306,6 @@
   margin-top: 10px;
 }
 
-#oligrapherGraphAnnotationForm {
-  margin-top: 10px;
-  -webkit-box-flex: 1 200px;
-  -moz-box-flex:  1 200px;
-  flex: 0 1 10%;
-}
-
-#oligrapherGraphAnnotationForm textarea {
-  margin-bottom: 10px;
-}
-
-#oligrapherGraphAnnotationFormText, #oligrapherGraphAnnotationFormHeader {
-  /* height: 400px; */
-  padding: 10px;
-  padding-left: 16px;
-  padding-right: 16px;
-  border: 1px solid #eee;
-  border-radius: 6px;
-}
-
-#oligrapherGraphAnnotationFormText {
-  margin-bottom: 20px;
-}
 
 #oligrapherSettingsForm {
   position: absolute;
