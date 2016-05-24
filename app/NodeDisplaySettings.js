@@ -21,7 +21,7 @@ module.exports = {
     normal: 1,
     editable: 1,
     highlighted: 1,
-    faded: 0.2
+    faded: 0.5
   },
   bgColor: {
     normal: "#fff",
@@ -40,13 +40,13 @@ module.exports = {
     normal: 1, 
     editable: 1, 
     highlighted: 1,
-    faded: 0.2
+    faded: 0.5
   },
   circleOpacity: {
     normal: 1,
     editable: 1,
     highlighted: 1,
-    faded: 0.2
+    faded: 0.5
   },
   bgRadiusDiff: 4,
   selectionRadiusDiff: 10

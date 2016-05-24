@@ -4,13 +4,13 @@ module.exports = {
     normal: "#999",
     editable: "#999",
     highlighted: "#999",
-    faded: "#ddd"
+    faded: "#aaa"
   },
   textColor: {
     normal: "#999",
     editable: "#444",
     highlighted: "#444",
-    faded: "#ddd"
+    faded: "#aaa"
   },
   bgColor: {
     normal: "#fff",

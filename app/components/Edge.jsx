@@ -21,6 +21,7 @@ export default class Edge extends BaseComponent {
     let width = 1 + (e.display.scale - 1) * 5;
     let selected = this.props.selected;
     let highlighted = e.display.status == "highlighted";
+    let editable = e.display.status == "editable";
 
     return (
       <DraggableCore
@@ -30,7 +31,7 @@ export default class Edge extends BaseComponent {
         onStart={this._handleDragStart}
         onDrag={this._handleDrag}
         onStop={this._handleDragStop}>
-        <g id={sp.groupId} className={classNames({ edge: true, selected, highlighted })}>
+        <g id={sp.groupId} className={classNames({ edge: true, selected, highlighted, editable })}>
           { selected ? <path 
             className="edge-selection" 
             d={sp.curve} 
@@ -38,7 +39,7 @@ export default class Edge extends BaseComponent {
             strokeOpacity={eds.selectOpacity} 
             strokeWidth={width + eds.selectWidthDiff} 
             fill="none"></path> : null }
-          { highlighted ? <path 
+          { (highlighted || editable) ? <path 
             className="edge-background" 
             d={sp.curve} 
             stroke={sp.bgColor} 

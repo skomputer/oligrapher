@@ -242,13 +242,20 @@
 }
 
 #oligrapherAnnotationListItems li .annotationHeaderWrapper{
-  width: calc(100% - 50px);
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
   margin: 7px 35px 5px 8px;
   font-weight: 500;
   line-height: initial;
+}
+
+#oligrapherAnnotationListItems:not(.annotationListPresentationMode) li .annotationHeaderWrapper{
+  width: calc(100% - 50px);
+}
+
+#oligrapherAnnotationListItems.annotationListPresentationMode li .annotationHeaderWrapper{
+  width: calc(100% - 15px);
 }
 
 #oligrapherAnnotationListItems li:not(.active) .annotationBodyWrapper{

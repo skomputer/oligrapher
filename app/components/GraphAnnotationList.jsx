@@ -16,7 +16,8 @@ export default class GraphAnnotationList extends BaseComponent {
   render() {
     return (
       <div id="oligrapherAnnotationList">
-        <ul id="oligrapherAnnotationListItems" onDragOver={this._handleDragOver}>
+        <ul id="oligrapherAnnotationListItems" className={!this.props.isEditor ? "annotationListPresentationMode" : null} 
+            onDragOver={this._handleDragOver}>
           { this.props.annotations.map(function(annotation, index) {
             return <GraphAnnotationListItem
               onChange={(index) => this._handleChange(index)}
@@ -34,6 +35,7 @@ export default class GraphAnnotationList extends BaseComponent {
               getEditIndex={this.state.editIndex}
               turnOffEditTools={() => this._handleRemoveEditTools()}
               doRemove={this.props.remove}
+              isEditor={this.props.isEditor}
               />
           }, this
           ) }

@@ -33,7 +33,7 @@ export default class GraphAnnotations extends Component {
     return (
       <div id="oligrapherGraphAnnotations" className="col-md-4">
         { showHideAnnotation }
-        { isEditor && navList && navListComponent }
+        { navListComponent }
         { (annotation || isEditor) && navComponent }
       </div>
     );

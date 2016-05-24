@@ -140,15 +140,19 @@ export default class GraphAnnotationListItem extends BaseComponent {
         draggable={true}
         id={"annotationIndex" + this.props.index}
         >
-        <div 
-          className="glyphicon glyphicon-edit"
-          onClick={() => this._handleEditClick(event)} >
-        </div>
-        <div 
-          className="glyphicon glyphicon-remove-sign"
-          onClick={() => this._handleRemove(event)} >
-        </div>
-         { this.state.editable == true ? 
+        { this.props.isEditor == true ? 
+          <div 
+            className="glyphicon glyphicon-edit"
+            onClick={() => this._handleEditClick(event)} >
+          </div> : null
+        }
+        { this.props.isEditor == true ? 
+          <div 
+            className="glyphicon glyphicon-remove-sign"
+            onClick={() => this._handleRemove(event)} >
+          </div> : null
+        }
+        { this.state.editable == true ? 
             <Editor
               ref="editorHeader" 
               onClick={() => this._handleShowClick(event)}

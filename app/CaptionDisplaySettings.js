@@ -7,7 +7,7 @@ module.exports = {
     "normal": 1,
     "editable": 1,
     "highlighted": 1,
-    "faded": 0.2
+    "faded": 0.5
   },
   highlightOpacity: 0.5,
   selectOpacity: 0.5
