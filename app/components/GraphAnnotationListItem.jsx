@@ -117,7 +117,7 @@ export default class GraphAnnotationListItem extends BaseComponent {
 
     let editorHeaderOptions = { 
       toolbar: { buttons: [
-        'bold', 'italic', 'underline', 'anchor'
+        'bold', 'italic', 'underline'
       ] },
       targetBlank: true, 
       placeholder: { text: "Annotation title" }
@@ -125,7 +125,7 @@ export default class GraphAnnotationListItem extends BaseComponent {
 
     let editorBodyOptions = { 
       toolbar: { buttons: [
-        'bold', 'italic', 'underline', 'anchor', 'h3', 'h4', 'quote', 'unorderedlist', 'orderedlist'
+        'bold', 'italic', 'underline', 'h3', 'h4', 'quote', 'unorderedlist', 'orderedlist'
       ] },
       targetBlank: true, 
       placeholder: { text: "Annotation text" }
