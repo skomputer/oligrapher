@@ -14,7 +14,12 @@ export default class Lasso extends BaseComponent {
       x: 0,
       y: 0,
       viewBoxWidth: +this.props.graph.state.viewBox.split(" ")[2],
-      viewBoxHeight: +this.props.graph.state.viewBox.split(" ")[3]
+      viewBoxHeight: +this.props.graph.state.viewBox.split(" ")[3],
+      thisOffsetLeft: null,
+      thisOffsetRight: null,
+      thisOffsetTop: null,
+      thisOffsetBottom: null,
+
     }
   }
 
@@ -27,6 +32,7 @@ export default class Lasso extends BaseComponent {
             onDrag={this._handleDrag}
             onStop={this._handleDragStop}>
           <rect
+            ref="lassoBg"
             x={-this.state.viewBoxWidth/2}
             y={-this.state.viewBoxHeight/2}
             width={this.state.viewBoxWidth}
@@ -42,6 +48,15 @@ export default class Lasso extends BaseComponent {
             opacity={0.5}/>
       </g>
     )
+  }
+
+  componentDidMount(e, ui){
+    /*will need to update offsets potentially at other points*/
+    this.setState({thisOffsetLeft: this.refs.lassoBg.getBoundingClientRect()["left"]});
+    this.setState({thisOffsetRight: this.refs.lassoBg.getBoundingClientRect()["right"]});
+    this.setState({thisOffsetTop: this.refs.lassoBg.getBoundingClientRect()["top"]});
+    this.setState({thisOffsetBottom: this.refs.lassoBg.getBoundingClientRect()["bottom"]});
+
   }
 
   _handleDragStart(e, ui) {
@@ -66,9 +81,12 @@ export default class Lasso extends BaseComponent {
 
   _handleDragStop(e, ui) {
      if (this._dragging) {
-       
-      // this.props.moveNode(this.props.node.id, this.state.x, this.state.y);
+      console.log("hi");       
     }
+    this.setState({ x : -500 });
+    this.setState({ y : -500 });
+    this.setState({ width : 0 });
+    this.setState({ height : 0 });
 
   }
 
@@ -85,15 +103,16 @@ export default class Lasso extends BaseComponent {
     let height = Math.abs(deltaY);
     this.setState({ width, height });
     if (deltaX < 0){
-       var x = (ui.position.clientX - e.target.getBoundingClientRect()["left"])/
-               (e.target.getBoundingClientRect()["right"] - e.target.getBoundingClientRect()["left"]) *
+       var x = (ui.position.clientX - this.state.thisOffsetLeft)/
+               (this.state.thisOffsetRight - this.state.thisOffsetLeft) *
                (this.state.viewBoxWidth) - this.state.viewBoxWidth/2;
       this.setState({ x });
     } 
     if (deltaY < 0){
-      var y = (ui.position.clientY - e.target.getBoundingClientRect()["top"])/
-               (e.target.getBoundingClientRect()["bottom"] - e.target.getBoundingClientRect()["top"]) *
+      var y = (ui.position.clientY - this.state.thisOffsetTop)/
+               (this.state.thisOffsetBottom - this.state.thisOffsetTop) *
                (this.state.viewBoxHeight) - this.state.viewBoxHeight/2;
+               console.log(y);
       this.setState({ y });
     } 
   }
