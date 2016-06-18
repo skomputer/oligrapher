@@ -80,6 +80,10 @@ export default class Edge extends BaseComponent {
     this.setState(newState);
   }
 
+  componentDidMount(props) {
+    this.props.moveEdge(this.props.edge.id, this.state.cx, this.state.cy);
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     return nextProps.selected !== this.props.selected || 
            JSON.stringify(nextState) !== JSON.stringify(this.state);

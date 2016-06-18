@@ -1,7 +1,14 @@
 import React, { Component, PropTypes } from 'react';
+import each from 'lodash/collection/each';
 import { DraggableCore } from 'react-draggable';
 import BaseComponent from './BaseComponent';
 import Graph from '../models/Graph';
+import nds from '../NodeDisplaySettings';
+import svgIntersections from 'svg-intersections';
+import Point2D from 'kld-affine/lib/Point2D'
+import bezier from 'svg-intersections/lib/functions/bezier';
+
+
 
 
 export default class Lasso extends BaseComponent {
@@ -81,12 +88,82 @@ export default class Lasso extends BaseComponent {
 
   _handleDragStop(e, ui) {
      if (this._dragging) {
-      console.log("hi");       
+      var graphThis = this;
+      var shape = svgIntersections.shape;
+      var bezierIntersections = bezier;
+      // console.log(bezierIntersections);
+      // console.log(svgIntersections);
+                              // var inp = SvgDom.intersectShapes(shape1.node, shape2.node)
+
+      // var shape = svgIntersections.shape;
+   
+      console.log(bezierIntersections);
+
+
+      // console.log(shape);
+    //   var intersections = svgIntersections.intersect(  
+    //     shape("bezier", { x1: -27, y1: 359, x2: -181, y2: 200, cx: -37, cy: 27 }),
+    //     shape("rect", { x: 0, y: 0, width: 60, height: 30 })  
+    // );
+    //   console.log(intersections)
+
+
+      each(this.props.graph.props.graph.nodes, function(n){
+        if (n.display.status != "highlighted"){
+           var thisRadius  = nds.circleRadius * n.display.scale;
+          if ((n.display.x + thisRadius) > graphThis.state.x && (n.display.x - thisRadius) < (graphThis.state.x + graphThis.state.width)
+          && (n.display.y + thisRadius) > graphThis.state.y && (n.display.y - thisRadius) < (graphThis.state.y + graphThis.state.height)){
+            graphThis.props.selectNode(n.id);
+          }
+        }
+      })
+
+      each(this.props.graph.props.graph.edges, function(e){
+        if (e.display.status != "highlighted"){
+            if (e.display.cx != null){
+              var intersectionTop = bezierIntersections.intersectBezier2Line(
+                new Point2D(e.display.x1, e.display.y1),
+                new Point2D(e.display.cx, e.display.cy),
+                new Point2D(e.display.x2, e.display.y2),
+                new Point2D(graphThis.state.x, graphThis.state.y),
+                new Point2D((graphThis.state.x + graphThis.state.width), graphThis.state.y));
+
+              var intersectionRight = bezierIntersections.intersectBezier2Line(
+                new Point2D(e.display.x1, e.display.y1),
+                new Point2D(e.display.cx, e.display.cy),
+                new Point2D(e.display.x2, e.display.y2),
+                new Point2D((graphThis.state.x + graphThis.state.width), graphThis.state.y),
+                new Point2D((graphThis.state.x + graphThis.state.width), (graphThis.state.y + graphThis.state.height)));
+
+              var intersectionBottom = bezierIntersections.intersectBezier2Line(
+                new Point2D(e.display.x1, e.display.y1),
+                new Point2D(e.display.cx, e.display.cy),
+                new Point2D(e.display.x2, e.display.y2),
+                new Point2D(graphThis.state.x, (graphThis.state.y + graphThis.state.height)),
+                new Point2D((graphThis.state.x + graphThis.state.width), (graphThis.state.y + graphThis.state.height)));
+
+              var intersectionLeft = bezierIntersections.intersectBezier2Line(
+                new Point2D(e.display.x1, e.display.y1),
+                new Point2D(e.display.cx, e.display.cy),
+                new Point2D(e.display.x2, e.display.y2),
+                new Point2D(graphThis.state.x, (graphThis.state.y + graphThis.state.height)),
+                new Point2D(graphThis.state.x, graphThis.state.y));
+              
+              if (intersectionTop.points.length > 0 || intersectionBottom.points.length > 0 || intersectionLeft.points.length > 0 || intersectionRight.points.length > 0){
+                graphThis.props.selectEdge(e.id);
+              }
+            } 
+        }
+      })
+
+      this.setState({ x : -500 });
+      this.setState({ y : -500 });
+      this.setState({ width : 0 });
+      this.setState({ height : 0 });      
     }
-    this.setState({ x : -500 });
-    this.setState({ y : -500 });
-    this.setState({ width : 0 });
-    this.setState({ height : 0 });
+
+
+    // console.log(this.props.graph.nodes, this.props.graph.edges, this.props.graph.captions);
 
   }
 
@@ -112,7 +189,6 @@ export default class Lasso extends BaseComponent {
       var y = (ui.position.clientY - this.state.thisOffsetTop)/
                (this.state.thisOffsetBottom - this.state.thisOffsetTop) *
                (this.state.viewBoxHeight) - this.state.viewBoxHeight/2;
-               console.log(y);
       this.setState({ y });
     } 
   }

@@ -39,7 +39,9 @@ export default class Graph extends BaseComponent {
             { this._renderEdges() }
             { this._renderNodes() }
             { this._renderCaptions() }
-            <Lasso graph={this} />
+            <Lasso graph={this}
+              selectNode={this.props.clickNode}
+              selectEdge={this.props.clickEdge} />
           </g>
         </DraggableCore>
         <defs dangerouslySetInnerHTML={ { __html: this._renderMarkers() } }/>
