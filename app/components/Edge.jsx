@@ -13,10 +13,10 @@ export default class Edge extends BaseComponent {
     // need control point immediately for dragging
     let { cx, cy, x1, y1, x2, y2, s1, s2, xa, ya, xb, yb } = this._calculateGeometry(props.edge.display);
     this.state = merge({}, props.edge.display, { cx, cy, x1, y1, x2, y2, s1, s2, xa, ya, xb, yb });
-    
   }
 
   render() {
+
     let e = this.props.edge;
     let sp = this._getSvgParams(e);
 

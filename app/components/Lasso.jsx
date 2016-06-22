@@ -14,6 +14,7 @@ import bezier from 'svg-intersections/lib/functions/bezier';
 
 export default class Lasso extends BaseComponent {
   constructor(props) {
+    console.log("burh hu")
     super(props);
     this.bindAll('_handleDragStart', '_handleDrag', '_handleDragStop');
     this.state = {
@@ -31,7 +32,13 @@ export default class Lasso extends BaseComponent {
     }
   }
 
+  componentShouldUpdate(nextProps, nextState){
+    // return nextProps.selected !== this.props.selected || 
+    //        JSON.stringify(nextState) !== JSON.stringify(this.state);
+  }
+
   render() {
+    console.log(this.state.viewBoxWidth);
 
     return (
       <g>
