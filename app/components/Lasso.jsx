@@ -14,7 +14,6 @@ import bezier from 'svg-intersections/lib/functions/bezier';
 
 export default class Lasso extends BaseComponent {
   constructor(props) {
-    console.log("burh hu")
     super(props);
     this.bindAll('_handleDragStart', '_handleDrag', '_handleDragStop');
     this.state = {
@@ -32,13 +31,27 @@ export default class Lasso extends BaseComponent {
     }
   }
 
-  componentShouldUpdate(nextProps, nextState){
-    // return nextProps.selected !== this.props.selected || 
-    //        JSON.stringify(nextState) !== JSON.stringify(this.state);
+  componentWillUpdate(props){
+
+    this.setState({thisOffsetLeft: this.refs.lassoBg.getBoundingClientRect()["left"]});
+    this.setState({thisOffsetRight: this.refs.lassoBg.getBoundingClientRect()["right"]});
+    this.setState({thisOffsetTop: this.refs.lassoBg.getBoundingClientRect()["top"]});
+    this.setState({thisOffsetBottom: this.refs.lassoBg.getBoundingClientRect()["bottom"]});
+  }
+
+
+
+  shouldComponentUpdate(nextProps, nextState){
+    return  (this.refs.lassoBg.getBoundingClientRect()["left"] != this.state.thisOffsetLeft) ||
+            (this.refs.lassoBg.getBoundingClientRect()["right"] != this.state.thisOffsetRight) ||
+            (this.refs.lassoBg.getBoundingClientRect()["top"] != this.state.thisOffsetTop) ||
+            (this.refs.lassoBg.getBoundingClientRect()["bottom"] != this.state.thisOffsetBottom) ||
+            (this.state.thisOffsetLeft == null) || 
+            (this.state.height != nextState.height) || (this.state.height != nextState.height) ||
+            (this.state.x != nextState.x) || (this.state.y != nextState.y);
   }
 
   render() {
-    console.log(this.state.viewBoxWidth);
 
     return (
       <g>
@@ -98,10 +111,6 @@ export default class Lasso extends BaseComponent {
      if (this._dragging) {
       var graphThis = this;
       var bezierIntersections = bezier;
-
-
-
-
 
       each(this.props.graph.props.graph.nodes, function(n){
         if (n.display.status != "highlighted"){
