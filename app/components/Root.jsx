@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { ActionCreators } from 'redux-undo';
 import { loadGraph, showGraph, 
          zoomIn, zoomOut, resetZoom, 
-         moveNode, moveEdge, moveCaption,
+         moveNode, moveEdge, moveCaption, updateEndPoints,
          swapNodeHighlight, swapEdgeHighlight, swapCaptionHighlight,
          swapNodeSelection, swapEdgeSelection, swapCaptionSelection,
          deleteSelection, deselectAll,
@@ -164,7 +164,8 @@ class Root extends Component {
                     clickEdge={clickEdge}
                     clickCaption={clickCaption}
                     moveNode={(graphId, nodeId, x, y) => dispatch(moveNode(graphId, nodeId, x, y))} 
-                    moveEdge={(graphId, edgeId, cx, cy) => dispatch(moveEdge(graphId, edgeId, cx, cy))} 
+                    moveEdge={(graphId, edgeId, cx, cy) => dispatch(moveEdge(graphId, edgeId, cx, cy))}
+                    updateEndPoints={(graphId, edgeId, xa, ya, xb, yb) => dispatch(updateEndPoints(graph, edgeId, xa, ya, xb, yb))}  
                     moveCaption={(graphId, captionId, x, y) => dispatch(moveCaption(graphId, captionId, x, y))} /> 
                 }
 

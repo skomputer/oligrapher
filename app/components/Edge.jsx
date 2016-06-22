@@ -11,13 +11,15 @@ export default class Edge extends BaseComponent {
     super(props);
     this.bindAll('_handleDragStart', '_handleDrag', '_handleDragStop', '_handleClick', '_handleTextClick');
     // need control point immediately for dragging
-    let { cx, cy } = this._calculateGeometry(props.edge.display);
-    this.state = merge({}, props.edge.display, { cx, cy });
+    let { cx, cy, x1, y1, x2, y2, s1, s2, xa, ya, xb, yb } = this._calculateGeometry(props.edge.display);
+    this.state = merge({}, props.edge.display, { cx, cy, x1, y1, x2, y2, s1, s2, xa, ya, xb, yb });
+    
   }
 
   render() {
     let e = this.props.edge;
     let sp = this._getSvgParams(e);
+
     let width = 1 + (e.display.scale - 1) * 5;
     let selected = this.props.selected;
     let highlighted = e.display.status == "highlighted";
@@ -81,7 +83,8 @@ export default class Edge extends BaseComponent {
   }
 
   componentDidMount(props) {
-    this.props.moveEdge(this.props.edge.id, this.state.cx, this.state.cy);
+    this.props.updateEndPoints(this.props.graphId, this.props.edge.id, this.state.xa, this.state.ya, this.state.xb, this.state.yb);
+    this.props.moveEdge(this.props.edge.id, this.state.cx, this.state.cy, this.state.x1, this.state.y1, this.state.x2, this.state.y2, this.state.s1, this.state.s2, this.state.xa, this.state.ya, this.state.xb, this.state.yb);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -135,9 +138,8 @@ export default class Edge extends BaseComponent {
 
   _getSvgParams(edge) {
     let e = edge;
-    let { label, scale, arrow, dash, status } = this.state;
     let { x, y, cx, cy, xa, ya, xb, yb, is_reverse } = this._calculateGeometry(this.state);
-
+    let { label, scale, arrow, dash, status } = this.state;
     const pathId = `path-${e.id}`;
     const fontSize = 10 * Math.sqrt(scale);
 
@@ -155,11 +157,11 @@ export default class Edge extends BaseComponent {
       textColor: eds.textColor[status],
       bgColor: eds.bgColor[status],
       bgOpacity: eds.bgOpacity[status]
+
     };
   }
 
   _calculateGeometry(state) {
-    // let edge = this.props.edge;
     let { cx, cy, x1, y1, x2, y2, s1, s2 } = state;
     let r1 = s1 * nds.circleRadius;
     let r2 = s2 * nds.circleRadius;

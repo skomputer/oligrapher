@@ -158,6 +158,7 @@ class Graph {
   }
 
   static updateEdgePosition(edge, graph) {
+
     // get nodes connected by edge
     let n1 = graph.nodes[edge.node1_id];
     let n2 = graph.nodes[edge.node2_id];
@@ -365,7 +366,6 @@ class Graph {
         merge({}, graph.edges[edgeId], omit(data, "id"))
       )
     );
-
     let edges = assign({}, graph.edges, { [edgeId]: edge });
 
     return assign({}, graph, { edges });
@@ -582,6 +582,10 @@ class Graph {
   static calculateEdgeAngle(edge) {
     let { x1, y1, x2, y2 } = edge.display;
     return Math.atan2(y2 - y1, x2 - x1);
+  }
+
+  static updateEndPoints(graph, edgeId, xa, ya, xb, yb) {
+    return this.updateEdge(graph, edgeId, { display: { xa, ya, xb, yb } });
   }
 
   static moveEdgeNode(edge, nodeNum, x, y) {

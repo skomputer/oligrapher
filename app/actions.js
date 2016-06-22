@@ -13,6 +13,7 @@ export const RESET_ZOOM = 'RESET_ZOOM';
 export const MOVE_NODE = 'MOVE_NODE';
 export const MOVE_EDGE = 'MOVE_EDGE';
 export const MOVE_CAPTION = 'MOVE_CAPTION';
+export const UPDATE_END_POINTS = 'UPDATE_END_POINTS';
 export const SWAP_NODE_HIGHLIGHT = 'SWAP_NODE_HIGHLIGHT';
 export const SWAP_EDGE_HIGHLIGHT = 'SWAP_EDGE_HIGHLIGHT';
 export const SWAP_CAPTION_HIGHLIGHT = 'SWAP_CAPTION_HIGHLIGHT';
@@ -86,6 +87,10 @@ export function moveEdge(edgeId, cx, cy) {
 
 export function moveCaption(captionId, x, y) {
   return { type: MOVE_CAPTION, captionId, x, y };
+}
+
+export function updateEndPoints(graph, edgeId, xa, ya, xb, yb) {
+  return { type: UPDATE_END_POINTS, graph, edgeId, xa, ya, xb, yb };
 }
 
 export function swapNodeHighlight(nodeId) {

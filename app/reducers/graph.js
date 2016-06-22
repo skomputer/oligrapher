@@ -2,7 +2,7 @@ import { LOAD_GRAPH, SHOW_GRAPH, NEW_GRAPH,
          MOVE_NODE, MOVE_EDGE, MOVE_CAPTION, 
          SWAP_NODE_HIGHLIGHT, SWAP_EDGE_HIGHLIGHT, SWAP_CAPTION_HIGHLIGHT,
          ADD_NODE, ADD_EDGE, ADD_CAPTION, ADD_SURROUNDING_NODES,
-         ADD_INTERLOCKS,
+         ADD_INTERLOCKS, UPDATE_END_POINTS,
          DELETE_NODE, DELETE_EDGE, DELETE_CAPTION, DELETE_SELECTION, DELETE_ALL,
          UPDATE_NODE, UPDATE_EDGE, UPDATE_CAPTION,
          PRUNE_GRAPH, LAYOUT_CIRCLE,
@@ -88,6 +88,10 @@ export default function graph(state = null, action) {
 
   case UPDATE_CAPTION:
     return Graph.updateCaption(state, action.captionId, action.data);
+
+  case UPDATE_END_POINTS:
+    return Graph.updateEndPoints(state, action.edgeId, action.xa, action.ya, action.xb, action.yb);
+
 
   case PRUNE_GRAPH:
     return Graph.prune(state);

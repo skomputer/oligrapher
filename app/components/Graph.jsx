@@ -72,7 +72,8 @@ export default class Graph extends BaseComponent {
         zoom={this.props.zoom}
         selected={this.props.selection && includes(this.props.selection.edgeIds, e.id)}
         clickEdge={this.props.clickEdge}
-        moveEdge={this.props.moveEdge} 
+        moveEdge={this.props.moveEdge}
+        updateEndPoints={this.props.updateEndPoints} 
         isLocked={this.props.isLocked} />);
   }
 
