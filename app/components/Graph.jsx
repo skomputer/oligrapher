@@ -45,7 +45,8 @@ export default class Graph extends BaseComponent {
                 selectEdge={this.props.clickEdge}
                 selectCaption={this.props.clickCaption}
                 simulateShiftKeyDown={this.props.simulateShiftKeyDown}
-                simulateShiftKeyUp={this.props.simulateShiftKeyUp} />}
+                simulateShiftKeyUp={this.props.simulateShiftKeyUp}
+                toggleLasso={this.props.toggleLasso} />}
           </g>
         </DraggableCore>
         <defs dangerouslySetInnerHTML={ { __html: this._renderMarkers() } }/>

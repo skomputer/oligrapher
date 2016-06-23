@@ -165,6 +165,7 @@ class Root extends Component {
                     clickNode={clickNode}
                     clickEdge={clickEdge}
                     clickCaption={clickCaption}
+                    toggleLasso={() => this.toggleLasso(!this.state.lasso)}
                     moveNode={(graphId, nodeId, x, y) => dispatch(moveNode(graphId, nodeId, x, y))} 
                     moveEdge={(graphId, edgeId, cx, cy) => dispatch(moveEdge(graphId, edgeId, cx, cy))}
                     updateEndPoints={(graphId, edgeId, xa, ya, xb, yb) => dispatch(updateEndPoints(graph, edgeId, xa, ya, xb, yb))}  

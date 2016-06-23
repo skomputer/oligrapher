@@ -9,9 +9,7 @@ import ds from '../CaptionDisplaySettings';
 import svgIntersections from 'svg-intersections';
 import Point2D from 'kld-affine/lib/Point2D'
 import bezier from 'svg-intersections/lib/functions/bezier';
-
-
-
+import isNaN from 'lodash/lang/isNaN';
 
 
 export default class Lasso extends BaseComponent {
@@ -28,7 +26,7 @@ export default class Lasso extends BaseComponent {
       thisOffsetLeft: null,
       thisOffsetRight: null,
       thisOffsetTop: null,
-      thisOffsetBottom: null,
+      thisOffsetBottom: null
 
     }
   }
@@ -44,13 +42,14 @@ export default class Lasso extends BaseComponent {
 
 
   shouldComponentUpdate(nextProps, nextState){
-    return  (this.refs.lassoBg.getBoundingClientRect()["left"] != this.state.thisOffsetLeft) ||
+    return  ((this.refs.lassoBg.getBoundingClientRect()["left"] != this.state.thisOffsetLeft) ||
             (this.refs.lassoBg.getBoundingClientRect()["right"] != this.state.thisOffsetRight) ||
             (this.refs.lassoBg.getBoundingClientRect()["top"] != this.state.thisOffsetTop) ||
             (this.refs.lassoBg.getBoundingClientRect()["bottom"] != this.state.thisOffsetBottom) ||
             (this.state.thisOffsetLeft == null) || 
             (this.state.height != nextState.height) || (this.state.height != nextState.height) ||
-            (this.state.x != nextState.x) || (this.state.y != nextState.y);
+            (this.state.x != nextState.x) || (this.state.y != nextState.y))
+            && (!_.isNaN(this.state.x)) && (!_.isNaN(this.state.width)) && (!_.isNaN(this.state.y)) && (!_.isNaN(this.state.height));
   }
 
   render() {
@@ -69,7 +68,7 @@ export default class Lasso extends BaseComponent {
             height={this.state.viewBoxHeight}
             opacity = "0"/>
         </DraggableCore>
-        <rect
+           <rect
             x={this.state.x}
             y={this.state.y}
             width={this.state.width} 
@@ -195,7 +194,8 @@ export default class Lasso extends BaseComponent {
       this.setState({ height : 0 });  
       }  
 
-      this.props.simulateShiftKeyUp();  
+      this.props.simulateShiftKeyUp();
+      this.props.toggleLasso();  
 
   }
 
@@ -210,7 +210,9 @@ export default class Lasso extends BaseComponent {
     
     let width = Math.abs(deltaX);
     let height = Math.abs(deltaY);
-    this.setState({ width, height });
+
+    this.setState({width, height});
+
     if (deltaX < 0){
        var x = (ui.position.clientX - this.state.thisOffsetLeft)/
                (this.state.thisOffsetRight - this.state.thisOffsetLeft) *
