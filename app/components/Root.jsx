@@ -166,7 +166,9 @@ class Root extends Component {
                     moveNode={(graphId, nodeId, x, y) => dispatch(moveNode(graphId, nodeId, x, y))} 
                     moveEdge={(graphId, edgeId, cx, cy) => dispatch(moveEdge(graphId, edgeId, cx, cy))}
                     updateEndPoints={(graphId, edgeId, xa, ya, xb, yb) => dispatch(updateEndPoints(graph, edgeId, xa, ya, xb, yb))}  
-                    moveCaption={(graphId, captionId, x, y) => dispatch(moveCaption(graphId, captionId, x, y))} /> 
+                    moveCaption={(graphId, captionId, x, y) => dispatch(moveCaption(graphId, captionId, x, y))}
+                    simulateShiftKeyDown={() => this.simulateShiftKeyDown()}
+                    simulateShiftKeyUp={() => this.simulateShiftKeyUp()} /> 
                 }
 
                 { graph &&
@@ -341,6 +343,14 @@ class Root extends Component {
       captionIds: keys(highlights.captions) 
     }
     this.props.dispatch(updateAnnotation(this.props.currentIndex, updateData));    
+  }
+
+  simulateShiftKeyDown() {
+    this.setState({"shiftKey": true});
+  }
+
+  simulateShiftKeyUp() {
+    this.setState({"shiftKey": false});
   }
 
   handleSave() {

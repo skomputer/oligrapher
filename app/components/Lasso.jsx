@@ -65,15 +65,18 @@ export default class Lasso extends BaseComponent {
             y={-this.state.viewBoxHeight/2}
             width={this.state.viewBoxWidth}
             height={this.state.viewBoxHeight}
-            opacity = {0.2}/>
+            opacity = "0"/>
         </DraggableCore>
         <rect
             x={this.state.x}
             y={this.state.y}
             width={this.state.width} 
             height={this.state.height} 
-            fill={"orange"} 
-            opacity={0.5}/>
+            fill="none"
+            stroke="#aaa"
+            strokeWidth="2px"
+            strokeDasharray="7,7"
+            />
       </g>
     )
   }
@@ -88,6 +91,7 @@ export default class Lasso extends BaseComponent {
   }
 
   _handleDragStart(e, ui) {
+    this.props.simulateShiftKeyDown();
 
     var newX = (ui.position.clientX - e.target.getBoundingClientRect()["left"])/
                (e.target.getBoundingClientRect()["right"] - e.target.getBoundingClientRect()["left"]) *
@@ -113,18 +117,14 @@ export default class Lasso extends BaseComponent {
       var bezierIntersections = bezier;
 
       each(this.props.graph.props.graph.nodes, function(n){
-        if (n.display.status != "highlighted"){
            var thisRadius  = nds.circleRadius * n.display.scale;
           if ((n.display.x + thisRadius) > graphThis.state.x && (n.display.x - thisRadius) < (graphThis.state.x + graphThis.state.width)
           && (n.display.y + thisRadius) > graphThis.state.y && (n.display.y - thisRadius) < (graphThis.state.y + graphThis.state.height)){
             graphThis.props.selectNode(n.id);
           }
-        }
       })
 
       each(this.props.graph.props.graph.edges, function(e){
-        if (e.display.status != "highlighted"){
-
 
           if (e.display.x1 >= graphThis.state.x && 
               e.display.x1 <= (graphThis.state.x + graphThis.state.width) &&
@@ -175,7 +175,6 @@ export default class Lasso extends BaseComponent {
               }
             } 
           }
-        }
       });
         
 
@@ -183,7 +182,9 @@ export default class Lasso extends BaseComponent {
       this.setState({ y : -500 });
       this.setState({ width : 0 });
       this.setState({ height : 0 });  
-      }    
+      }  
+
+      this.props.simulateShiftKeyUp();  
 
   }
 

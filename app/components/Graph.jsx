@@ -41,7 +41,9 @@ export default class Graph extends BaseComponent {
             { this._renderCaptions() }
             <Lasso graph={this}
               selectNode={this.props.clickNode}
-              selectEdge={this.props.clickEdge} />
+              selectEdge={this.props.clickEdge}
+              simulateShiftKeyDown={this.props.simulateShiftKeyDown}
+              simulateShiftKeyUp={this.props.simulateShiftKeyUp} />
           </g>
         </DraggableCore>
         <defs dangerouslySetInnerHTML={ { __html: this._renderMarkers() } }/>
