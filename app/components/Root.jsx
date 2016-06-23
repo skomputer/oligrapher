@@ -27,6 +27,7 @@ import EditButton from './EditButton';
 import HelpButton from './HelpButton';
 import HelpScreen from './HelpScreen';
 import SettingsButton from './SettingsButton';
+import LassoButton from './LassoButton';
 import GraphSettingsForm from './GraphSettingsForm';
 import SaveButton from './SaveButton';
 import GraphModel from '../models/Graph';
@@ -41,7 +42,7 @@ import filter from 'lodash/collection/filter';
 class Root extends Component {
   constructor(props) {
     super(props);
-    this.state = { shiftKey: false };
+    this.state = { shiftKey: false, lasso: false };
   }
 
   render() {
@@ -160,6 +161,7 @@ class Root extends Component {
                     graph={annotatedGraph ? annotatedGraph : graph}
                     isEditor={isEditor}
                     isLocked={isLocked}
+                    isLasso={this.state.lasso}
                     clickNode={clickNode}
                     clickEdge={clickEdge}
                     clickCaption={clickCaption}
@@ -168,7 +170,8 @@ class Root extends Component {
                     updateEndPoints={(graphId, edgeId, xa, ya, xb, yb) => dispatch(updateEndPoints(graph, edgeId, xa, ya, xb, yb))}  
                     moveCaption={(graphId, captionId, x, y) => dispatch(moveCaption(graphId, captionId, x, y))}
                     simulateShiftKeyDown={() => this.simulateShiftKeyDown()}
-                    simulateShiftKeyUp={() => this.simulateShiftKeyUp()} /> 
+                    simulateShiftKeyUp={() => this.simulateShiftKeyUp()}
+                     /> 
                 }
 
                 { graph &&
@@ -189,6 +192,8 @@ class Root extends Component {
                 <div id="oligrapherMetaButtons">
                   { isEditor && 
                     <EditButton toggle={() => this.toggleEditTools()} showEditTools={showEditTools} /> }
+                  { isEditor && 
+                    <LassoButton toggle={() => this.toggleLasso(!this.state.lasso)} lassoActive={this.state.lasso} /> }
                   { isEditor && hasSettings && 
                     <SettingsButton toggleSettings={(value) => dispatch(toggleSettings(value))} /> }
                   { isEditor && 
@@ -303,6 +308,10 @@ class Root extends Component {
 
   toggleEditTools(value)  { 
     this.props.dispatch(toggleEditTools(value));
+  };
+
+  toggleLasso(value)  { 
+    this.setState({ lasso: value})
   };
 
 
