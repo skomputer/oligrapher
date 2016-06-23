@@ -5,9 +5,11 @@ import { DraggableCore } from 'react-draggable';
 import BaseComponent from './BaseComponent';
 import Graph from '../models/Graph';
 import nds from '../NodeDisplaySettings';
+import ds from '../CaptionDisplaySettings';
 import svgIntersections from 'svg-intersections';
 import Point2D from 'kld-affine/lib/Point2D'
 import bezier from 'svg-intersections/lib/functions/bezier';
+
 
 
 
@@ -121,6 +123,15 @@ export default class Lasso extends BaseComponent {
           if ((n.display.x + thisRadius) > graphThis.state.x && (n.display.x - thisRadius) < (graphThis.state.x + graphThis.state.width)
           && (n.display.y + thisRadius) > graphThis.state.y && (n.display.y - thisRadius) < (graphThis.state.y + graphThis.state.height)){
             graphThis.props.selectNode(n.id);
+          }
+      })
+
+
+      each(this.props.graph.props.graph.captions, function(c){
+          //at this point, let's approximate the width/height of text rather than getting DOM element's size
+          if ((c.display.x + c.display.text.length * c.display.scale * 15 * 0.6) > graphThis.state.x && c.display.x < (graphThis.state.x + graphThis.state.width)
+          && (c.display.y + ds.lineHeight * c.display.scale/2) > graphThis.state.y && (c.display.y - ds.lineHeight * c.display.scale/1.5) < (graphThis.state.y + graphThis.state.height)){
+            graphThis.props.selectCaption(c.id);
           }
       })
 

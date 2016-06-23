@@ -42,6 +42,7 @@ export default class Graph extends BaseComponent {
             <Lasso graph={this}
               selectNode={this.props.clickNode}
               selectEdge={this.props.clickEdge}
+              selectCaption={this.props.clickCaption}
               simulateShiftKeyDown={this.props.simulateShiftKeyDown}
               simulateShiftKeyUp={this.props.simulateShiftKeyUp} />
           </g>
