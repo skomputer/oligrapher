@@ -194,8 +194,6 @@ export default class Lasso extends BaseComponent {
       this.setState({ height : 0 });  
       }  
 
-      this.props.simulateShiftKeyUp();
-      this.props.toggleLasso();  
 
   }
 

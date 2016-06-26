@@ -153,7 +153,8 @@ class Root extends Component {
                   updateTitle={updateTitle}
                   isEditor={isEditor} /> }
 
-              <div id="oligrapherGraphContainer">
+              <div id="oligrapherGraphContainer"
+                    className={this.state.lasso ? "oligrapherCursorLasso" : "oligrapherCursorPan"}>
                 { graph && 
                   <Graph 
                     ref={(c) => { this.graph = c; if (c) { c.root = this; } }}
