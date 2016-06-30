@@ -70,7 +70,11 @@ button#oligrapherLassoButton svg {
   margin-bottom: 10px;
 }
 
-#oligrapherLassoButton.lassoActiveMode {
+#oligrapherLassoButton.editContentMode {
+  background-color: rgba(0, 255, 0, 0.5);
+}
+
+#oligrapherLassoButton.editAnnotationsMode {
   background-color: rgba(255, 255, 0, 0.5);
 }
 

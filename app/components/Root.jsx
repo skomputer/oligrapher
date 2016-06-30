@@ -195,7 +195,7 @@ class Root extends Component {
                   { isEditor && 
                     <EditButton toggle={() => this.toggleEditTools()} showEditTools={showEditTools} /> }
                   { isEditor && 
-                    <LassoButton toggle={() => this.toggleLasso(!this.state.lasso)} lassoActive={this.state.lasso} /> }
+                    <LassoButton toggle={() => this.toggleLasso(!this.state.lasso)} lassoActive={this.state.lasso} showEditTools={showEditTools} /> }
                   { isEditor && hasSettings && 
                     <SettingsButton toggleSettings={(value) => dispatch(toggleSettings(value))} /> }
                   { isEditor && 

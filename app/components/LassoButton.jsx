@@ -3,10 +3,14 @@ import React, { Component, PropTypes } from 'react';
 export default class LassoButton extends Component {
 
   render() {
+    var theClass = "";
+    if (this.props.lassoActive){
+      theClass = this.props.showEditTools ? "editContentMode" : "editAnnotationsMode";
+    }
     return (
       <button 
         id="oligrapherLassoButton" 
-        className={"btn btn-sm btn-default " + (this.props.lassoActive ? "lassoActiveMode" : null)}
+        className={"btn btn-sm btn-default " + theClass}
         title={this.props.showEditTools ? "disable lasso tool" : "enable lasso tool"}
         onClick={this.props.toggle}>
         <span>
