@@ -8,7 +8,7 @@ import { loadGraph, showGraph,
          swapNodeHighlight, swapEdgeHighlight, swapCaptionHighlight,
          swapNodeSelection, swapEdgeSelection, swapCaptionSelection,
          deleteSelection, deselectAll,
-         pruneGraph, layoutCircle, 
+         pruneGraph, layoutCircle, layoutForce, 
          addNode, addEdge, addCaption,
          updateNode, updateEdge, updateCaption,
          deleteAll, addSurroundingNodes,
@@ -55,6 +55,7 @@ class Root extends Component {
     let annotatedGraph = graph && annotation ? GraphModel.setHighlights(graph, annotation, !isEditor) : graph;
 
     const keyMap = { 
+      'force': 'ctrl+f',
       'undo': 'ctrl+,',
       'redo': 'ctrl+.',
       'zoomIn': 'ctrl+=',
@@ -66,6 +67,7 @@ class Root extends Component {
     };
 
     const keyHandlers = {
+      'force': () => dispatch(layoutForce(true)),
       'undo': () => { dispatch(ActionCreators.undo()) },
       'redo': () => { dispatch(ActionCreators.redo()) },
       'zoomIn': () => dispatch(zoomIn()),
@@ -86,6 +88,7 @@ class Root extends Component {
       resetZoom: () => dispatch(resetZoom()),
       prune: () => dispatch(pruneGraph()),
       circleLayout: () => dispatch(layoutCircle()),
+      forceLayout: () => dispatch(layoutForce()),
       addNode: (node) => dispatch(addNode(node)),
       addEdge: (edge) => dispatch(addEdge(edge)),
       addCaption: (caption) => dispatch(addCaption(caption)),

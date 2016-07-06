@@ -34,6 +34,7 @@ export const UPDATE_EDGE = 'UPDATE_EDGE';
 export const UPDATE_CAPTION = 'UPDATE_CAPTION';
 export const PRUNE_GRAPH = 'PRUNE_GRAPH';
 export const LAYOUT_CIRCLE = 'LAYOUT_CIRCLE';
+export const LAYOUT_FORCE = 'LAYOUT_FORCE';
 export const DELETE_ALL = 'DELETE_ALL';
 export const SET_HIGHLIGHTS = 'SET_HIGHLIGHTS';
 export const TOGGLE_EDIT_TOOLS = 'TOGGLE_EDIT_TOOLS';
@@ -182,6 +183,10 @@ export function pruneGraph() {
 
 export function layoutCircle() {
   return { type: LAYOUT_CIRCLE };
+}
+
+export function layoutForce(override) {
+  return { type: LAYOUT_FORCE, override };
 }
 
 export function setHighlights(highlights, otherwiseFaded = false) {

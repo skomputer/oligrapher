@@ -108,9 +108,9 @@ class Graph {
     }, {});    
   }
 
-  static forceLayout(graph, steps = 500) {
+  static forceLayout(graph, steps = 500, override) {
     // only use force layout if there are unpositioned nodes
-    if (!values(graph.nodes).find(n => !(isNumber(n.display.x) && isNumber(n.display.y)))) {
+    if (!override && !values(graph.nodes).find(n => !(isNumber(n.display.x) && isNumber(n.display.y)))) {
       return graph;
     }
 

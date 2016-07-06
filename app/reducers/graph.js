@@ -5,7 +5,7 @@ import { LOAD_GRAPH, SHOW_GRAPH, NEW_GRAPH,
          ADD_INTERLOCKS,
          DELETE_NODE, DELETE_EDGE, DELETE_CAPTION, DELETE_SELECTION, DELETE_ALL,
          UPDATE_NODE, UPDATE_EDGE, UPDATE_CAPTION,
-         PRUNE_GRAPH, LAYOUT_CIRCLE,
+         PRUNE_GRAPH, LAYOUT_CIRCLE, LAYOUT_FORCE,
          SET_HIGHLIGHTS, TOGGLE_EDIT_TOOLS } from '../actions';
 import Graph from '../models/Graph';
 import Edge from '../models/Edge';
@@ -94,6 +94,9 @@ export default function graph(state = null, action) {
 
   case LAYOUT_CIRCLE:
     return Graph.prepareEdges(Graph.circleLayout(state, true));
+
+  case LAYOUT_FORCE:
+    return Graph.prepareEdges(Graph.forceLayout(state, true, action.override));
 
   case SET_HIGHLIGHTS:
     return Graph.setHighlights(state, action.highlights, action.otherwiseFaded);

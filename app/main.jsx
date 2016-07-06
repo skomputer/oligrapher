@@ -12,7 +12,7 @@ import { loadGraph, showGraph, newGraph,
          deleteNode, deleteEdge, deleteCaption, deleteAll,
          deselectAll, deleteSelection,
          updateNode, updateEdge, updateCaption,
-         pruneGraph, layoutCircle,
+         pruneGraph, layoutCircle, layoutForce,
          setHighlights, clearHighlights,
          loadAnnotations, setTitle,
          toggleEditTools } from './actions';
@@ -227,7 +227,10 @@ class Oligrapher {
   circleLayout() {
     this.root.dispatchProps.dispatch(layoutCircle());
   }
+
+  forceLayout() {
+    this.root.dispatchProps.dispatch(forceCircle());
+  }
 };
 
 module.exports = Oligrapher;
-
