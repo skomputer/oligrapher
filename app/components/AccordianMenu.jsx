@@ -19,6 +19,7 @@ export default class AccordianMenu extends BaseComponent {
 
     return (
       <div className="accordianMenu">
+      {/*
         <AccordianButton
             class="accordianButton"
             value={"Select"}
@@ -26,6 +27,7 @@ export default class AccordianMenu extends BaseComponent {
             size={"large"}
             hasFoldOut={false}
             onClick={this.props.toggleEditTools} />
+        */}
         <AccordianButton
             class="accordianButton"
             value={"Add Element"}
@@ -43,7 +45,7 @@ export default class AccordianMenu extends BaseComponent {
         <AccordianButton
             class="accordianButton"
             value={"Edit Element"}
-            glyphName={"edit"} 
+            glyphName={"editElement"} 
             size={"small"}
             hasFoldOut={true} />
         <AccordianButton

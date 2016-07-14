@@ -132,9 +132,9 @@ button#toggleEditTools {
 .accordianButton {
   background-color: rgba(75, 75, 75, 0.5);
   position: relative;
-  margin-bottom: 10px;
   cursor: pointer;
   font-size: 1.05em;
+  border-bottom: #4b4b4b 1 px solid;
 }
 
 .accordianMenutop {
@@ -187,6 +187,7 @@ button#toggleEditTools {
   margin-bottom: 5px;
   height:25px;
   padding-left: 15px;
+  cursor: pointer;
 }
 
 .addButton p {
@@ -206,6 +207,11 @@ button#toggleEditTools {
   position: absolute;
   height: 24px;
   line-height: 25px;
+  font-size: 18px;
+}
+
+.addButtonGlyph i {
+  margin-left: -3px;
 }
 
 .extendingButton {
