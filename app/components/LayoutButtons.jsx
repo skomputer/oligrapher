@@ -12,25 +12,29 @@ export default class LayoutButtons extends Component {
           value={"Circle Layout"} 
           size={"small"}
           hasFoldOut={false}
-          onClick={this.props.circleLayout} />
+          onClick={this.props.circleLayout}
+          glyphName="circleLayout" />
         <AccordianButton
           class="addButton"
           value={"Force Layout"} 
           size={"small"}
           hasFoldOut={false}
-          onClick={this.props.forceLayout} />
+          onClick={this.props.forceLayout}
+          glyphName="forceLayout" />
         <AccordianButton
           class="addButton"
           value={"Remove Unattached"} 
           size={"small"}
           hasFoldOut={false}
-          onClick={this.props.prune} />
+          onClick={this.props.prune}
+          glyphName="prune" />
         <AccordianButton
           class="addButton"
           value={"Clear Graph"} 
           size={"small"}
           hasFoldOut={false}
-          onClick={this.props.clearGraph} />
+          onClick={this.props.clearGraph}
+          glyphName="clear" />
       </div>
     );
   }

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { HotKeys } from 'react-hotkeys';
 import AccordianButton from './AccordianButton';
 import BaseComponent from './BaseComponent';
+require('../styles/oliFontv1Style.css');
+
 
 
 
@@ -20,13 +22,14 @@ export default class AccordianMenu extends BaseComponent {
         <AccordianButton
             class="accordianButton"
             value={"Select"}
+            glyphName={"select"}
             size={"large"}
             hasFoldOut={false}
-            onClick={this.props.toggleEditTools}
-            glyph={"plus"} />
+            onClick={this.props.toggleEditTools} />
         <AccordianButton
             class="accordianButton"
-            value={"Add Element"} 
+            value={"Add Element"}
+            glyphName={"addNode"} 
             size={"small"}
             hasFoldOut={true}
             data={this.props.data}
@@ -36,56 +39,55 @@ export default class AccordianMenu extends BaseComponent {
             source={this.props.dataSource} 
             nodes={this.props.graph.nodes}
             setNodeResults={this.props.setNodeResults}
-            nodeResults={this.props.nodeResults}
-            glyph={"plus"} />
+            nodeResults={this.props.nodeResults} />
         <AccordianButton
             class="accordianButton"
-            value={"Edit Element"} 
+            value={"Edit Element"}
+            glyphName={"edit"} 
             size={"small"}
-            hasFoldOut={true}
-            glyph={"plus"} />
+            hasFoldOut={true} />
         <AccordianButton
             class="accordianButton"
-            value={"Layout"} 
+            value={"Layout"}
+            glyphName={"circleLayout"} 
             size={"small"}
             hasFoldOut={true}
             prune={this.props.graphApi.prune} 
             circleLayout={this.props.graphApi.circleLayout} 
             forceLayout={this.props.graphApi.forceLayout} 
-            clearGraph={() => this._clearGraph()}
-            glyph={"plus"} />
+            clearGraph={() => this._clearGraph()} />
         <AccordianButton
             class="accordianButton"
-            value={"Save"} 
+            value={"Save"}
+            glyphName={"select"} 
             size={"small"}
             hasFoldOut={true}
             save={this.props.save}
             updateSettings={this.props.updateSettings}
-            settings={this.props.settings}
-            glyph={"plus"} />
+            settings={this.props.settings} />
         <AccordianButton
             class="accordianButton"
-            value={"Undo"} 
+            value={"Undo"}
+            glyphName={"undo"} 
             size={"small"}
             hasFoldOut={false}
-            glyph={"plus"}
             onClick={this.props.undo} />
         <AccordianButton
             class="accordianButton"
-            value={"Redo"} 
+            value={"Redo"}
+            glyphName={"redo"} 
             size={"small"}
             hasFoldOut={false}
-            glyph={"plus"}
             onClick={this.props.redo} />
         <AccordianButton
             class="accordianButton"
-            value={"Help"} 
+            value={"Help"}
+            glyphName={"help"} 
             size={"small"}
             hasFoldOut={false}
             settings={this.props.settings}
             saveSettings={this.props.saveSettings}
-            save={this.props.save}
-            glyph={"plus"} />
+            save={this.props.save} />
       </div>
     );
   }

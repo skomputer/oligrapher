@@ -9,6 +9,7 @@ import AddCaptionForm from './AddCaptionForm';
 import GraphSettingsForm from './GraphSettingsForm';
 import LayoutButtons from './LayoutButtons';
 import SaveButton from './SaveButton';
+require('../styles/oliFontv1Style.css');
 
 
 
@@ -31,7 +32,7 @@ export default class AccordianButton extends BaseComponent {
           {
             this.props.class == "addButton" &&
             <div className="addButtonGlyph">
-              <span className={"glyphicon glyphicon-" + this.props.glyph}></span>
+              <i className={"icon-" + this.props.glyphName}></i>
             </div>
           }
           <p>
@@ -46,7 +47,7 @@ export default class AccordianButton extends BaseComponent {
           {
             this.props.class == "accordianButton" &&
             <div className="extendingButton">
-              <span className={"glyphicon glyphicon-" + this.props.glyph}></span>
+              <i className={"icon-" + this.props.glyphName}></i>
             </div>
           }
         </div>

@@ -27,20 +27,23 @@ export default class AddElementsForm extends BaseComponent {
          source={this.props.source} 
          nodes={this.props.nodes}
          setNodeResults={this.props.setNodeResults}
-         nodeResults={this.props.nodeResults}/>
+         nodeResults={this.props.nodeResults}
+         glyphName="addNode"/>
        <AccordianButton value="Add Edge"
          size="small"
          hasFoldOut={true}
          class="addButton"
          addEdge={this.props.addEdge}
          closeAddForm={this.props.closeAddForm} 
-         nodes={this.props.nodes} />
+         nodes={this.props.nodes}
+         glyphName="addEdge" />
        <AccordianButton value="Add Caption"
          size="small"
          hasFoldOut={true}
          class="addButton"
          addCaption={this.props.addCaption}
-         closeAddForm={this.props.closeAddForm} />
+         closeAddForm={this.props.closeAddForm}
+         glyphName="addCaption" />
      </div>
      );
   }
