@@ -28,7 +28,6 @@ export default class AddCaptionForm extends BaseComponent {
 
     return (
       <div id="addCaption" className="editForm accordianMenuForm">
-        <HotKeys keyMap={keyMap} handlers={keyHandlers}>  
           <form onSubmit={this._handleSubmit}>
             <label>Caption:</label>
             <input type="text" className="form-control input-sm" placeholder="add caption" ref="text" /><br />
@@ -43,7 +42,6 @@ export default class AddCaptionForm extends BaseComponent {
             ) }
             </select>
           </form>
-        </HotKeys>
       </div>
     );
   }

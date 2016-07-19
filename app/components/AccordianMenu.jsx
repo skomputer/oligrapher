@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { HotKeys } from 'react-hotkeys';
 import AccordianButton from './AccordianButton';
 import BaseComponent from './BaseComponent';
+import AddElementsForm from './AddElementsForm';
+
 require('../styles/oliFontv1Style.css');
 
 
@@ -43,11 +45,13 @@ export default class AccordianMenu extends BaseComponent {
             data={this.props.data}
             addNode={this.props.graphApi.addNode}
             addEdge={this.props.graphApi.addEdge}
+            addCaption={this.props.graphApi.addCaption}
             closeAddForm={_closeAddForm} 
             source={this.props.dataSource} 
             nodes={this.props.graph.nodes}
             setNodeResults={this.props.setNodeResults}
             nodeResults={this.props.nodeResults} />
+        {/*
         <AccordianButton
             parentOpen={this.state.open}
             class="accordianButton"
@@ -55,6 +59,7 @@ export default class AccordianMenu extends BaseComponent {
             glyphName={"editElement"} 
             size={"small"}
             hasFoldOut={true} />
+        */}
         <AccordianButton
             parentOpen={this.state.open}
             class="accordianButton"

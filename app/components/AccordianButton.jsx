@@ -24,6 +24,13 @@ export default class AccordianButton extends BaseComponent {
   }
 
   render() { 
+    var isOpen = false;
+    if (this.props.hasFoldOut){
+      if (this.state.open){
+        isOpen = true;
+      }
+    }
+
 
     return (
       <div className="accordianSegment">
@@ -41,7 +48,7 @@ export default class AccordianButton extends BaseComponent {
           {
             this.props.hasFoldOut &&
             <div className="accordianFoldOutArrow">
-              <span className={this.state.open ? "glyphicon glyphicon-chevron-up" : "glyphicon glyphicon-chevron-down"}></span>
+              <span className={isOpen ? "glyphicon glyphicon-chevron-up" : "glyphicon glyphicon-chevron-down"}></span>
             </div>
           }
           {
@@ -52,13 +59,14 @@ export default class AccordianButton extends BaseComponent {
           }
         </div>
         {
-            (this.props.hasFoldOut && this.state.open) &&
+            (isOpen) &&
             <div className = "accordianFoldOut">
               {(this.props.value == "Add Element") ? 
                 <AddElementsForm
                 parentOpen={this.props.parentOpen}
                 addNode={this.props.addNode}
                 addEdge={this.props.addEdge}
+                addCaption={this.props.addCaption}
                 closeAddForm={this.props.closeAddForm} 
                 source={this.props.source} 
                 nodes={this.props.nodes}
@@ -101,8 +109,8 @@ export default class AccordianButton extends BaseComponent {
                 data={this.props.data} /> : null}
               {(this.props.value == "Add Caption") ?
                 <AddCaptionForm
-                  parentOpen={this.props.parentOpen} 
-                addCaption={this.props.addCaption} 
+                parentOpen={this.props.parentOpen} 
+                addCaption={this.props.addCaption}
                 closeAddForm={this.props.closeAddForm} /> : null }
             </div>
           }
@@ -112,15 +120,19 @@ export default class AccordianButton extends BaseComponent {
 
 
   componentDidUpdate() {
-    if (this.state.open && !this.props.parentOpen){
-      this.setState({open: false});
+    if (this.props.hasFoldOut){
+      if (this.state.open && !this.props.parentOpen){
+        this.setState({open: false});
+      }
     }
   }
 
 
 
   _toggleOpen() {
-    this.setState({open: !this.state.open});
+    if (this.props.hasFoldOut){
+      this.setState({open: !this.state.open});
+    }
   }
 
 }

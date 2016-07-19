@@ -4,7 +4,6 @@ import titleize from 'titleize';
 export default class GraphSettingsForm extends Component {
 
   render() {
-    console.log(this.props);
     return (
       <div id="oligrapherSettingsForm" className="accordianMenuForm">
         { Object.keys(this.props.settings).map(key => 
