@@ -23,9 +23,10 @@ export default class AddNodeInput extends BaseComponent {
     };
 
     return (
-      <div id="addNodeInput">
+      <div id="addNodeInput" className="accordianMenuForm">
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
           <form onSubmit={this._handleSubmit}>
+            <label>Name:</label>
             <input type="text" className="form-control input-sm" placeholder="search for node" ref="name" onChange={this._handleSearch} /><br />
             { this.props.source ? 
               <ul className="addNodeResults dropdown-menu" style={{ display: results.length > 0 ? "block" : "none" }} ref="results">

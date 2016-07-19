@@ -4,8 +4,9 @@ import titleize from 'titleize';
 export default class GraphSettingsForm extends Component {
 
   render() {
+    console.log(this.props);
     return (
-      <div id="oligrapherSettingsForm">
+      <div id="oligrapherSettingsForm" className="accordianMenuForm">
         { Object.keys(this.props.settings).map(key => 
           <div key={key}>
             {titleize(key.replace(/[_-]+/, " "))}&nbsp;
@@ -17,6 +18,12 @@ export default class GraphSettingsForm extends Component {
               onChange={(event) => this.handleChange(event)} />
           </div>
         ) }
+        <button 
+          id="oligrapherSaveButton" 
+          className="btn btn-sm btn-default"
+          onClick={this.props.save}>
+          Save
+        </button>
       </div>
     );
   }

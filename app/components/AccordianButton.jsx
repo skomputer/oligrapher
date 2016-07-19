@@ -73,8 +73,8 @@ export default class AccordianButton extends BaseComponent {
                 <div>
                 <GraphSettingsForm
                     settings={this.props.settings}
-                    updateSettings={this.props.updateSettings} />
-                    <SaveButton save={() => this.handleSave()} />
+                    updateSettings={this.props.updateSettings}
+                    save={() => this.handleSave()} />
                 </div> : null}
               {(this.props.value == "Help") ? "hiiiii" : null}
               {(this.props.value == "Add Node") ?

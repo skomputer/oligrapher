@@ -67,12 +67,6 @@ button#toggleEditTools {
   pointer-events: all;
 }
 
-#addNodeInput {
-  position: relative;
-  display: inline-block;
-  margin-right: 10px;
-}
-
 #addInterlocksButton {
   margin-left: 10px;
 }
@@ -106,9 +100,33 @@ button#toggleEditTools {
   background-color: rgba(238, 238, 238, 0.75);
 }
 
-.accordianMenu * {
-  margin: 0px;
-  padding: 0px; 
+.accordianMenuForm {
+  padding-bottom: 10px;
+}
+
+.accordianMenuForm form {
+  height: 35px;
+}
+
+.accordianMenuForm form label {
+  font-size: 0.7em;
+  display: inline-block;
+  width: 27%;
+  float: left;
+  line-height: 30px;
+  text-align: right;
+}
+
+.accordianMenuForm form input {
+  display: inline-block;
+  width: 70%;
+  float: right;
+}
+
+.accordianMenuForm form select {
+  display: inline-block;
+  width: 70%;
+  float: right;
 }
 
 .accordianButton {
@@ -119,7 +137,7 @@ button#toggleEditTools {
   font-size: 1.05em;
 }
 
-.accordianSegment > div {
+.accordianMenutop {
   padding-left: 15px;
   cursor: pointer;
 }
@@ -134,6 +152,10 @@ button#toggleEditTools {
 
 .accordianSegment > div.small p {
   line-height: 24px;
+}
+
+.accordianButton {
+  padding-left: 15px;
 }
 
 .accordianButton.large {
@@ -161,9 +183,10 @@ button#toggleEditTools {
 .addButton {
   border: 1.5px #aaa solid;
   background-color: #fff;
-  width: 95%;
+  width: 100%;
   margin-bottom: 5px;
   height:25px;
+  padding-left: 15px;
 }
 
 .addButton p {
@@ -210,9 +233,14 @@ button#toggleEditTools {
   height: auto;
 }
 
-.accordianFoldout {
-  color: #aaa;
-  font-size: 0.7em;
+.accordianFoldOut {
+  margin-left: 15px;
+  width: calc(100% - 30px);
+}
+
+.accordianFoldOut .accordianFoldOut {
+  margin-left: 0px;
+  width: 100%;
 }
 
 .editForm {
@@ -229,7 +257,7 @@ button#toggleEditTools {
 }
 
 .editForm input:not([type='checkbox']), .editForm select {
-  width: 150px;
+  /*width: 95%;*/
 }
 
 #addEdgeForm input, #addEdgeForm select {
@@ -249,17 +277,17 @@ button#toggleEditTools {
   margin-left: 5px;
 }
 
-.addNodeInput {
-  margin-bottom: 5px;
+#addNodeInput {
+  /*margin-bottom: 5px;*/
 }
 
-.addNodeResult {
+.addNodeResults {
   margin-top: 3px;
-}
-
-.addNodeResult {
   color: #008;
   cursor: pointer;
+  display: block;
+  position: relative;
+  top: -10px;
 }
 
 #addEdgeForm {

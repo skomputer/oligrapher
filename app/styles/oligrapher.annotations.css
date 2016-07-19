@@ -218,7 +218,7 @@
   top: 15px;
   right: 15px;
   margin: 0 auto;
-  text-align: right;
+  width: 100%;
 }
 
 #oligrapherHelpScreen {

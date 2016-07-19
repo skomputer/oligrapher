@@ -34,21 +34,24 @@ export default class AddEdgeForm extends BaseComponent {
     let nodes = sortBy(values(this.props.nodes), (node) => node.display.name);
 
     return (
-      <div id="addEdgeForm" className="editForm">
+      <div id="addEdgeForm" className="editForm accordianMenuForm">
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
           <form onSubmit={this._handleSubmit}>
+            <label>From:</label>
             <select defaultValue={node1Id} className="form-control input-sm" ref="node1Id">
               <option value="">Node 1</option>
               { nodes.map((node, i) =>
                 <option key={node.id} value={node.id}>{node.display.name}</option>
               ) }
             </select>
+            <label>To:</label>
             <select defaultValue={node2Id} className="form-control input-sm" ref="node2Id">
               <option value="">Node 2</option>
               { nodes.map((node, i) =>
                 <option key={node.id} value={node.id}>{node.display.name}</option>
               ) }
             </select>
+            <label>Label:</label>
             <input type="text" placeholder="label" className="form-control input-sm" ref="label" />
           </form>
         </HotKeys>
