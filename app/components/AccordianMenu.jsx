@@ -4,6 +4,14 @@ import { HotKeys } from 'react-hotkeys';
 import AccordianButton from './AccordianButton';
 import BaseComponent from './BaseComponent';
 import AddElementsForm from './AddElementsForm';
+import AddNodeInput from './AddNodeInput';
+import AddEdgeForm from './AddEdgeForm';
+import AddCaptionForm from './AddCaptionForm';
+import GraphSettingsForm from './GraphSettingsForm';
+import LayoutButtons from './LayoutButtons';
+import SaveButton from './SaveButton';
+
+import MenuStructure from '../MenuStructure';
 
 require('../styles/oliFontv1Style.css');
 
@@ -20,21 +28,15 @@ export default class AccordianMenu extends BaseComponent {
 
     let _closeAddForm = () => this.props.toggleAddForm(null);
 
+
     return (
       <div className={"accordianMenu " + (this.state.open ? null : "closedAccordian")}>
         <div className = "showHideMenuButton"
             onClick={() => this._toggleOpen()}>
             <span className={"glyphicon glyphicon-" + (this.state.open ? "backward" : "forward")}></span>
         </div>
-      {/*
-        <AccordianButton
-            class="accordianButton"
-            value={"Select"}
-            glyphName={"select"}
-            size={"large"}
-            hasFoldOut={false}
-            onClick={this.props.toggleEditTools} />
-        */}
+        {this._renderButtons()}
+        {/*
         <AccordianButton
             parentOpen={this.state.open}
             class="accordianButton"
@@ -51,15 +53,6 @@ export default class AccordianMenu extends BaseComponent {
             nodes={this.props.graph.nodes}
             setNodeResults={this.props.setNodeResults}
             nodeResults={this.props.nodeResults} />
-        {/*
-        <AccordianButton
-            parentOpen={this.state.open}
-            class="accordianButton"
-            value={"Edit Element"}
-            glyphName={"editElement"} 
-            size={"small"}
-            hasFoldOut={true} />
-        */}
         <AccordianButton
             parentOpen={this.state.open}
             class="accordianButton"
@@ -106,9 +99,55 @@ export default class AccordianMenu extends BaseComponent {
             hasFoldOut={false}
             settings={this.props.settings}
             saveSettings={this.props.saveSettings}
-            save={this.props.save} />
+            save={this.props.save}/> */}
       </div>
     );
+  }
+
+  _renderButtons(){
+    return MenuStructure.map((i) =>  
+      <AccordianButton 
+        key={i.value} 
+        parentOpen={this.state.open}
+        class="accordianButton"
+        value={i.value}
+        glyphName={i.glyphName} 
+        size={"small"}
+        hasFoldOut={i.hasFoldOut}>
+        {this._renderChildren(i.value)}
+    </AccordianButton>);
+
+  }
+
+  _renderChildren(whichFunc){
+    if (whichFunc == "Add Element"){
+        return ( <AddElementsForm
+                    parentOpen={this.props.parentOpen}
+                    addNode={this.props.addNode}
+                    addEdge={this.props.addEdge}
+                    addCaption={this.props.addCaption}
+                    closeAddForm={this.props.closeAddForm} 
+                    source={this.props.source} 
+                    nodes={this.props.nodes}
+                    setNodeResults={this.props.setNodeResults}
+                    nodeResults={this.props.nodeResults} />);
+    } else if (whichFunc == "Layout"){
+        return ( <LayoutButtons
+                  parentOpen={this.props.parentOpen} 
+                  prune={this.props.prune} 
+                  forceLayout={this.props.forceLayout} 
+                  circleLayout={this.props.circleLayout} 
+                  clearGraph={this.props.clearGraph} />);
+
+    } else if (whichFunc == "Save"){
+        return ( <div>
+                    <GraphSettingsForm
+                    parentOpen={this.props.parentOpen}
+                    settings={this.props.settings}
+                    updateSettings={this.props.updateSettings}
+                    save={() => this.handleSave()} />
+                </div> );
+    } 
   }
 
   _clearGraph() {

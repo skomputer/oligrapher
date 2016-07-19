@@ -30,6 +30,7 @@ export default class AccordianButton extends BaseComponent {
         isOpen = true;
       }
     }
+    console.log(this.props.children);
 
 
     return (
@@ -58,62 +59,7 @@ export default class AccordianButton extends BaseComponent {
             </div>
           }
         </div>
-        {
-            (isOpen) &&
-            <div className = "accordianFoldOut">
-              {(this.props.value == "Add Element") ? 
-                <AddElementsForm
-                parentOpen={this.props.parentOpen}
-                addNode={this.props.addNode}
-                addEdge={this.props.addEdge}
-                addCaption={this.props.addCaption}
-                closeAddForm={this.props.closeAddForm} 
-                source={this.props.source} 
-                nodes={this.props.nodes}
-                setNodeResults={this.props.setNodeResults}
-                nodeResults={this.props.nodeResults} /> : null}
-              {(this.props.value == "Edit Element") ? "hiiiii" : null}
-              {(this.props.value == "Layout") ?           
-                <LayoutButtons
-                  parentOpen={this.props.parentOpen} 
-                  prune={this.props.prune} 
-                  forceLayout={this.props.forceLayout} 
-                  circleLayout={this.props.circleLayout} 
-                  clearGraph={this.props.clearGraph} /> : null}
-              {(this.props.value == "Save") ? 
-                <div>
-                <GraphSettingsForm
-                  parentOpen={this.props.parentOpen}
-                    settings={this.props.settings}
-                    updateSettings={this.props.updateSettings}
-                    save={() => this.handleSave()} />
-                </div> : null}
-              {(this.props.value == "Help") ? "hiiiii" : null}
-              {(this.props.value == "Add Node") ?
-               <AddNodeInput
-                parentOpen={this.props.parentOpen}
-                ref="addNodeInput"
-                addNode={this.props.addNode}
-                addEdge={this.props.addEdge}
-                closeAddForm={this.props.closeAddForm} 
-                source={this.props.source} 
-                nodes={this.props.nodes}
-                results={this.props.nodeResults}
-                setNodeResults={this.props.setNodeResults} /> : null}
-              {(this.props.value == "Add Edge") ?
-               <AddEdgeForm
-                parentOpen={this.props.parentOpen} 
-                addEdge={this.props.addEdge} 
-                nodes={this.props.nodes}
-                closeAddForm={this.props.closeAddForm} 
-                data={this.props.data} /> : null}
-              {(this.props.value == "Add Caption") ?
-                <AddCaptionForm
-                parentOpen={this.props.parentOpen} 
-                addCaption={this.props.addCaption}
-                closeAddForm={this.props.closeAddForm} /> : null }
-            </div>
-          }
+        { isOpen && this.props.children }
       </div>
     );
   }
