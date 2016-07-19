@@ -26,6 +26,7 @@ import GraphAnnotations from './GraphAnnotations';
 import EditButton from './EditButton';
 import HelpButton from './HelpButton';
 import HelpScreen from './HelpScreen';
+import AccordianMenu from './AccordianMenu';
 import SettingsButton from './SettingsButton';
 import GraphSettingsForm from './GraphSettingsForm';
 import SaveButton from './SaveButton';
@@ -88,7 +89,7 @@ class Root extends Component {
       resetZoom: () => dispatch(resetZoom()),
       prune: () => dispatch(pruneGraph()),
       circleLayout: () => dispatch(layoutCircle()),
-      forceLayout: () => dispatch(layoutForce()),
+      forceLayout: () => dispatch(layoutForce(true)),
       addNode: (node) => dispatch(addNode(node)),
       addEdge: (edge) => dispatch(addEdge(edge)),
       addCaption: (caption) => dispatch(addCaption(caption)),
@@ -170,7 +171,7 @@ class Root extends Component {
                     moveEdge={(graphId, edgeId, cx, cy) => dispatch(moveEdge(graphId, edgeId, cx, cy))} 
                     moveCaption={(graphId, captionId, x, y) => dispatch(moveCaption(graphId, captionId, x, y))} /> 
                 }
-
+                {/*
                 { graph &&
                   <Editor 
                     {...this.props}
@@ -197,6 +198,29 @@ class Root extends Component {
                 </div>
 
                 { showSettings && hasSettings && <GraphSettingsForm settings={graphSettings} updateSettings={updateSettings} /> }
+
+              */}
+              {
+                graph && 
+                <AccordianMenu
+                  {...this.props}
+                    graphApi={graphApi}
+                    isEditor={isEditor} 
+                    showEditButton={false} 
+                    hideHelp={true} 
+                    setNodeResults={(nodes) => dispatch(setNodeResults(nodes))}
+                    toggleAddForm={(form) => dispatch(toggleAddForm(form))}
+                    toggleHelpScreen={() => dispatch(toggleHelpScreen())}
+                    undo={() => dispatch(ActionCreators.undo())}
+                    redo={() => dispatch(ActionCreators.redo())} 
+                    fetchInterlocks={fetchInterlocksCallback}
+                    toggleEditTools={() => this.toggleEditTools()}
+                    updateSettings={updateSettings}
+                    save={() => this.handleSave()}
+                    settings={graphSettings}
+                    updateSettings={updateSettings}
+                     />
+              }
               </div>
             </div>
             { showAnnotations &&
@@ -227,7 +251,7 @@ class Root extends Component {
               </button>
             </div> 
           }
-          { showSaveButton && isEditor && onSave && <SaveButton save={() => this.handleSave()} /> }
+          { /*showSaveButton && isEditor && onSave && <SaveButton save={() => this.handleSave()} /> */}
           { showHelpScreen && <HelpScreen source={this.props.dataSource} close={() => dispatch(toggleHelpScreen(false))} /> }
         </HotKeys>
       </div>

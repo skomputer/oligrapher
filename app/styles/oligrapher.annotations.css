@@ -85,7 +85,6 @@
 }
 
 #oligrapherSaveButton {
-  position: fixed;
   bottom: 20px;
   left: 20px;
   background-color: #f8f8f8;
@@ -214,7 +213,6 @@
 }
 
 #oligrapherSettingsForm {
-  position: absolute;
   display: inline-block;
   z-index: 20;
   top: 15px;

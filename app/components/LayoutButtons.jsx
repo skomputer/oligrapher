@@ -1,13 +1,36 @@
 import React, { Component, PropTypes } from 'react';
+import AccordianButton from './AccordianButton';
+
 
 export default class LayoutButtons extends Component {
 
   render() {
     return (
-      <div id="layoutButtons" className="btn-group buttonGroup">
-        <button className="btn btn-sm btn-default" title="remove unconnected nodes" onClick={this.props.prune}>prune</button>
-        <button className="btn btn-sm btn-default" title="arrange nodes in a circle" onClick={this.props.circleLayout}>circle</button>
-        <button className="btn btn-sm btn-default" title="delete everything" onClick={this.props.clearGraph}>clear</button>
+      <div id="layoutButtons" className="buttonGroup">
+        <AccordianButton
+          class="addButton"
+          value={"Circle Layout"} 
+          size={"small"}
+          hasFoldOut={false}
+          onClick={this.props.circleLayout} />
+        <AccordianButton
+          class="addButton"
+          value={"Force Layout"} 
+          size={"small"}
+          hasFoldOut={false}
+          onClick={this.props.forceLayout} />
+        <AccordianButton
+          class="addButton"
+          value={"Remove Unattached"} 
+          size={"small"}
+          hasFoldOut={false}
+          onClick={this.props.prune} />
+        <AccordianButton
+          class="addButton"
+          value={"Clear Graph"} 
+          size={"small"}
+          hasFoldOut={false}
+          onClick={this.props.clearGraph} />
       </div>
     );
   }
