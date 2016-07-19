@@ -39,7 +39,7 @@ export default class AccordianButton extends BaseComponent {
             {this.props.value}
           </p>
           {
-            this.props.hasFoldOut && this.props.class == "accordianButton" &&
+            this.props.hasFoldOut &&
             <div className="accordianFoldOutArrow">
               <span className={this.state.open ? "glyphicon glyphicon-chevron-up" : "glyphicon glyphicon-chevron-down"}></span>
             </div>
@@ -56,6 +56,7 @@ export default class AccordianButton extends BaseComponent {
             <div className = "accordianFoldOut">
               {(this.props.value == "Add Element") ? 
                 <AddElementsForm
+                parentOpen={this.props.parentOpen}
                 addNode={this.props.addNode}
                 addEdge={this.props.addEdge}
                 closeAddForm={this.props.closeAddForm} 
@@ -65,7 +66,8 @@ export default class AccordianButton extends BaseComponent {
                 nodeResults={this.props.nodeResults} /> : null}
               {(this.props.value == "Edit Element") ? "hiiiii" : null}
               {(this.props.value == "Layout") ?           
-                <LayoutButtons 
+                <LayoutButtons
+                  parentOpen={this.props.parentOpen} 
                   prune={this.props.prune} 
                   forceLayout={this.props.forceLayout} 
                   circleLayout={this.props.circleLayout} 
@@ -73,6 +75,7 @@ export default class AccordianButton extends BaseComponent {
               {(this.props.value == "Save") ? 
                 <div>
                 <GraphSettingsForm
+                  parentOpen={this.props.parentOpen}
                     settings={this.props.settings}
                     updateSettings={this.props.updateSettings}
                     save={() => this.handleSave()} />
@@ -80,6 +83,7 @@ export default class AccordianButton extends BaseComponent {
               {(this.props.value == "Help") ? "hiiiii" : null}
               {(this.props.value == "Add Node") ?
                <AddNodeInput
+                parentOpen={this.props.parentOpen}
                 ref="addNodeInput"
                 addNode={this.props.addNode}
                 addEdge={this.props.addEdge}
@@ -89,13 +93,15 @@ export default class AccordianButton extends BaseComponent {
                 results={this.props.nodeResults}
                 setNodeResults={this.props.setNodeResults} /> : null}
               {(this.props.value == "Add Edge") ?
-               <AddEdgeForm 
+               <AddEdgeForm
+                parentOpen={this.props.parentOpen} 
                 addEdge={this.props.addEdge} 
                 nodes={this.props.nodes}
                 closeAddForm={this.props.closeAddForm} 
                 data={this.props.data} /> : null}
               {(this.props.value == "Add Caption") ?
-                <AddCaptionForm 
+                <AddCaptionForm
+                  parentOpen={this.props.parentOpen} 
                 addCaption={this.props.addCaption} 
                 closeAddForm={this.props.closeAddForm} /> : null }
             </div>
@@ -103,6 +109,15 @@ export default class AccordianButton extends BaseComponent {
       </div>
     );
   }
+
+
+  componentDidUpdate() {
+    if (this.state.open && !this.props.parentOpen){
+      this.setState({open: false});
+    }
+  }
+
+
 
   _toggleOpen() {
     this.setState({open: !this.state.open});

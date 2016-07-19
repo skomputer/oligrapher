@@ -18,6 +18,7 @@ export default class AddElementsForm extends BaseComponent {
   	return (
   		<div>
        <AccordianButton value="Add Node"
+         parentOpen={this.props.parentOpen}
          size="small"
          hasFoldOut={true}
          class="addButton"
@@ -30,6 +31,7 @@ export default class AddElementsForm extends BaseComponent {
          nodeResults={this.props.nodeResults}
          glyphName="addNode"/>
        <AccordianButton value="Add Edge"
+         parentOpen={this.props.parentOpen}
          size="small"
          hasFoldOut={true}
          class="addButton"
@@ -38,6 +40,7 @@ export default class AddElementsForm extends BaseComponent {
          nodes={this.props.nodes}
          glyphName="addEdge" />
        <AccordianButton value="Add Caption"
+         parentOpen={this.props.parentOpen}
          size="small"
          hasFoldOut={true}
          class="addButton"

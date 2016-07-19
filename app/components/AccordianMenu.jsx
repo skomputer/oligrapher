@@ -11,6 +11,7 @@ require('../styles/oliFontv1Style.css');
 export default class AccordianMenu extends BaseComponent {
   constructor(props) {
     super(props);
+    this.state = {"open": true};
   }
 
   render() {
@@ -18,7 +19,11 @@ export default class AccordianMenu extends BaseComponent {
     let _closeAddForm = () => this.props.toggleAddForm(null);
 
     return (
-      <div className="accordianMenu">
+      <div className={"accordianMenu " + (this.state.open ? null : "closedAccordian")}>
+        <div className = "showHideMenuButton"
+            onClick={() => this._toggleOpen()}>
+            <span className={"glyphicon glyphicon-" + (this.state.open ? "backward" : "forward")}></span>
+        </div>
       {/*
         <AccordianButton
             class="accordianButton"
@@ -29,6 +34,7 @@ export default class AccordianMenu extends BaseComponent {
             onClick={this.props.toggleEditTools} />
         */}
         <AccordianButton
+            parentOpen={this.state.open}
             class="accordianButton"
             value={"Add Element"}
             glyphName={"addNode"} 
@@ -43,12 +49,14 @@ export default class AccordianMenu extends BaseComponent {
             setNodeResults={this.props.setNodeResults}
             nodeResults={this.props.nodeResults} />
         <AccordianButton
+            parentOpen={this.state.open}
             class="accordianButton"
             value={"Edit Element"}
             glyphName={"editElement"} 
             size={"small"}
             hasFoldOut={true} />
         <AccordianButton
+            parentOpen={this.state.open}
             class="accordianButton"
             value={"Layout"}
             glyphName={"circleLayout"} 
@@ -59,15 +67,17 @@ export default class AccordianMenu extends BaseComponent {
             forceLayout={this.props.graphApi.forceLayout} 
             clearGraph={() => this._clearGraph()} />
         <AccordianButton
+            parentOpen={this.state.open}
             class="accordianButton"
             value={"Save"}
-            glyphName={"select"} 
+            glyphName={"save"} 
             size={"small"}
             hasFoldOut={true}
             save={this.props.save}
             updateSettings={this.props.updateSettings}
             settings={this.props.settings} />
         <AccordianButton
+            parentOpen={this.state.open}
             class="accordianButton"
             value={"Undo"}
             glyphName={"undo"} 
@@ -75,6 +85,7 @@ export default class AccordianMenu extends BaseComponent {
             hasFoldOut={false}
             onClick={this.props.undo} />
         <AccordianButton
+            parentOpen={this.state.open}
             class="accordianButton"
             value={"Redo"}
             glyphName={"redo"} 
@@ -82,6 +93,7 @@ export default class AccordianMenu extends BaseComponent {
             hasFoldOut={false}
             onClick={this.props.redo} />
         <AccordianButton
+            parentOpen={this.state.open}
             class="accordianButton"
             value={"Help"}
             glyphName={"help"} 
@@ -99,6 +111,10 @@ export default class AccordianMenu extends BaseComponent {
       this.props.graphApi.deleteAll();
       this.props.toggleAddForm(null);
     }
+  }
+
+  _toggleOpen() {
+    this.setState({"open": !this.state.open});
   }
 
 }

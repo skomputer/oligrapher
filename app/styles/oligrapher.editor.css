@@ -97,11 +97,15 @@ button#toggleEditTools {
   top: 0px;
   width: 200px;
   height:100%;
-  background-color: rgba(238, 238, 238, 0.75);
+}
+
+.accordianMenu.closedAccordian {
+  left: -186px;
 }
 
 .accordianMenuForm {
   padding-bottom: 10px;
+  width: 95%
 }
 
 .accordianMenuForm form {
@@ -129,14 +133,6 @@ button#toggleEditTools {
   float: right;
 }
 
-.accordianButton {
-  background-color: rgba(75, 75, 75, 0.5);
-  position: relative;
-  cursor: pointer;
-  font-size: 1.05em;
-  border-bottom: #4b4b4b 1 px solid;
-}
-
 .accordianMenutop {
   padding-left: 15px;
   cursor: pointer;
@@ -155,17 +151,20 @@ button#toggleEditTools {
 }
 
 .accordianButton {
+  background-color: #2196f3;
+  position: relative;
+  cursor: pointer;
+  font-size: 1.05em;
+  border-bottom: #2a4c8a 1px solid;
   padding-left: 15px;
 }
 
 .accordianButton.large {
   height: 35px;
-  width: 235px;
 }
 
 .accordianButton.small {
   height: 25px;
-  width: 225px;
 }
 
 .accordianButton p {
@@ -181,13 +180,21 @@ button#toggleEditTools {
 }
 
 .addButton {
-  border: 1.5px #aaa solid;
-  background-color: #fff;
-  width: 100%;
+  border-bottom: 1px solid #3f69b5;
+  border-left: 1px solid #3f69b5;
+  background-color: rgba(255,255,255,0.5);
+  width: 95%;
   margin-bottom: 5px;
   height:25px;
   padding-left: 15px;
   cursor: pointer;
+  color:#142061;
+  position: relative;
+}
+
+.addButton .accordianFoldOutArrow {
+  color:#142061;
+  right:15px;
 }
 
 .addButton p {
@@ -202,7 +209,6 @@ button#toggleEditTools {
 .addButtonGlyph {
   margin-left: -10px;
   width: 18px;
-  border-right: 1px solid #aaa;
   display: inline-block;
   position: absolute;
   height: 24px;
@@ -218,9 +224,10 @@ button#toggleEditTools {
   right: 0px;
   top:0px;
   position: absolute;
-  background-color: rgba(75, 75, 75, 0.9);
+  background-color: #3f69b5;
   color: #eee;
   text-align: center;
+  border-bottom: 1px solid #2a4c8a;
 }
 
 .large .extendingButton {
@@ -240,13 +247,32 @@ button#toggleEditTools {
 }
 
 .accordianFoldOut {
-  margin-left: 15px;
-  width: calc(100% - 30px);
+  padding-left: 15px;
+  padding-top: 5px;
+  width: 100%;
+  background-color: #98d1ea;
+  height:100%;
 }
 
 .accordianFoldOut .accordianFoldOut {
-  margin-left: 0px;
+  padding-left: 0px;
   width: 100%;
+}
+
+.showHideMenuButton {
+  background-color: #142061;
+  color: #aaa;
+  margin: 0px;
+  padding: 0px;
+  height: 10px;
+  right: 0px;
+  position: relative;
+  text-align: right;
+  width: 100%;
+  font-size: 0.5em;
+  line-height: 11px;
+  padding-right: 3px;
+  cursor: pointer;
 }
 
 .editForm {
