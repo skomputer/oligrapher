@@ -66,18 +66,18 @@ export default class AccordianMenu extends BaseComponent {
   _renderChildren(whichFunc){
     if (whichFunc == "Add Element"){
         return ( <AddElementsForm
-                    parentOpen={this.props.parentOpen}
-                    addNode={this.props.addNode}
-                    addEdge={this.props.addEdge}
-                    addCaption={this.props.addCaption}
-                    closeAddForm={this.props.closeAddForm} 
+                    parentOpen={this.state.open}
+                    addNode={this.props.graphApi.addNode}
+                    addEdge={this.props.graphApi.addEdge}
+                    addCaption={this.props.graphApi.addCaption}
+                    closeAddForm={this.props.toggleAddForm} 
                     source={this.props.source} 
                     nodes={this.props.nodes}
                     setNodeResults={this.props.setNodeResults}
                     nodeResults={this.props.nodeResults} />);
     } else if (whichFunc == "Layout"){
         return ( <LayoutButtons
-                  parentOpen={this.props.graphApi.parentOpen} 
+                  parentOpen={this.state.open} 
                   prune={this.props.graphApi.prune} 
                   forceLayout={this.props.graphApi.forceLayout} 
                   circleLayout={this.props.graphApi.circleLayout} 

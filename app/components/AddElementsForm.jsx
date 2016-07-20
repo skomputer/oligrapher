@@ -2,17 +2,18 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { HotKeys } from 'react-hotkeys';
 import BaseComponent from './BaseComponent';
-import AddNodeForm from './AddNodeForm';
+import AddNodeInput from './AddNodeInput';
 import AddEdgeForm from './AddEdgeForm';
 import AddCaptionForm from './AddCaptionForm';
 import AccordianButton from './AccordianButton';
+
 
 const structure = [
         {"value": "Add Node", "glyphName": "addNode", "hasFoldOut": true, "func": null},
         {"value": "Add Edge", "glyphName": "addEdge", "hasFoldOut": true, "func": null},
         {"value": "Add Caption", "glyphName": "addCaption", "hasFoldOut": true, "func": null},
     ]
-
+/*CONTINUE TO EDIT!*/
 export default class AddElementsForm extends BaseComponent {
   constructor(props) {
     super(props);
@@ -61,33 +62,31 @@ export default class AddElementsForm extends BaseComponent {
   }
 
   _renderChildren(whichFunc){
+    console.log(this.props);
     if (whichFunc == "Add Node"){
-        return ( <AddElementsForm
-                    parentOpen={this.props.parentOpen}
-                    addNode={this.props.addNode}
-                    addEdge={this.props.addEdge}
-                    addCaption={this.props.addCaption}
-                    closeAddForm={this.props.closeAddForm} 
-                    source={this.props.source} 
-                    nodes={this.props.nodes}
-                    setNodeResults={this.props.setNodeResults}
-                    nodeResults={this.props.nodeResults} />);
+        return ( <AddNodeInput
+                parentOpen={false}
+                ref="addNodeInput"
+                addNode={this.props.addNode}
+                addEdge={this.props.addEdge}
+                closeAddForm={this.props.closeAddForm} 
+                source={this.props.source} 
+                nodes={this.props.nodes}
+                results={this.props.nodeResults}
+                setNodeResults={this.props.setNodeResults} />);
     } else if (whichFunc == "Add Edge"){
-        return ( <LayoutButtons
-                  parentOpen={this.props.graphApi.parentOpen} 
-                  prune={this.props.graphApi.prune} 
-                  forceLayout={this.props.graphApi.forceLayout} 
-                  circleLayout={this.props.graphApi.circleLayout} 
-                  clearGraph={this._clearGraph} />);
+        return ( <AddEdgeForm
+                parentOpen={false} 
+                addEdge={this.props.addEdge} 
+                nodes={this.props.nodes}
+                closeAddForm={this.props.closeAddForm} 
+                data={this.props.data} />);
 
     } else if (whichFunc == "Add Caption"){
-        return ( <div>
-                    <GraphSettingsForm
-                    parentOpen={this.props.parentOpen}
-                    settings={this.props.settings}
-                    updateSettings={this.props.updateSettings}
-                    save={() => this.handleSave()} />
-                </div> );
+        return ( <AddCaptionForm
+                parentOpen={false} 
+                addCaption={this.props.addCaption}
+                closeAddForm={this.props.closeAddForm} /> );
     } 
   }
 
@@ -102,6 +101,7 @@ export default class AddElementsForm extends BaseComponent {
         size={"small"}
         hasFoldOut={i.hasFoldOut}
         buttonFunc={this.props[i.func]}>
+          {this._renderChildren(i.value)}
     </AccordianButton>);
 
   }
