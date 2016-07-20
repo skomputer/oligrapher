@@ -23,6 +23,7 @@ export default class AccordianButton extends BaseComponent {
     this.bindAll('_toggleOpen');
   }
 
+
   render() { 
     var isOpen = false;
     if (this.props.hasFoldOut){
@@ -30,13 +31,12 @@ export default class AccordianButton extends BaseComponent {
         isOpen = true;
       }
     }
-    console.log(this.props.children);
 
 
     return (
       <div className="accordianSegment">
         <div className={this.props.class + " " + this.props.size}
-              onClick={this.props.hasFoldOut ? this._toggleOpen : this.props.onClick}>
+              onClick={this.props.hasFoldOut ? this._toggleOpen : this.props.buttonFunc}>
           {
             this.props.class == "addButton" &&
             <div className="addButtonGlyph">
@@ -59,7 +59,11 @@ export default class AccordianButton extends BaseComponent {
             </div>
           }
         </div>
-        { isOpen && this.props.children }
+          { isOpen &&
+            <div className = "accordianFoldOut">
+              {this.props.children}
+            </div>
+          }
       </div>
     );
   }
@@ -72,8 +76,6 @@ export default class AccordianButton extends BaseComponent {
       }
     }
   }
-
-
 
   _toggleOpen() {
     if (this.props.hasFoldOut){

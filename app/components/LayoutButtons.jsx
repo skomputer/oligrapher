@@ -1,41 +1,39 @@
 import React, { Component, PropTypes } from 'react';
+import BaseComponent from './BaseComponent';
 import AccordianButton from './AccordianButton';
 
+const structure = [
+        {"value": "Circle Layout", "glyphName": "circleLayout", "hasFoldOut": false, "func": "circleLayout"},
+        {"value": "Force Layout", "glyphName": "forceLayout", "hasFoldOut": false, "func": "forceLayout"},
+        {"value": "Remove Unattached", "glyphName": "prune", "hasFoldOut": false, "func": "prune"},
+        {"value": "Clear", "glyphName": "clear", "hasFoldOut": false, "func": "clearGraph"}
+    ]
 
-export default class LayoutButtons extends Component {
+
+export default class LayoutButtonsexport extends BaseComponent {
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (
       <div id="layoutButtons" className="buttonGroup">
-        <AccordianButton
-          class="addButton"
-          value={"Circle Layout"} 
-          size={"small"}
-          hasFoldOut={false}
-          onClick={this.props.circleLayout}
-          glyphName="circleLayout" />
-        <AccordianButton
-          class="addButton"
-          value={"Force Layout"} 
-          size={"small"}
-          hasFoldOut={false}
-          onClick={this.props.forceLayout}
-          glyphName="forceLayout" />
-        <AccordianButton
-          class="addButton"
-          value={"Remove Unattached"} 
-          size={"small"}
-          hasFoldOut={false}
-          onClick={this.props.prune}
-          glyphName="prune" />
-        <AccordianButton
-          class="addButton"
-          value={"Clear Graph"} 
-          size={"small"}
-          hasFoldOut={false}
-          onClick={this.props.clearGraph}
-          glyphName="clear" />
+        {this._renderButtons()}
       </div>
     );
+  }
+
+  _renderButtons(){
+    return structure.map((i) =>  
+      <AccordianButton 
+        key={i.value} 
+        parentOpen={false}
+        class="addButton"
+        value={i.value}
+        glyphName={i.glyphName} 
+        size={"small"}
+        hasFoldOut={i.hasFoldOut}
+        buttonFunc={this.props[i.func]} />);
+
   }
 }
