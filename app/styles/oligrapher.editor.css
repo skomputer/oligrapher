@@ -398,3 +398,20 @@ button#toggleEditTools {
 #edgeUrlInput {
   width: 337px;
 }
+
+.optionButtons{
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 100%;
+}
+
+.optionButton {
+  background-color: #2a4c8a;
+  color: #eee;
+  text-align: center;
+  width:25px;
+  height:25px;
+  line-height: 25px;
+  float: left;
+}

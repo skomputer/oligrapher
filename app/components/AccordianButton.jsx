@@ -20,7 +20,10 @@ export default class AccordianButton extends BaseComponent {
     if (this.props.hasFoldOut){
       this.state = { open: false };
     }
-    this.bindAll('_toggleOpen');
+    if (this.props.options){
+      this.state = { optionsOpen: false };
+    }
+    this.bindAll('_toggleOpen', '_toggleOpenOptions');
   }
 
 
@@ -54,8 +57,15 @@ export default class AccordianButton extends BaseComponent {
           }
           {
             this.props.class == "accordianButton" &&
-            <div className="extendingButton">
+            <div className="extendingButton"
+                  onClick = {this.props.options ? this._toggleOpenOptions : null}>
               <i className={"icon-" + this.props.glyphName}></i>
+              { (this.props.options && this.state.optionsOpen) &&
+                <div className = "optionButtons"
+                    style={{width: this.props.options.length * 35 + "px"}}>
+                  {this._renderOptionButtons(this.props.options)}
+                </div>
+              }
             </div>
           }
         </div>
@@ -66,6 +76,17 @@ export default class AccordianButton extends BaseComponent {
           }
       </div>
     );
+  }
+
+  _renderOptionButtons(options) {
+    return options.map((i) =>
+      <div key = {i.glyphName}
+          className = "optionButton"
+          onClick={() => this.props.optionClick("hey")}>
+        <i className={"icon-" + i.glyphName}></i>
+      </div>
+    )
+
   }
 
 
@@ -80,6 +101,12 @@ export default class AccordianButton extends BaseComponent {
   _toggleOpen() {
     if (this.props.hasFoldOut){
       this.setState({open: !this.state.open});
+    }
+  }
+
+  _toggleOpenOptions() {
+    if (this.props.options){
+      this.setState({optionsOpen: !this.state.optionsOpen});
     }
   }
 

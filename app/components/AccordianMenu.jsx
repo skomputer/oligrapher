@@ -16,9 +16,9 @@ import MenuStructure from '../MenuStructure';
 require('../styles/oliFontv1Style.css');
 
 const structure = [
-        {"value": "Add Element", "glyphName": "addNode", "hasFoldOut": true, "func": null},
-        {"value": "Layout", "glyphName": "circleLayout", "hasFoldOut": true, "func": null},
-        {"value": "Save", "glyphName": "save", "hasFoldOut": true, "func": null},
+        {"value": "Add Element", "glyphName": "selectaddNode", "hasFoldOut": true, "func": null, "options": [{"glyphName": "addNode", "func": "doFunc"}, {"glyphName": "addEdge", "func": "doFunc"}, {"glyphName": "addCaption", "func": "doFunc"}]},
+        {"value": "Layout", "glyphName": "selectcircleLayout", "hasFoldOut": true, "func": null, "options": [{"glyphName": "circleLayout", "func": "doFunc"}, {"glyphName": "forceLayout", "func": "doFunc"}, {"glyphName": "prune", "func": "doFunc"}, {"glyphName": "clear", "func": "doFunc"}]},
+        {"value": "Save", "glyphName": "save", "hasFoldOut": true, "func": "save"},
         {"value": "Undo", "glyphName": "undo", "hasFoldOut": false, "func": "undo"},
         {"value": "Redo", "glyphName": "redo", "hasFoldOut": false, "func": "redo"},
         {"value": "Help", "glyphName": "help", "hasFoldOut": false, "func": "toggleHelpScreen"}
@@ -47,6 +47,11 @@ export default class AccordianMenu extends BaseComponent {
     );
   }
 
+  _enactOptionFunction(val){
+
+    
+  }
+
   _renderButtons(){
     return structure.map((i) =>  
       <AccordianButton 
@@ -57,7 +62,9 @@ export default class AccordianMenu extends BaseComponent {
         glyphName={i.glyphName} 
         size={"small"}
         hasFoldOut={i.hasFoldOut}
-        buttonFunc={this.props[i.func]}>
+        buttonFunc={this.props[i.func]}
+        options={i.options}
+        optionClick={(val) => this._enactOptionFunction(val)}>
         {this._renderChildren(i.value)}
     </AccordianButton>);
 
