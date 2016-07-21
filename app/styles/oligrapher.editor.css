@@ -151,12 +151,14 @@ button#toggleEditTools {
 }
 
 .accordianButton {
+  width: calc(100% - 25px);
   background-color: #2196f3;
   position: relative;
   cursor: pointer;
   font-size: 1.05em;
   border-bottom: #2a4c8a 1px solid;
   padding-left: 15px;
+  display: inline-block;
 }
 
 .accordianButton.large {
@@ -174,7 +176,7 @@ button#toggleEditTools {
 .accordianFoldOutArrow {
   color: #fff;
   position: absolute;
-  right: 35px;
+  right: 15px;
   top: 0px;
   line-height: 27px;
 }
@@ -194,7 +196,6 @@ button#toggleEditTools {
 
 .addButton .accordianFoldOutArrow {
   color:#142061;
-  right:15px;
 }
 
 .addButton p {
@@ -223,23 +224,15 @@ button#toggleEditTools {
 .extendingButton {
   right: 0px;
   top:0px;
-  position: absolute;
   background-color: #3f69b5;
   color: #eee;
   text-align: center;
   border-bottom: 1px solid #2a4c8a;
-}
-
-.large .extendingButton {
-  width:35px;
-  height:35px;
-  line-height: 35px;
-}
-
-.small .extendingButton {
   width:25px;
   height:25px;
   line-height: 25px;
+  float: right;
+  cursor: pointer;
 }
 
 .accordianSegment {
@@ -248,7 +241,7 @@ button#toggleEditTools {
 
 .accordianFoldOut {
   padding-left: 15px;
-  padding-top: 5px;
+  padding-top: 4px;
   width: 100%;
   background-color: #98d1ea;
   height:100%;
@@ -401,9 +394,9 @@ button#toggleEditTools {
 
 .optionButtons{
   height: 100%;
-  position: absolute;
-  top: 0px;
+  top: -26px;
   left: 100%;
+  position: relative;
 }
 
 .optionButton {
@@ -414,4 +407,14 @@ button#toggleEditTools {
   height:25px;
   line-height: 25px;
   float: left;
+}
+
+.optionButton:hover {
+  background-color: #183771;
+  cursor: pointer;
+}
+
+.optionButton:active {
+  background-color: #183771;
+  cursor: pointer;
 }

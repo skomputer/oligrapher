@@ -16,8 +16,8 @@ import MenuStructure from '../MenuStructure';
 require('../styles/oliFontv1Style.css');
 
 const structure = [
-        {"value": "Add Element", "glyphName": "selectaddNode", "hasFoldOut": true, "func": null, "options": [{"glyphName": "addNode", "func": "doFunc"}, {"glyphName": "addEdge", "func": "doFunc"}, {"glyphName": "addCaption", "func": "doFunc"}]},
-        {"value": "Layout", "glyphName": "selectcircleLayout", "hasFoldOut": true, "func": null, "options": [{"glyphName": "circleLayout", "func": "doFunc"}, {"glyphName": "forceLayout", "func": "doFunc"}, {"glyphName": "prune", "func": "doFunc"}, {"glyphName": "clear", "func": "doFunc"}]},
+        {"value": "Add Element", "glyphName": "selectaddNode", "hasFoldOut": true, "func": null, "options": [{"glyphName": "addNode"}, {"glyphName": "addEdge"}, {"glyphName": "addCaption"}]},
+        {"value": "Layout", "glyphName": "selectcircleLayout", "hasFoldOut": true, "func": null, "options": [{"glyphName": "circleLayout"}, {"glyphName": "forceLayout"}, {"glyphName": "prune"}, {"glyphName": "clear"}]},
         {"value": "Save", "glyphName": "save", "hasFoldOut": true, "func": "save"},
         {"value": "Undo", "glyphName": "undo", "hasFoldOut": false, "func": "undo"},
         {"value": "Redo", "glyphName": "redo", "hasFoldOut": false, "func": "redo"},
@@ -28,7 +28,7 @@ const structure = [
 export default class AccordianMenu extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = {"open": true};
+    this.state = {"open": false};
   }
 
   render() {
@@ -48,7 +48,23 @@ export default class AccordianMenu extends BaseComponent {
   }
 
   _enactOptionFunction(val){
-
+    if (val == "addNode"){
+      this.props.graphApi.addNode();
+    } else if (val == "addEdge"){
+      this.props.graphApi.addEdge();
+    } else if (val == "addCaption"){
+      this.props.graphApi.addCaption();
+    } else if (val == "addEdge") {
+      this.props.graphApi.addEdge();
+    } else if (val == "forceLayout") {
+      this.props.graphApi.forceLayout();
+    } else if (val == "circleLayout"){
+      this.props.graphApi.circleLayout();
+    } else if (val == "prune"){
+      this.props.graphApi.prune();
+    } else if (val == "clear"){
+      this._clearGraph();
+    }
     
   }
 

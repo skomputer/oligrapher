@@ -55,10 +55,11 @@ export default class AccordianButton extends BaseComponent {
               <span className={isOpen ? "glyphicon glyphicon-chevron-up" : "glyphicon glyphicon-chevron-down"}></span>
             </div>
           }
+        </div>
           {
             this.props.class == "accordianButton" &&
             <div className="extendingButton"
-                  onClick = {this.props.options ? this._toggleOpenOptions : null}>
+                  onClick = {this.props.options ? this._toggleOpenOptions : this.props.buttonFunc}>
               <i className={"icon-" + this.props.glyphName}></i>
               { (this.props.options && this.state.optionsOpen) &&
                 <div className = "optionButtons"
@@ -68,7 +69,6 @@ export default class AccordianButton extends BaseComponent {
               }
             </div>
           }
-        </div>
           { isOpen &&
             <div className = "accordianFoldOut">
               {this.props.children}
@@ -82,7 +82,7 @@ export default class AccordianButton extends BaseComponent {
     return options.map((i) =>
       <div key = {i.glyphName}
           className = "optionButton"
-          onClick={() => this.props.optionClick("hey")}>
+          onClick={() => this.props.optionClick(i.glyphName)}>
         <i className={"icon-" + i.glyphName}></i>
       </div>
     )
