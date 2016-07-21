@@ -52,30 +52,27 @@ export default class AccordianMenu extends BaseComponent {
   }
 
   _enactOptionFunction(val, parent){
+    this._updateIcon(val, parent);
     if (val == "addNode"){
       this.props.graphApi.addNode();
-      this._updateIcon(val, parent);
     } else if (val == "addEdge"){
       this.props.graphApi.addEdge();
-      this._updateIcon(val, parent);
     } else if (val == "addCaption"){
       this.props.graphApi.addCaption();
-      this._updateIcon(val, parent);
     } else if (val == "addEdge") {
       this.props.graphApi.addEdge();
-      this._updateIcon(val, parent);
     } else if (val == "forceLayout") {
       this.props.graphApi.forceLayout();
-      this._updateIcon(val, parent);
     } else if (val == "circleLayout"){
       this.props.graphApi.circleLayout();
-      this._updateIcon(val, parent);
     } else if (val == "prune"){
       this.props.graphApi.prune();
-      this._updateIcon(val, parent);
     } else if (val == "clear"){
       this._clearGraph();
-      this._updateIcon(val, parent);
+    } else if (val == "annotations"){
+      this.props.turnOffEditTools();
+    } else if (val == "edit"){
+      this.props.turnOnEditTools();
     }
     
   }

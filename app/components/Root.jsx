@@ -207,7 +207,8 @@ class Root extends Component {
                     undo={() => dispatch(ActionCreators.undo())}
                     redo={() => dispatch(ActionCreators.redo())} 
                     fetchInterlocks={fetchInterlocksCallback}
-                    toggleEditTools={() => this.toggleEditTools(false)}
+                    turnOffEditTools={() => this.toggleEditTools(false)}
+                    turnOnEditTools={() => this.toggleEditTools(true)}
                     updateSettings={updateSettings}
                     save={() => this.handleSave()}
                     settings={graphSettings}
