@@ -79,16 +79,16 @@ export default class AccordianButton extends BaseComponent {
   }
 
   _renderOptionButtons(options) {
+    let theParent = this.props.value;
     return options.map((i) =>
       <div key = {i.glyphName}
           className = "optionButton"
-          onClick={() => this.props.optionClick(i.glyphName)}>
+          onClick={() => this.props.optionClick(i.glyphName, theParent)}>
         <i className={"icon-" + i.glyphName}></i>
       </div>
     )
 
   }
-
 
   componentDidUpdate() {
     if (this.props.hasFoldOut){

@@ -10,14 +10,18 @@ import AddCaptionForm from './AddCaptionForm';
 import GraphSettingsForm from './GraphSettingsForm';
 import LayoutButtons from './LayoutButtons';
 import SaveButton from './SaveButton';
+import findIndex from 'lodash/array/findIndex';
+
 
 import MenuStructure from '../MenuStructure';
 
 require('../styles/oliFontv1Style.css');
 
 const structure = [
+        {"value": "Mode", "glyphName": "selectannotations", "hasFoldOut": false, "func": null, "options": [{"glyphName": "annotations"}, {"glyphName": "edit"}]},
         {"value": "Add Element", "glyphName": "selectaddNode", "hasFoldOut": true, "func": null, "options": [{"glyphName": "addNode"}, {"glyphName": "addEdge"}, {"glyphName": "addCaption"}]},
         {"value": "Layout", "glyphName": "selectcircleLayout", "hasFoldOut": true, "func": null, "options": [{"glyphName": "circleLayout"}, {"glyphName": "forceLayout"}, {"glyphName": "prune"}, {"glyphName": "clear"}]},
+        {"value": "Delete", "glyphName": "delete", "hasFoldOut": false, "func": "delete"},
         {"value": "Save", "glyphName": "save", "hasFoldOut": true, "func": "save"},
         {"value": "Undo", "glyphName": "undo", "hasFoldOut": false, "func": "undo"},
         {"value": "Redo", "glyphName": "redo", "hasFoldOut": false, "func": "redo"},
@@ -47,25 +51,38 @@ export default class AccordianMenu extends BaseComponent {
     );
   }
 
-  _enactOptionFunction(val){
+  _enactOptionFunction(val, parent){
     if (val == "addNode"){
       this.props.graphApi.addNode();
+      this._updateIcon(val, parent);
     } else if (val == "addEdge"){
       this.props.graphApi.addEdge();
+      this._updateIcon(val, parent);
     } else if (val == "addCaption"){
       this.props.graphApi.addCaption();
+      this._updateIcon(val, parent);
     } else if (val == "addEdge") {
       this.props.graphApi.addEdge();
+      this._updateIcon(val, parent);
     } else if (val == "forceLayout") {
       this.props.graphApi.forceLayout();
+      this._updateIcon(val, parent);
     } else if (val == "circleLayout"){
       this.props.graphApi.circleLayout();
+      this._updateIcon(val, parent);
     } else if (val == "prune"){
       this.props.graphApi.prune();
+      this._updateIcon(val, parent);
     } else if (val == "clear"){
       this._clearGraph();
+      this._updateIcon(val, parent);
     }
     
+  }
+
+  _updateIcon(val, parent){
+    let theIndex = _.findIndex(structure, function(d){ return d["value"] == parent});
+    structure[theIndex]["glyphName"] = "select" + val;
   }
 
   _renderButtons(){
@@ -80,7 +97,7 @@ export default class AccordianMenu extends BaseComponent {
         hasFoldOut={i.hasFoldOut}
         buttonFunc={this.props[i.func]}
         options={i.options}
-        optionClick={(val) => this._enactOptionFunction(val)}>
+        optionClick={(val, par) => this._enactOptionFunction(val, par)}>
         {this._renderChildren(i.value)}
     </AccordianButton>);
 

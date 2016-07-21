@@ -30,6 +30,7 @@ import AccordianMenu from './AccordianMenu';
 import SettingsButton from './SettingsButton';
 import GraphSettingsForm from './GraphSettingsForm';
 import SaveButton from './SaveButton';
+import ZoomButtons from './ZoomButtons';
 import GraphModel from '../models/Graph';
 import { HotKeys } from 'react-hotkeys';
 import pick from 'lodash/object/pick';
@@ -66,6 +67,7 @@ class Root extends Component {
       'shiftUp': { sequence: 'shift', action: 'keyup' },
       'delete': ['alt+d', 'ctrl+d', 'command+d', 'del', 'backspace']
     };
+
 
     const keyHandlers = {
       'force': () => dispatch(layoutForce(true)),
@@ -171,41 +173,32 @@ class Root extends Component {
                     moveEdge={(graphId, edgeId, cx, cy) => dispatch(moveEdge(graphId, edgeId, cx, cy))} 
                     moveCaption={(graphId, captionId, x, y) => dispatch(moveCaption(graphId, captionId, x, y))} /> 
                 }
-                {/*
-                { graph &&
-                  <Editor 
-                    {...this.props}
-                    delete={() => dispatch(deleteSelection(selection))}
-                    graphApi={graphApi}
-                    isEditor={isEditor} 
-                    showEditButton={false} 
-                    hideHelp={true} 
-                    setNodeResults={(nodes) => dispatch(setNodeResults(nodes))}
-                    toggleAddForm={(form) => dispatch(toggleAddForm(form))}
-                    toggleHelpScreen={() => dispatch(toggleHelpScreen())}
-                    undo={() => dispatch(ActionCreators.undo())}
-                    redo={() => dispatch(ActionCreators.redo())} 
-                    fetchInterlocks={fetchInterlocksCallback} />
-                }
 
-                <div id="oligrapherMetaButtons">
-                  { isEditor && 
-                    <EditButton toggle={() => this.toggleEditTools()} showEditTools={showEditTools} /> }
-                  { isEditor && hasSettings && 
-                    <SettingsButton toggleSettings={(value) => dispatch(toggleSettings(value))} /> }
-                  { isEditor && 
-                    <HelpButton toggleHelpScreen={() => dispatch(toggleHelpScreen())} /> }
-                </div>
+                {<ZoomButtons zoomIn={() => dispatch(zoomIn())} zoomOut={() => dispatch(zoomOut())} />}
+                 {/*
+                  graph &&
+                   <Editor 
+                     {...this.props}
+                     delete={() => dispatch(deleteSelection(selection))}
+                     graphApi={graphApi}
+                     isEditor={isEditor} 
+                     showEditButton={false} 
+                     hideHelp={true} 
+                     setNodeResults={(nodes) => dispatch(setNodeResults(nodes))}
+                     toggleAddForm={(form) => dispatch(toggleAddForm(form))}
+                     toggleHelpScreen={() => dispatch(toggleHelpScreen())}
+                     undo={() => dispatch(ActionCreators.undo())}
+                     redo={() => dispatch(ActionCreators.redo())} 
+                     fetchInterlocks={fetchInterlocksCallback} />
 
-                { showSettings && hasSettings && <GraphSettingsForm settings={graphSettings} updateSettings={updateSettings} /> }
-
-              */}
+                */   } 
               {
                 graph && 
                 <AccordianMenu
                   {...this.props}
                     graphApi={graphApi}
                     isEditor={isEditor} 
+                    delete={() => dispatch(deleteSelection(selection))}
                     showEditButton={false} 
                     hideHelp={true} 
                     setNodeResults={(nodes) => dispatch(setNodeResults(nodes))}
@@ -214,7 +207,7 @@ class Root extends Component {
                     undo={() => dispatch(ActionCreators.undo())}
                     redo={() => dispatch(ActionCreators.redo())} 
                     fetchInterlocks={fetchInterlocksCallback}
-                    toggleEditTools={() => this.toggleEditTools()}
+                    toggleEditTools={() => this.toggleEditTools(false)}
                     updateSettings={updateSettings}
                     save={() => this.handleSave()}
                     settings={graphSettings}
@@ -241,7 +234,8 @@ class Root extends Component {
                 move={move}
                 remove={remove}
                 editForm={true}
-                hideEditTools={() => dispatch(toggleEditTools(false))} />
+                hideEditTools={() => dispatch(toggleEditTools(false))}
+                 />
             }
           </div>
           { !showAnnotations && this.enableAnnotations() &&

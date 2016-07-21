@@ -20,6 +20,15 @@
     text-rendering: optimizeLegibility;
 }
 
+.icon-selectedit:before {
+    content: "\e90c";
+}
+.icon-selectannotations:before {
+    content: "\e917";
+}
+.icon-selectdelete:before {
+    content: "\e918";
+}
 .icon-delete:before {
     content: "\e913";
 }
@@ -80,13 +89,10 @@
 .icon-save:before {
     content: "\e90d";
 }
-.icon-editElement:before {
-    content: "\e90c";
-}
 .icon-edit:before {
     content: "\e901";
 }
-.icon-select:before {
+.icon-annotations:before {
     content: "\e900";
 }
 .icon-help:before {

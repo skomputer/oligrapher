@@ -12,12 +12,12 @@
 
 #zoomButtons {
   position: absolute;
-  top: 15px;
-  left: 15px;
+  bottom: 15px;
+  right: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 5px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8)
 }
 
 #zoomOut {
