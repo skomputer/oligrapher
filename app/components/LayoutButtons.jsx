@@ -27,7 +27,7 @@ export default class LayoutButtonsexport extends BaseComponent {
     return structure.map((i) =>  
       <AccordianButton 
         key={i.value} 
-        parentOpen={false}
+        parentOpen={this.props.parentOpen}
         class="addButton"
         value={i.value}
         glyphName={i.glyphName} 

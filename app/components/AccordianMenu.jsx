@@ -64,21 +64,20 @@ export default class AccordianMenu extends BaseComponent {
   }
 
   _renderChildren(whichFunc){
-    console.log(this.props);
     if (whichFunc == "Add Element"){
         return ( <AddElementsForm
-                    parentOpen={this.props.parentOpen}
+                    parentOpen={this.state.open}
                     addNode={this.props.graphApi.addNode}
                     addEdge={this.props.graphApi.addEdge}
                     addCaption={this.props.graphApi.addCaption}
                     closeAddForm={this.props.toggleAddForm} 
-                    source={this.props.source} 
+                    source={this.props.dataSource} 
                     nodes={this.props.graph.nodes}
                     setNodeResults={this.props.setNodeResults}
                     nodeResults={this.props.nodeResults} />);
     } else if (whichFunc == "Layout"){
         return ( <LayoutButtons
-                  parentOpen={this.props.parentOpen} 
+                  parentOpen={this.state.open} 
                   prune={this.props.graphApi.prune} 
                   forceLayout={this.props.graphApi.forceLayout} 
                   circleLayout={this.props.graphApi.circleLayout} 
@@ -87,7 +86,7 @@ export default class AccordianMenu extends BaseComponent {
     } else if (whichFunc == "Save"){
         return ( <div>
                     <GraphSettingsForm
-                    parentOpen={this.props.parentOpen}
+                    parentOpen={this.state.open}
                     settings={this.props.settings}
                     updateSettings={this.props.updateSettings}
                     save={() => this.handleSave()} />
