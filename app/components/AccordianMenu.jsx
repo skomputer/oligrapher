@@ -41,7 +41,7 @@ export default class AccordianMenu extends BaseComponent {
 
 
     return (
-      <div className={"accordianMenu " + (this.state.open ? null : "closedAccordian")}>
+      <div className={"accordianMenu " + (this.props.showEditTools ? "editMenu" : "selectMenu") + " " + (this.state.open ? null : "closedAccordian")}>
         <div className = "showHideMenuButton"
             onClick={() => this._toggleOpen()}>
             <span className={"glyphicon glyphicon-" + (this.state.open ? "backward" : "forward")}></span>

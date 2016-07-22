@@ -32,46 +32,16 @@ export default class EditTools extends BaseComponent {
     return (
       <div id="editTools">
         <div id="buttons">
-          <EditButtons
-            ref="editButtons"
-            addNode={addNode}
-            addEdge={addEdge}
-            closeAddForm={closeAddForm} 
-            source={source}
-            nodes={graph.nodes}
-            nodeResults={this.props.nodeResults}
-            setNodeResults={this.props.setNodeResults}
-            toggleAddEdgeForm={toggleAddEdgeForm}
-            showInterlocksButton={this.props.showInterlocksButton}
-            fetchInterlocks={this.props.fetchInterlocks} />
           { currentForm == 'UpdateCaptionForm' && 
           <UpdateCaptionForm 
             updateCaption={updateCaption} 
             data={data}
             deselect={deselectAll} /> }
-          { currentForm != 'UpdateCaptionForm' && 
-             <AddCaptionForm 
-            addCaption={addCaption}  /> }
-          <LayoutButtons 
-            prune={prune} 
-            circleLayout={circleLayout} 
-            clearGraph={clearGraph} />
-          <UndoButtons 
-            undo={this.props.undo}
-            redo={this.props.redo} 
-            canUndo={this.props.canUndo}
-            canRedo={this.props.canRedo} />
          
           { this.props.hideHelp ? null : <button id="helpButton" className="btn btn-sm btn-default buttonGroup" onClick={toggleHelpScreen}>help</button> }
 
         </div>
 
-        { addForm == 'AddEdgeForm' && 
-          <AddEdgeForm 
-            addEdge={addEdge} 
-            nodes={graph.nodes}
-            closeAddForm={closeAddForm} 
-            data={data} /> }
         { currentForm == 'UpdateNodeForm' && 
             <UpdateNodeForm 
               updateNode={updateNode} 
@@ -82,19 +52,7 @@ export default class EditTools extends BaseComponent {
             updateEdge={updateEdge} 
             getGraph={getGraph} 
             data={data}
-            deselect={deselectAll} /> }
-        { currentForm == 'UpdateNodeForm' && source && source.getConnectedNodes && 
-          <AddConnectedNodesForm
-            data={data}
-            source={source} 
-            closeAddForm={closeAddForm} 
-            graph={graph}
-            addSurroundingNodes={addSurroundingNodes} 
-            addEdge={addEdge} /> }        
-          { (currentForm == 'UpdateNodeForm' || currentForm == 'UpdateEdgeForm') &&
-          <DeleteSelectedButton 
-            currentForm = {currentForm}
-            doDelete = {this._handleDelete} /> }
+            deselect={deselectAll} /> }       
         { helpScreen && !this.props.hideHelp ? <HelpScreen source={source} /> : null }
       </div>
     );

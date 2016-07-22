@@ -41,7 +41,6 @@ export default class UpdateNodeForm extends BaseComponent {
               ref="name" 
               value={display.name}
               onChange={() => this.apply()} />
-            &nbsp;
             <input 
               type="text" 
               title="input image URL"
@@ -50,8 +49,19 @@ export default class UpdateNodeForm extends BaseComponent {
               ref="image" 
               value={display.image}
               onChange={() => this.apply()} />
-            &nbsp;
-            <ChangeColorInput
+          </div>
+          <div>
+            <input
+              id="nodeUrlInput"
+              type="text"
+              title="edit node link"
+              className="form-control input-sm"
+              placeholder="link URL"
+              ref="url"
+              value={display.url}
+              onChange={() => this.apply()} />
+          </div>
+          <ChangeColorInput
               ref="color"
               value={display.color}
               status={display.status}
@@ -67,18 +77,6 @@ export default class UpdateNodeForm extends BaseComponent {
                 <option key={scale[1]} value={scale[0]}>{scale[1]}</option>
               ) }
             </select>
-          </div>
-          <div>
-            <input
-              id="nodeUrlInput"
-              type="text"
-              title="edit node link"
-              className="form-control input-sm"
-              placeholder="link URL"
-              ref="url"
-              value={display.url}
-              onChange={() => this.apply()} />
-          </div>
         </HotKeys>
       </div>
     );

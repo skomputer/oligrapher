@@ -175,8 +175,8 @@ class Root extends Component {
                 }
 
                 {<ZoomButtons zoomIn={() => dispatch(zoomIn())} zoomOut={() => dispatch(zoomOut())} />}
-                 {/*
-                  graph &&
+                 {
+                  (graph && showEditTools) &&
                    <Editor 
                      {...this.props}
                      delete={() => dispatch(deleteSelection(selection))}
@@ -191,13 +191,14 @@ class Root extends Component {
                      redo={() => dispatch(ActionCreators.redo())} 
                      fetchInterlocks={fetchInterlocksCallback} />
 
-                */   } 
+                   } 
               {
                 graph && 
                 <AccordianMenu
                   {...this.props}
                     graphApi={graphApi}
                     isEditor={isEditor} 
+                    showEditTools={showEditTools} 
                     delete={() => dispatch(deleteSelection(selection))}
                     showEditButton={false} 
                     hideHelp={true} 

@@ -66,9 +66,8 @@ export default class Editor extends BaseComponent {
     }
 
     return (
-      <div id="oligrapherEditorContainer" style={{ height: '100%' }}>
+      <div id="oligrapherEditorContainer">
         <HotKeys focused={true} attach={window} keyMap={keyMap} handlers={keyHandlers}>
-          <ZoomButtons zoomIn={zoomIn} zoomOut={zoomOut} />
           { this.props.showEditButton && this.props.isEditor && 
             <button 
               id="toggleEditTools" 
