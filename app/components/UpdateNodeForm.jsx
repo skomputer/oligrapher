@@ -70,7 +70,7 @@ export default class UpdateNodeForm extends BaseComponent {
             <select
               title="change node size" 
               value={display.scale} 
-              className="form-control input-sm" 
+              className="form-control input-sm nodeSize" 
               ref="scale"
               onChange={() => this.apply()}>
               { scales.map((scale, i) =>

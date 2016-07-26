@@ -4,6 +4,7 @@ import { HotKeys } from 'react-hotkeys';
 import BaseComponent from './BaseComponent';
 import ZoomButtons from './ZoomButtons';
 import EditTools from './EditTools';
+import { DraggableCore } from 'react-draggable';
 import merge from 'lodash/object/merge';
 import values from 'lodash/object/values';
 import cloneDeep from 'lodash/lang/cloneDeep';
@@ -14,7 +15,11 @@ require('../styles/oligrapher.editor.css');
 export default class Editor extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = { helpScreen: false };
+    this.state = { 
+      helpScreen: false,
+      open: true
+    }
+
   }
 
   render() {
@@ -66,33 +71,49 @@ export default class Editor extends BaseComponent {
     }
 
     return (
-      <div id="oligrapherEditorContainer">
-        <HotKeys focused={true} attach={window} keyMap={keyMap} handlers={keyHandlers}>
-          { this.props.showEditButton && this.props.isEditor && 
-            <button 
-              id="toggleEditTools" 
-              className="btn btn-sm btn-default" 
-              onClick={() => this.props.toggleEditTools()}>
-              <span className="glyphicon glyphicon-pencil"></span>
-            </button>
+        <div id="oligrapherEditorWrapper"
+              className={this.state.open ? null : "closedMenu"}>
+          <div className = "dragMenuButton"
+                onClick={() => this._toggleOpen()}>
+            <span className={"glyphicon glyphicon-" + (this.state.open ? "forward" : "backward")}></span>
+          </div>
+          {this.state.open &&
+            <div id="oligrapherEditorContainer">
+              <HotKeys focused={true} attach={window} keyMap={keyMap} handlers={keyHandlers}>
+                { this.props.showEditButton && this.props.isEditor && 
+                  <button 
+                    id="toggleEditTools" 
+                    className="btn btn-sm btn-default" 
+                    onClick={() => this.props.toggleEditTools()}>
+                    <span className="glyphicon glyphicon-pencil"></span>
+                  </button>
+                }
+                { this.props.showEditTools && 
+                  <EditTools
+                    ref="editTools"
+                    {...this.props}
+                    closeAddForm={_closeAddForm} 
+                    source={this.props.dataSource} 
+                    toggleAddEdgeForm={() => this._toggleAddEdgeForm()}
+                    toggleHelpScreen={() => this._toggleHelpScreen()}
+                    clearGraph={() => this._clearGraph()}
+                    data={formData}
+                    addForm={addForm}
+                    currentForm={currentForm}
+                    showInterlocksButton={showInterlocksButton}
+                    fetchInterlocks={fetchInterlocks}
+                    delete={this.props.delete} />
+                }       
+              </HotKeys>
+            </div>
           }
-          { this.props.showEditTools && 
-            <EditTools
-              ref="editTools"
-              {...this.props}
-              closeAddForm={_closeAddForm} 
-              source={this.props.dataSource} 
-              toggleAddEdgeForm={() => this._toggleAddEdgeForm()}
-              toggleHelpScreen={() => this._toggleHelpScreen()}
-              clearGraph={() => this._clearGraph()}
-              data={formData}
-              addForm={addForm}
-              currentForm={currentForm}
-              showInterlocksButton={showInterlocksButton}
-              fetchInterlocks={fetchInterlocks}
-              delete={this.props.delete} />
-          }       
-        </HotKeys>
+          {!this.state.open &&
+            <div className ="largeEditButton"
+                  onClick={() => this._toggleOpen()}>
+              <i className="icon-edit"/>
+              <p>Edit</p>
+            </div>
+          }
       </div>
     );
   }
@@ -150,10 +171,6 @@ export default class Editor extends BaseComponent {
     this.props.toggleAddForm('AddConnectedNodesForm');
   }
 
-  _toggleHelpScreen() {
-    this.props.toggleHelpScreen();
-  }
-
   _clearGraph() {
     if (confirm("Are you sure you want to clear the graph? This can't be undone!")) {
       this.props.graphApi.deleteAll();
@@ -170,4 +187,10 @@ export default class Editor extends BaseComponent {
   _focusAddNodeInput() {
     this.refs.editTools.refs.editButtons.refs.addNodeInput.refs.name.focus();
   }
+
+  _toggleOpen() {
+    this.setState({"open": !this.state.open});
+  }
+
+
 }

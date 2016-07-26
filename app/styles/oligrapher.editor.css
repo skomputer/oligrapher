@@ -6,25 +6,81 @@
   background-color: #7ad8be;
 }
 
+#oligrapherEditorWrapper {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width:25%;
+  min-width: 175px;
+}
+
+#oligrapherEditorWrapper.closedMenu{
+  width: 60px;
+  min-width: 60px;
+}
+
+.largeEditButton{
+  width: 100%;
+  background-color:#00805c;
+  color:#fff; 
+  padding-left: 5px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.largeEditButton p{
+  display: inline-block;
+  padding-left: 5px;
+}
+
 #oligrapherEditorContainer button:not(.nodeColorInputClearer) {
   background-color: #f8f8f8;
 }
 
 #oligrapherEditorContainer{
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width:30%;
-  background-color: #7ad8be;
+  background-color: rgba(122, 216, 190, 0.5);
   padding: 10px;
+  color: #001710;
+  font-size: 10px;
+  font-style: italic;
 }
 
-#oligrapherEditorContainer input {
+
+#oligrapherEditorContainer .form-control.nodeSize {
+  width: initial;
+  display: inline-block;
+  position: relative;
+}
+
+#oligrapherEditorContainer .input-sm {
   margin-bottom: 5px;
+  height: 25px;
+  font-size: 10px;
+  font-style: normal;
 }
 
 #oligrapherEditorContainer input[type=text] {
   width: 100%;
+}
+
+.dragMenuButton {
+  background-color: #00543c;
+  color: #aaa;
+  margin: 0px;
+  padding: 0px;
+  height: 10px;
+  right: 0px;
+  position: relative;
+  text-align: left;
+  width: 100%;
+  font-size: 0.5em;
+  line-height: 10px;
+  padding-left: 3px;
+  cursor: pointer;
+}
+
+.dragMenuButton span{
+  pointer-events: none;
 }
 
 #zoomButtons {
@@ -242,7 +298,7 @@ button#toggleEditTools {
 .extendingButton {
   right: 0px;
   top:0px;
-  background-color: #ce9e33;
+  background-color: #e2b337;
   color: #eee;
   text-align: center;
   border-bottom: 1px solid #966f19;
@@ -254,7 +310,7 @@ button#toggleEditTools {
 }
 
 .extendingButton:hover {
-   background-color: #b78c2c;
+   background-color: #ca9a30;
 }
 
 .editMenu .extendingButton {
@@ -274,12 +330,12 @@ button#toggleEditTools {
   padding-left: 15px;
   padding-top: 4px;
   width: 100%;
-  background-color: #fff4d6;
+  background-color: rgba(255, 231, 164, 0.5);
   height:100%;
 }
 
 .editMenu .accordianFoldOut {
-  background-color: #7ad8be;
+  background-color: rgba(122, 216, 190, 0.5);
 }
 
 .accordianFoldOut .accordianFoldOut {
@@ -395,10 +451,11 @@ button#toggleEditTools {
 .nodeColorInputWrapper {
   position: relative;
   display: inline-block;
+  float: left;
 }
 
 .nodeColorInputWrapper .nodeColorInput {
-  width: 50px;
+  width: 45px;
   padding: 4px 8px;
   cursor: pointer;
   position: relative;
@@ -406,9 +463,9 @@ button#toggleEditTools {
 }
 
 .nodeColorInputSwatch {
-  width: 22px;
-  height: 22px;
-  border-radius: 22px;
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
   margin-top: -1px;
   margin-left: -5px;
   cursor: pointer;
@@ -419,7 +476,7 @@ button#toggleEditTools {
   border: none;
   position: absolute;
   right: -2px;
-  line-height: 29px;
+  line-height: 20px;
   top: 0px;
 }
 
