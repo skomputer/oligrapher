@@ -37,9 +37,7 @@ export default class EditTools extends BaseComponent {
             updateCaption={updateCaption} 
             data={data}
             deselect={deselectAll} /> }
-         
           { this.props.hideHelp ? null : <button id="helpButton" className="btn btn-sm btn-default buttonGroup" onClick={toggleHelpScreen}>help</button> }
-
         </div>
 
         { currentForm == 'UpdateNodeForm' && 
@@ -52,8 +50,14 @@ export default class EditTools extends BaseComponent {
             updateEdge={updateEdge} 
             getGraph={getGraph} 
             data={data}
-            deselect={deselectAll} /> }       
-        { helpScreen && !this.props.hideHelp ? <HelpScreen source={source} /> : null }
+            deselect={deselectAll} /> }  
+        { currentForm == null &&
+          <div>
+            <p>
+              Select a node, link, or caption to edit it!
+            </p>
+          </div>
+        }     
       </div>
     );
   }

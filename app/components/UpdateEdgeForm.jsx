@@ -40,14 +40,8 @@ export default class UpdateEdgeForm extends BaseComponent {
               ref="dash" 
               checked={display.dash} 
               onChange={() => this.apply()} /> dash
-            &nbsp;&nbsp;<input 
-              type="text" 
-              className="form-control input-sm"
-              placeholder="label" 
-              ref="label" 
-              value={display.label} 
-              onChange={() => this.apply()} />
-            &nbsp;<select 
+            &nbsp;&nbsp;
+            <select 
               value={display.scale} 
               className="form-control input-sm" 
               ref="scale" 
@@ -56,6 +50,13 @@ export default class UpdateEdgeForm extends BaseComponent {
                 <option key={scale[1]} value={scale[0]}>{scale[1]}</option>
               ) }
             </select>
+            <input 
+              type="text" 
+              className="form-control input-sm"
+              placeholder="label" 
+              ref="label" 
+              value={display.label} 
+              onChange={() => this.apply()} />
           </div>
           <div>
             <input

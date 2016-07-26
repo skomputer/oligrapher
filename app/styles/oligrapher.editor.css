@@ -20,6 +20,10 @@
 }
 
 #oligrapherEditorContainer input {
+  margin-bottom: 5px;
+}
+
+#oligrapherEditorContainer input[type=text] {
   width: 100%;
 }
 
@@ -63,21 +67,6 @@ button#toggleEditTools {
   padding-top: 7px;
   width: 32px;
   outline: none;
-}
-
-#buttons {
-  position: absolute;
-  top: 15px;
-  left: 60px;
-  width:250px;
-  pointer-events: none;
-}
-
-#buttons .buttonGroup {
-  display: inline-block;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  pointer-events: all;
 }
 
 #addInterlocksButton {

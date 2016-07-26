@@ -41,7 +41,7 @@ export default class UpdateCaptionForm extends BaseComponent {
               ref="text" 
               value={display.text} 
               onChange={() => this.apply()} />
-            &nbsp;<select 
+            <select 
               value={display.scale} 
               className="form-control input-sm" 
               ref="scale" 
