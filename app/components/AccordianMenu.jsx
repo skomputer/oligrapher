@@ -59,11 +59,11 @@ export default class AccordianMenu extends BaseComponent {
     }
 
     if (val == "addNode"){
-      this.props.graphApi.addNode();
+      this.props.toggleAddForm("Add Node");
     } else if (val == "addEdge"){
-      this.props.graphApi.addEdge();
+      this.props.toggleAddForm("Add Edge");
     } else if (val == "addCaption"){
-      this.props.graphApi.addCaption();
+      this.props.toggleAddForm("Add Caption");
     } else if (val == "addEdge") {
       this.props.graphApi.addEdge();
     } else if (val == "forceLayout") {

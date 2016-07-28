@@ -47,7 +47,7 @@ export default class AddTools extends BaseComponent {
 	    		<div>
 	    			<h1>Yoyo</h1>
 	    		</div>
-	    		<div class = "addContainer">
+	    		<div className = "addContainer">
 		    		{
 		    			this._renderForm(this.props.addForm)
 		    		}
