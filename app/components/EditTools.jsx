@@ -1,22 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import BaseComponent from './BaseComponent';
 import UndoButtons from './UndoButtons';
-import LayoutButtons from './LayoutButtons';
 import EditButtons from './EditButtons';
-import AddEdgeForm from './AddEdgeForm';
-import AddCaptionForm from './AddCaptionForm';
-import AddConnectedNodesForm from './AddConnectedNodesForm';
 import DeleteSelectedButton from './DeleteSelectedButton';
 import UpdateNodeForm from './UpdateNodeForm';
 import UpdateEdgeForm from './UpdateEdgeForm';
 import UpdateCaptionForm from './UpdateCaptionForm';
-import HelpScreen from './HelpScreen';
 
 export default class EditTools extends BaseComponent {
 
   constructor(props) {
     super(props);
-    this.bindAll('_handleDelete');
 
   }
 
@@ -37,7 +31,6 @@ export default class EditTools extends BaseComponent {
             updateCaption={updateCaption} 
             data={data}
             deselect={deselectAll} /> }
-          { this.props.hideHelp ? null : <button id="helpButton" className="btn btn-sm btn-default buttonGroup" onClick={toggleHelpScreen}>help</button> }
         </div>
 
         { currentForm == 'UpdateNodeForm' && 
@@ -62,7 +55,4 @@ export default class EditTools extends BaseComponent {
     );
   }
 
-  _handleDelete() {
-    this.props.delete();
-  }
 }

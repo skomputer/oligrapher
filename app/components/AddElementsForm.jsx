@@ -9,9 +9,9 @@ import AccordianButton from './AccordianButton';
 
 
 const structure = [
-        {"value": "Add Node", "glyphName": "addNode", "hasFoldOut": true, "func": null},
-        {"value": "Add Edge", "glyphName": "addEdge", "hasFoldOut": true, "func": null},
-        {"value": "Add Caption", "glyphName": "addCaption", "hasFoldOut": true, "func": null},
+        {"value": "Add Node", "glyphName": "addNode", "hasFoldOut": false, "func": null},
+        {"value": "Add Edge", "glyphName": "addEdge", "hasFoldOut": false, "func": null},
+        {"value": "Add Caption", "glyphName": "addCaption", "hasFoldOut": false, "func": null},
     ]
 /*CONTINUE TO EDIT!*/
 export default class AddElementsForm extends BaseComponent {

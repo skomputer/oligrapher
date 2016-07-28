@@ -21,7 +21,7 @@ const structure = [
         {"value": "Mode", "glyphName": "selectannotations", "hasFoldOut": false, "func": null, "options": [{"glyphName": "annotations"}, {"glyphName": "edit"}]},
         {"value": "Add Element", "glyphName": "selectaddNode", "hasFoldOut": true, "func": null, "options": [{"glyphName": "addNode"}, {"glyphName": "addEdge"}, {"glyphName": "addCaption"}]},
         {"value": "Layout", "glyphName": "selectcircleLayout", "hasFoldOut": true, "func": null, "options": [{"glyphName": "circleLayout"}, {"glyphName": "forceLayout"}, {"glyphName": "prune"}, {"glyphName": "clear"}]},
-        {"value": "Delete", "glyphName": "delete", "hasFoldOut": false, "func": "delete"},
+        {"value": "Delete Selection", "glyphName": "delete", "hasFoldOut": false, "func": "delete"},
         {"value": "Save", "glyphName": "save", "hasFoldOut": true, "func": "save"},
         {"value": "Undo", "glyphName": "undo", "hasFoldOut": false, "func": "undo"},
         {"value": "Redo", "glyphName": "redo", "hasFoldOut": false, "func": "redo"},
