@@ -52,7 +52,12 @@ export default class AccordianMenu extends BaseComponent {
   }
 
   _enactOptionFunction(val, parent){
-    this._updateIcon(val, parent);
+    if (parent != undefined){
+      this._updateIcon(val, parent);
+    } else {
+      val = val.split("select")[1];
+    }
+
     if (val == "addNode"){
       this.props.graphApi.addNode();
     } else if (val == "addEdge"){

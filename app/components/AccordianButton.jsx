@@ -23,7 +23,7 @@ export default class AccordianButton extends BaseComponent {
     if (this.props.options){
       this.state = { optionsOpen: false };
     }
-    this.bindAll('_toggleOpen', '_toggleOpenOptions');
+    this.bindAll('_toggleOpen', '_toggleOpenOptions', '_selectOption');
   }
 
 
@@ -59,8 +59,18 @@ export default class AccordianButton extends BaseComponent {
           {
             this.props.class == "accordianButton" &&
             <div className="extendingButton"
-                  onClick = {this.props.options ? this._toggleOpenOptions : this.props.buttonFunc}>
+                  onClick = {this.props.options ? null : this.props.buttonFunc}>
               <i className={"icon-" + this.props.glyphName}></i>
+              { this.props.options &&
+                <svg>
+                  <path d="M 0 0 L 0 25 L 8 25 L 25 8 L 25 0 z"
+                        fill="grey" stroke="grey" opacity="0"
+                        onClick = {() => this.props.optionClick(this.props.glyphName)}/>
+                  <path d="M 8 25 L 25 25 L 25 8 z"
+                        fill="purple" stroke="grey" opacity="0"
+                        onClick = {this._toggleOpenOptions}/>
+                </svg>
+              }
               { (this.props.options && this.state.optionsOpen) &&
                 <div className = "optionButtons"
                     style={{width: this.props.options.length * 35 + "px"}}>
@@ -83,11 +93,16 @@ export default class AccordianButton extends BaseComponent {
     return options.map((i) =>
       <div key = {i.glyphName}
           className = "optionButton"
-          onClick={() => this.props.optionClick(i.glyphName, theParent)}>
+          onClick={() => this._selectOption(i.glyphName, theParent)}>
         <i className={"icon-" + i.glyphName}></i>
       </div>
     )
 
+  }
+
+  _selectOption(glyph, parent) {
+    this.props.optionClick(glyph, parent);
+    this._toggleOpenOptions();
   }
 
   componentDidUpdate() {

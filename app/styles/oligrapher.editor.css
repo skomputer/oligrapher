@@ -210,7 +210,7 @@ button#toggleEditTools {
 
 .accordianButton {
   width: calc(100% - 25px);
-  background-color: #e2b432;
+  background-color: #fbc836;
   position: relative;
   cursor: pointer;
   font-size: 1.05em;
@@ -320,6 +320,13 @@ button#toggleEditTools {
 
 .editMenu .extendingButton:hover{
   background-color: #006d4e;
+}
+
+.extendingButton svg{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  margin-left: -20px;
 }
 
 .accordianSegment {
