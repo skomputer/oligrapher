@@ -113,6 +113,7 @@ export default class AccordianMenu extends BaseComponent {
                     addEdge={this.props.graphApi.addEdge}
                     addCaption={this.props.graphApi.addCaption}
                     closeAddForm={this.props.toggleAddForm} 
+                    toggleAddForm={(which) => this.props.toggleAddForm(which)} 
                     source={this.props.dataSource} 
                     nodes={this.props.graph.nodes}
                     setNodeResults={this.props.setNodeResults}

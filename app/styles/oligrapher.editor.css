@@ -125,6 +125,19 @@ button#toggleEditTools {
   outline: none;
 }
 
+#addTools {
+  position: absolute;
+  width: 200px;
+  height: auto;
+  background-color: orange;
+  left: 50%;
+  top: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+  padding: 10px;
+
+}
+
 #addInterlocksButton {
   margin-left: 10px;
 }

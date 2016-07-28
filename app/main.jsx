@@ -73,6 +73,10 @@ class Oligrapher {
     this._render(props);
   }
 
+  toggleAddTools(value) {
+    this.root.dispatchProps.dispatch(toggleAddTools(value));
+  }
+
   toggleEditTools(value) {
     this.root.dispatchProps.dispatch(toggleEditTools(value));
   }

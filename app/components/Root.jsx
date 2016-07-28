@@ -21,6 +21,7 @@ import { loadGraph, showGraph,
          toggleHelpScreen, setSettings, toggleSettings } from '../actions';
 import Graph from './Graph';
 import Editor from './Editor';
+import AddTools from './AddTools';
 import GraphHeader from './GraphHeader';
 import GraphAnnotations from './GraphAnnotations';
 import EditButton from './EditButton';
@@ -48,7 +49,7 @@ class Root extends Component {
 
   render() {
     let { dispatch, graph, selection, isEditor, isLocked, title,
-          showEditTools, showSaveButton, showHelpScreen, 
+          showEditTools, addForm, showSaveButton, showHelpScreen, 
           hasSettings, graphSettings, showSettings, onSave,
           currentIndex, annotation, annotations, visibleAnnotations } = this.props;
     let that = this;
@@ -191,7 +192,23 @@ class Root extends Component {
                      redo={() => dispatch(ActionCreators.redo())} 
                      fetchInterlocks={fetchInterlocksCallback} />
 
-                   } 
+                   }
+              {
+                  (graph && (this.props.addForm != null) && isEditor) &&
+                   <AddTools 
+                     {...this.props}
+                     graphApi={graphApi}
+                     isEditor={isEditor} 
+                     showEditButton={false} 
+                     hideHelp={true} 
+                     setNodeResults={(nodes) => dispatch(setNodeResults(nodes))}
+                     toggleAddForm={(form) => dispatch(toggleAddForm(form))}
+                     toggleHelpScreen={() => dispatch(toggleHelpScreen())}
+                     undo={() => dispatch(ActionCreators.undo())}
+                     redo={() => dispatch(ActionCreators.redo())} 
+                     fetchInterlocks={fetchInterlocksCallback} />
+
+              } 
               {
                 graph && 
                 <AccordianMenu
@@ -247,7 +264,6 @@ class Root extends Component {
               </button>
             </div> 
           }
-          { /*showSaveButton && isEditor && onSave && <SaveButton save={() => this.handleSave()} /> */}
           { showHelpScreen && <HelpScreen source={this.props.dataSource} close={() => dispatch(toggleHelpScreen(false))} /> }
         </HotKeys>
       </div>
@@ -387,6 +403,7 @@ function select(state) {
     zoom: state.zoom,
     showEditTools: state.editTools.visible,
     addForm: state.editTools.addForm,
+    showAddForm: state.editTools.addVisible,
     nodeResults: state.editTools.nodeResults,
     title: state.title,
     currentIndex: state.annotations.currentIndex,

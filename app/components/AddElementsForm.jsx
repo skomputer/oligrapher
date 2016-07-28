@@ -2,25 +2,23 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { HotKeys } from 'react-hotkeys';
 import BaseComponent from './BaseComponent';
-import AddNodeInput from './AddNodeInput';
-import AddEdgeForm from './AddEdgeForm';
-import AddCaptionForm from './AddCaptionForm';
 import AccordianButton from './AccordianButton';
 
 
 const structure = [
-        {"value": "Add Node", "glyphName": "addNode", "hasFoldOut": false, "func": null},
-        {"value": "Add Edge", "glyphName": "addEdge", "hasFoldOut": false, "func": null},
-        {"value": "Add Caption", "glyphName": "addCaption", "hasFoldOut": false, "func": null},
+        {"value": "Add Node", "glyphName": "addNode", "hasFoldOut": false},
+        {"value": "Add Edge", "glyphName": "addEdge", "hasFoldOut": false},
+        {"value": "Add Caption", "glyphName": "addCaption", "hasFoldOut": false},
     ]
 /*CONTINUE TO EDIT!*/
 export default class AddElementsForm extends BaseComponent {
   constructor(props) {
     super(props);
+    this.bindAll('_doToggle');
+
   }
 
   render() {
-
 
   	return (
   		<div>
@@ -29,33 +27,10 @@ export default class AddElementsForm extends BaseComponent {
      );
   }
 
-  _renderChildren(whichFunc){
-    if (whichFunc == "Add Node"){
-        return ( <AddNodeInput
-                parentOpen={this.props.parentOpen}
-                ref="addNodeInput"
-                addNode={this.props.addNode}
-                addEdge={this.props.addEdge}
-                closeAddForm={this.props.closeAddForm} 
-                source={this.props.source} 
-                nodes={this.props.nodes}
-                results={this.props.nodeResults}
-                setNodeResults={this.props.setNodeResults} />);
-    } else if (whichFunc == "Add Edge"){
-        return ( <AddEdgeForm
-                parentOpen={this.props.parentOpen} 
-                addEdge={this.props.addEdge} 
-                nodes={this.props.nodes}
-                closeAddForm={this.props.closeAddForm} 
-                data={this.props.data} />);
-
-    } else if (whichFunc == "Add Caption"){
-        return ( <AddCaptionForm
-                parentOpen={this.props.parentOpen} 
-                addCaption={this.props.addCaption}
-                closeAddForm={this.props.closeAddForm} /> );
-    } 
+  _doToggle(theVal){
+    this.props.toggleAddForm(theVal);
   }
+
 
   _renderButtons(){
     return structure.map((i) =>  
@@ -66,8 +41,8 @@ export default class AddElementsForm extends BaseComponent {
         value={i.value}
         glyphName={i.glyphName} 
         size={"small"}
-        hasFoldOut={i.hasFoldOut}>
-          {this._renderChildren(i.value)}
+        hasFoldOut={i.hasFoldOut}
+        buttonFunc={() => this._doToggle(i.value)}>
     </AccordianButton>);
 
   }

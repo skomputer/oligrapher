@@ -61,6 +61,7 @@ export default class AddNodeInput extends BaseComponent {
     let name = this.refs.name.value.trim();
     this.props.addNode({ display: { name } });
     this.clear();
+    console.log(this.props);
     this.props.closeAddForm();
     e.preventDefault();
   }

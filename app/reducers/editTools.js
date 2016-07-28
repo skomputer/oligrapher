@@ -3,6 +3,7 @@ import { TOGGLE_EDIT_TOOLS, TOGGLE_ADD_FORM, SET_NODE_RESULTS,
 
 const initState = { 
   visible: false,
+  addVisible: false,
   addForm: null,
   nodeResults: []
 };
@@ -15,6 +16,7 @@ export default function editTools(state = initState, action) {
     return Object.assign({}, state, { visible });
 
   case TOGGLE_ADD_FORM:
+    let addVisible = typeof action.value === "undefined" ? !state.addVisible : action.value;
     let addForm = action.form == state.addForm ? null : action.form;
     return Object.assign({}, state, { addForm });
 
