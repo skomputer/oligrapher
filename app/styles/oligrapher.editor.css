@@ -129,13 +129,16 @@ button#toggleEditTools {
   position: absolute;
   width: 200px;
   height: auto;
-  background-color: orange;
+  background-color: rgba(255, 231, 164, 0.8);
   left: 50%;
   top: 50%;
   margin-top: -50px;
   margin-left: -100px;
   padding: 10px;
+}
 
+#addTools.editMode{
+  background-color: rgba(122, 216, 190, 0.8);
 }
 
 #addInterlocksButton {

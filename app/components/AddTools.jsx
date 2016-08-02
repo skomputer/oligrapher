@@ -16,36 +16,37 @@ export default class AddTools extends BaseComponent {
   	}
 
   	_renderForm(whichFunc){
-  		console.log(this.props);
 	    if (whichFunc == "Add Node"){
 	        return ( <AddNodeInput
 	                ref="addNodeInput"
 	                addNode={this.props.graphApi.addNode}
 	                addEdge={this.props.graphApi.addEdge}
 	                closeAddForm={this._closeAddForm} 
-	                source={this.props.source} 
-	                nodes={this.props.nodes}
+	                source={this.props.dataSource} 
+	                nodes={this.props.graph.nodes}
 	                results={this.props.nodeResults}
 	                setNodeResults={this.props.setNodeResults} />);
 	    } else if (whichFunc == "Add Edge"){
 	        return ( <AddEdgeForm
-	                addEdge={this.props.addEdge} 
-	                nodes={this.props.nodes}
-	                closeAddForm={this.closeAddForm} 
+	                addEdge={this.props.graphApi.addEdge} 
+	                nodes={this.props.graph.nodes}
+	                closeAddForm={this._closeAddForm} 
 	                data={this.props.data} />);
 
 	    } else if (whichFunc == "Add Caption"){
 	        return ( <AddCaptionForm
-	                addCaption={this.props.addCaption}
-	                closeAddForm={this.closeAddForm} /> );
+	                addCaption={this.props.graphApi.addCaption}
+	                closeAddForm={this._closeAddForm} /> );
 	    } 
 	  }
 
   	render() {
+  		console.log(this.props);
     	return (
-	    	<div id = "addTools">
+	    	<div id = "addTools"
+	    		className = {this.props.showEditTools ? "editMode" : null}>
 	    		<div>
-	    			<h1>Yoyo</h1>
+	    			<h1>{this.props.addForm}</h1>
 	    		</div>
 	    		<div className = "addContainer">
 		    		{

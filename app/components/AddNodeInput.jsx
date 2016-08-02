@@ -22,6 +22,7 @@ export default class AddNodeInput extends BaseComponent {
       'esc': () => this.clear()
     };
 
+
     return (
       <div id="addNodeInput" className="accordianMenuForm">
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
@@ -55,13 +56,13 @@ export default class AddNodeInput extends BaseComponent {
     this.refs.name.value = '';
     this.refs.name.blur();
     this.props.setNodeResults([]);
+    this.props.closeAddForm();
   }
 
   _handleSubmit(e) {
     let name = this.refs.name.value.trim();
     this.props.addNode({ display: { name } });
     this.clear();
-    console.log(this.props);
     this.props.closeAddForm();
     e.preventDefault();
   }
