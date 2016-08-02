@@ -64,7 +64,7 @@ export default class AddEdgeForm extends BaseComponent {
     let node2Id = this.refs.node2Id.value;
     let label = this.refs.label.value.trim();
 
-    if (node1Id && node2Id && label) {
+    if (node1Id && node2Id) {
       this.props.addEdge({ node1_id: node1Id, node2_id: node2Id, display: { label } });
       this._clear();
       this.props.closeAddForm();      
