@@ -122,6 +122,7 @@ export function addNode(node) {
 }
 
 export function addEdge(edge) {
+  console.log(edge);
   return { type: ADD_EDGE, edge };
 }
 

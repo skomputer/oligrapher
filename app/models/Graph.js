@@ -239,6 +239,7 @@ class Graph {
   }
 
   static addEdge(graph, edge) {
+    console.log(graph, edge);
     edge = this.updateEdgePosition(Edge.setDefaults(edge), graph);
     return merge({}, graph, { edges: { [edge.id]: edge } });
   }

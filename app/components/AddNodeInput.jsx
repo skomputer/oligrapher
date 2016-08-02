@@ -7,11 +7,14 @@ import { HotKeys } from 'react-hotkeys';
 export default class AddNodeInput extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleSubmit', '_handleSearch', '_updateForm');
+    this.bindAll('_handleSubmit', '_handleSearch', '_updateForm', 'componentWillUnmount', 'componentDidUpdate', 'shouldComponentUpdate');
+
+    this.state = {"edges": [], "prevResults": [], "hasSubmitted": false }
 
   }
 
   render() {
+    console.log("render", this.state);
     // filter existing nodes out of results
     const results = this.props.results.filter(node => !this.props.nodes[node.id]);
 
@@ -83,14 +86,29 @@ export default class AddNodeInput extends BaseComponent {
   }
 
   componentWillUnmount() {
+    // if (this.state.edges.length > 0){
+    //   this.state.edges.forEach(edge => this.props.addEdge(edge));
+    //   this.setState({"edges": []});
+    // }
     window.clearTimeout(this.timeout);
   }
+
+  shouldComponentUpdate(){
+    console.log("should", this.state);
+    return this.state.prevResults != this.props.results || this.state.hasSubmitted;
+  }
+
+  componentDidUpdate(){
+        console.log("hi", this.state.hasSubmitted);
+  }
+
 
   clear() {
     this.refs.name.value = '';
     this.refs.name.blur();
     this.props.setNodeResults([]);
     this.props.closeAddForm();
+    // this.state = {"edges": []};
   }
 
   _handleSubmit(e) {
@@ -99,17 +117,24 @@ export default class AddNodeInput extends BaseComponent {
     let scale = parseFloat(this.refs.scale.value);
     let url = this.refs.url.value.trim();
     this.props.addNode({ display: { name, image, scale, url } });
-    this.clear();
-    this.props.closeAddForm();
-    if (e != undefined){
-      e.preventDefault();
-    }
+    // this.state.edges.forEach(edge => console.log(edge));
+    // this.state.edges.forEach(edge => this.props.addEdge(edge));
+    console.log("is it teee?", this);
+    this.setState = ({"hasSubmitted": true});
+    // this.state = {"edges": []};
+    // if (e != undefined){
+    //   e.preventDefault();
+    // }
+    // this.clear();
+    // this.props.closeAddForm();
   }
 
   _updateForm(vals) {
     this.refs.name.value = vals.node.display.name;
     this.refs.url.value = vals.node.display.url;
     this.refs.image.value = vals.node.display.image;
+    console.log("or this?", this);
+    this.setState({"edges": vals.edges});
     this.props.setNodeResults([]);
   }
 
@@ -128,7 +153,6 @@ export default class AddNodeInput extends BaseComponent {
         if (query) {
           that.props.source.findNodes(query, nodes => that._addResults(nodes));          
         } else {
-          this.setState({ results: [] })
         }
       }, 200);
     }
@@ -136,5 +160,7 @@ export default class AddNodeInput extends BaseComponent {
 
   _addResults(nodes) {
     this.props.setNodeResults(nodes);
+    console.log("is it this?", this);
+    this.setState({ prevResults: nodes })
   }
 }
