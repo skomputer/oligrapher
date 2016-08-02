@@ -151,11 +151,30 @@ button#toggleEditTools {
 .addToolsHeader{
   position: absolute;
   width: 100%;
-  background-color: #00805c;
+  background-color: #966f19;
   color: #fff;
   height:30px;
   padding-left: 10px;
 }
+
+#addTools.editMode .addToolsHeader{
+    background-color: #00543c;
+}
+
+.addToolsCheckboxes {
+  width: 100%;
+  display: inline-block;
+}
+
+.accordianMenuForm .addToolsCheckboxes label, .accordianMenuForm .addToolsCheckboxes input{
+  float: none;
+} 
+
+.accordianMenuForm .addToolsCheckboxes input {
+  width:10%;
+  padding-left: 10px;
+}
+
 
 .addToolsHeader h1{
   font-size: 18px;
@@ -223,7 +242,7 @@ button#toggleEditTools {
   text-align: right;
 }
 
-.accordianMenuForm form input {
+.accordianMenuForm form input:not([type='checkbox']) {
   display: inline-block;
   width: 70%;
   float: right;

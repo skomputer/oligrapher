@@ -13,6 +13,14 @@ export default class AddEdgeForm extends BaseComponent {
   render() {
     let node1Id, node2Id;
 
+    const scales = [
+      [null, "Scale"],
+      [1, "1x"],
+      [1.5, "1.5x"],
+      [2, "2x"],
+      [3, "3x"]
+    ];
+
     if (Array.isArray(this.props.data) && this.props.data.length == 2) {
       node1Id = this.props.data[0].id;
       node2Id = this.props.data[1].id;
@@ -51,8 +59,21 @@ export default class AddEdgeForm extends BaseComponent {
                 <option key={node.id} value={node.id}>{node.display.name}</option>
               ) }
             </select>
+            <span className = "addToolsCheckboxes">
+              <label>Arrow:</label>
+              <input 
+                type="checkbox" 
+                ref="arrow"  />
+              <label>Dash:</label>
+              <input 
+                type="checkbox" 
+                ref="dash" />
+            </span>
             <label>Label:</label>
             <input type="text" placeholder="label" className="form-control input-sm" ref="label" />
+    
+
+            {console.log(this)}
           </form>
         </HotKeys>
       </div>
@@ -63,9 +84,11 @@ export default class AddEdgeForm extends BaseComponent {
     let node1Id = this.refs.node1Id.value;
     let node2Id = this.refs.node2Id.value;
     let label = this.refs.label.value.trim();
+    let arrow = this.refs.arrow.checked;
+    let dash = this.refs.dash.checked;
 
     if (node1Id && node2Id) {
-      this.props.addEdge({ node1_id: node1Id, node2_id: node2Id, display: { label } });
+      this.props.addEdge({ node1_id: node1Id, node2_id: node2Id, display: { label, arrow, dash } });
       this._clear();
       this.props.closeAddForm();      
     }
