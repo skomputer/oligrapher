@@ -325,7 +325,13 @@ button#toggleEditTools {
   cursor: pointer;
 }
 
-.extendingButton:hover {
+.extendingButton.disabledExtendingButton {
+  background-color: #bd9c45;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.extendingButton:not(.disabledExtendingButton):hover {
    background-color: #ca9a30;
 }
 
@@ -334,7 +340,11 @@ button#toggleEditTools {
   border-bottom: 1px solid #00543c;
 }
 
-.editMenu .extendingButton:hover{
+.editMenu .extendingButton.disabledExtendingButton {
+  background-color: #416f63;
+}
+
+.editMenu .extendingButton:not(.disabledExtendingButton):hover{
   background-color: #006d4e;
 }
 

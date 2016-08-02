@@ -21,10 +21,10 @@ const structure = [
         {"value": "Mode", "glyphName": "selectannotations", "hasFoldOut": false, "func": null, "options": [{"glyphName": "annotations"}, {"glyphName": "edit"}]},
         {"value": "Add Element", "glyphName": "selectaddNode", "hasFoldOut": true, "func": null, "options": [{"glyphName": "addNode"}, {"glyphName": "addEdge"}, {"glyphName": "addCaption"}]},
         {"value": "Layout", "glyphName": "selectcircleLayout", "hasFoldOut": true, "func": null, "options": [{"glyphName": "circleLayout"}, {"glyphName": "forceLayout"}, {"glyphName": "prune"}, {"glyphName": "clear"}]},
-        {"value": "Delete Selection", "glyphName": "delete", "hasFoldOut": false, "func": "delete"},
+        {"value": "Delete Selection", "glyphName": "delete", "hasFoldOut": false, "func": "delete", "mustBeTrue": "showEditTools"},
         {"value": "Save", "glyphName": "save", "hasFoldOut": true, "func": "save"},
-        {"value": "Undo", "glyphName": "undo", "hasFoldOut": false, "func": "undo"},
-        {"value": "Redo", "glyphName": "redo", "hasFoldOut": false, "func": "redo"},
+        {"value": "Undo", "glyphName": "undo", "hasFoldOut": false, "func": "undo", "mustBeTrue": "canUndo"},
+        {"value": "Redo", "glyphName": "redo", "hasFoldOut": false, "func": "redo", "mustBeTrue": "canRedo"},
         {"value": "Help", "glyphName": "help", "hasFoldOut": false, "func": "toggleHelpScreen"}
     ]
 
@@ -97,6 +97,7 @@ export default class AccordianMenu extends BaseComponent {
         glyphName={i.glyphName} 
         size={"small"}
         hasFoldOut={i.hasFoldOut}
+        isDisabled={i.mustBeTrue ? !this.props[i.mustBeTrue] : false}
         buttonFunc={this.props[i.func]}
         options={i.options}
         optionClick={(val, par) => this._enactOptionFunction(val, par)}>

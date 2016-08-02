@@ -39,7 +39,7 @@ export default class AccordianButton extends BaseComponent {
     return (
       <div className="accordianSegment">
         <div className={this.props.class + " " + this.props.size}
-              onClick={this.props.hasFoldOut ? this._toggleOpen : this.props.buttonFunc}>
+              onClick={this.props.hasFoldOut ? this._toggleOpen : (!this.props.isDisabled ? this.props.buttonFunc : null)}>
           {
             this.props.class == "addButton" &&
             <div className="addButtonGlyph">
@@ -58,8 +58,8 @@ export default class AccordianButton extends BaseComponent {
         </div>
           {
             this.props.class == "accordianButton" &&
-            <div className="extendingButton"
-                  onClick = {this.props.options ? null : this.props.buttonFunc}>
+            <div className={this.props.isDisabled ? "extendingButton disabledExtendingButton" : "extendingButton"}
+                  onClick = {this.props.options ? null : (!this.props.isDisabled ? this.props.buttonFunc : null)}>
               <i className={"icon-" + this.props.glyphName}></i>
               { this.props.options &&
                 <svg>

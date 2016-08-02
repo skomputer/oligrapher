@@ -34,6 +34,7 @@ export default class ChangeColorInput extends BaseComponent {
   onChange(newColor) {
     this.setState({ color: newColor });
     this.props.onChange(newColor);
+    this.handleClose();
   }
 
   render() {
