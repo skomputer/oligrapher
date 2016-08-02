@@ -8,11 +8,21 @@ export default class AddTools extends BaseComponent {
 
 	constructor(props) {
     	super(props);
-    	this.bindAll('_closeAddForm');
+    	this.bindAll('_closeAddForm', '_submitForm');
   	}
 
   	_closeAddForm(){
   		this.props.toggleAddForm(null);
+  	}
+
+  	_submitForm(whichFunc){
+  		if (whichFunc == "Add Node"){
+  			this.refs.addNodeInput._handleSubmit();
+  		} else if (whichFunc == "Add Edge"){
+  			this.refs.addEdgeInput._handleSubmit();
+  		} else if (whichFunc == "Add Caption"){
+  			this.refs.addCaptionInput._handleSubmit();
+  		}
   	}
 
   	_renderForm(whichFunc){
@@ -28,6 +38,7 @@ export default class AddTools extends BaseComponent {
 	                setNodeResults={this.props.setNodeResults} />);
 	    } else if (whichFunc == "Add Edge"){
 	        return ( <AddEdgeForm
+	        		ref="addEdgeInput"
 	                addEdge={this.props.graphApi.addEdge} 
 	                nodes={this.props.graph.nodes}
 	                closeAddForm={this._closeAddForm} 
@@ -35,12 +46,16 @@ export default class AddTools extends BaseComponent {
 
 	    } else if (whichFunc == "Add Caption"){
 	        return ( <AddCaptionForm
+	        		ref="addCaptionInput"
 	                addCaption={this.props.graphApi.addCaption}
 	                closeAddForm={this._closeAddForm} /> );
 	    } 
 	  }
 
+
+
   	render() {
+  		console.log(this);
     	return (
 	    	<div id = "addTools"
 	    		className = {this.props.showEditTools ? "editMode" : null}>
@@ -56,6 +71,8 @@ export default class AddTools extends BaseComponent {
 		    			this._renderForm(this.props.addForm)
 		    		}
 		    	</div>
+		    	<button className="btn btn-sm btn-default"
+		    		onClick={() => this._submitForm(this.props.addForm)}>Submit</button>
 	    	</div>
 	    );
 	}

@@ -61,7 +61,9 @@ export default class AddCaptionForm extends BaseComponent {
 
     this.props.addCaption({ display: { text, scale  } });
     this._clear();
-    e.preventDefault();
+    if (e != undefined){
+      e.preventDefault();
+    }
   }
 
   _clear() {

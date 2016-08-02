@@ -137,6 +137,11 @@ button#toggleEditTools {
   padding-bottom: 15px;
 }
 
+#addTools button{
+  margin-right: 10px;
+  float: right;
+}
+
 #addTools.editMode{
   background-color: rgba(122, 216, 190, 0.8);
 }
@@ -518,11 +523,6 @@ button#toggleEditTools {
 
 #layoutButtons button {
   width:90%;
-}
-
-#nodeUrlInput {
-  width: 100%;
-  float: right;
 }
 
 .nodeColorInputWrapper {

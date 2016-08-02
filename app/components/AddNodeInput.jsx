@@ -34,15 +34,6 @@ export default class AddNodeInput extends BaseComponent {
       <div id="addNodeInput" className="accordianMenuForm">
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
           <form onSubmit={this._handleSubmit}>
-            <label>Scale:</label>
-              <select
-              title="change node size"
-              className="form-control input-sm nodeSize" 
-              ref="scale">
-              { scales.map((scale, i) =>
-                <option key={scale[1]} value={scale[0]}>{scale[1]}</option>
-              ) }
-            </select>
             <label>Node:</label>
             <input type="text" className="form-control input-sm" placeholder="search for node" ref="name" onChange={this._handleSearch} />
             { this.props.source ? 
@@ -59,6 +50,30 @@ export default class AddNodeInput extends BaseComponent {
                     clearResults={() => this.clear()} />
                   ) }
               </ul> : null }
+              <label>Image:</label>
+              <input 
+              type="text" 
+              title="input image URL"
+              className="form-control input-sm"
+              placeholder="image URL" 
+              ref="image" />
+              <label>Link:</label>
+              <input
+              id="nodeUrlInput"
+              type="text"
+              title="edit node link"
+              className="form-control input-sm"
+              placeholder="link URL"
+              ref="url"/>
+              <label>Scale:</label>
+              <select
+              title="change node size"
+              className="form-control input-sm nodeSize" 
+              ref="scale">
+              { scales.map((scale, i) =>
+                <option key={scale[1]} value={scale[0]}>{scale[1]}</option>
+              ) }
+            </select>
           </form>
         </HotKeys>
       </div>
@@ -82,7 +97,9 @@ export default class AddNodeInput extends BaseComponent {
     this.props.addNode({ display: { name, scale } });
     this.clear();
     this.props.closeAddForm();
-    e.preventDefault();
+    if (e != undefined){
+      e.preventDefault();
+    }
   }
 
   _handleSearch() {
