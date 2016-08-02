@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BaseComponent from './BaseComponent';
+import merge from 'lodash/object/merge';
 
 export default class AddNodeResult extends BaseComponent {
   constructor(props) {
@@ -14,12 +15,14 @@ export default class AddNodeResult extends BaseComponent {
   }
 
   _handleClick(e) {
-    let { source, node, nodes } = this.props;
+    let { source, node, nodes, scale } = this.props;
 
     if (source) {
       let nodeIds = Object.keys(nodes);
 
       let callback = (data) => {
+        let theDisplay = merge({ scale: scale }, data.node.display);
+        data.node.display = theDisplay;
         this.props.addNode(data.node);
         data.edges.forEach(edge => this.props.addEdge(edge));
         this.props.clearResults();

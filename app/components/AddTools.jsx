@@ -41,7 +41,6 @@ export default class AddTools extends BaseComponent {
 	  }
 
   	render() {
-  		console.log(this);
     	return (
 	    	<div id = "addTools"
 	    		className = {this.props.showEditTools ? "editMode" : null}>

@@ -18,6 +18,13 @@ export default class AddNodeInput extends BaseComponent {
       'esc': 'esc'
     };
 
+    const scales = [
+      [1, "1x"],
+      [1.5, "1.5x"],
+      [2, "2x"],
+      [3, "3x"]
+    ];
+
     const keyHandlers = {
       'esc': () => this.clear()
     };
@@ -27,12 +34,22 @@ export default class AddNodeInput extends BaseComponent {
       <div id="addNodeInput" className="accordianMenuForm">
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
           <form onSubmit={this._handleSubmit}>
-            <label>Name:</label>
-            <input type="text" className="form-control input-sm" placeholder="search for node" ref="name" onChange={this._handleSearch} /><br />
+            <label>Scale:</label>
+              <select
+              title="change node size"
+              className="form-control input-sm nodeSize" 
+              ref="scale">
+              { scales.map((scale, i) =>
+                <option key={scale[1]} value={scale[0]}>{scale[1]}</option>
+              ) }
+            </select>
+            <label>Node:</label>
+            <input type="text" className="form-control input-sm" placeholder="search for node" ref="name" onChange={this._handleSearch} />
             { this.props.source ? 
               <ul className="addNodeResults dropdown-menu" style={{ display: results.length > 0 ? "block" : "none" }} ref="results">
                 { results.map((node, i) =>
                   <AddNodeResult 
+                    scale={parseFloat(this.refs.scale.value)}
                     key={node.id}
                     node={node} 
                     source={this.props.source} 
@@ -61,7 +78,8 @@ export default class AddNodeInput extends BaseComponent {
 
   _handleSubmit(e) {
     let name = this.refs.name.value.trim();
-    this.props.addNode({ display: { name } });
+    let scale = parseFloat(this.refs.scale.value);
+    this.props.addNode({ display: { name, scale } });
     this.clear();
     this.props.closeAddForm();
     e.preventDefault();

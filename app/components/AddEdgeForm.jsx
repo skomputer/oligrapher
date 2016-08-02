@@ -69,11 +69,16 @@ export default class AddEdgeForm extends BaseComponent {
                 type="checkbox" 
                 ref="dash" />
             </span>
+            <label>Weight:</label>
+            <select 
+              className="form-control input-sm" 
+              ref="scale" >
+              { scales.map((scale, i) =>
+                <option key={scale[1]} value={scale[0]}>{scale[1]}</option>
+              ) }
+            </select>
             <label>Label:</label>
             <input type="text" placeholder="label" className="form-control input-sm" ref="label" />
-    
-
-            {console.log(this)}
           </form>
         </HotKeys>
       </div>
@@ -86,9 +91,10 @@ export default class AddEdgeForm extends BaseComponent {
     let label = this.refs.label.value.trim();
     let arrow = this.refs.arrow.checked;
     let dash = this.refs.dash.checked;
+    let scale = parseFloat(this.refs.scale.value);
 
     if (node1Id && node2Id) {
-      this.props.addEdge({ node1_id: node1Id, node2_id: node2Id, display: { label, arrow, dash } });
+      this.props.addEdge({ node1_id: node1Id, node2_id: node2Id, display: { label, arrow, dash, scale } });
       this._clear();
       this.props.closeAddForm();      
     }

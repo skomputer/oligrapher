@@ -132,8 +132,9 @@ button#toggleEditTools {
   background-color: rgba(255, 231, 164, 0.8);
   left: 50%;
   top: 50%;
-  margin-top: -50px;
+  margin-top: -125px;
   margin-left: -100px;
+  padding-bottom: 15px;
 }
 
 #addTools.editMode{
@@ -240,18 +241,14 @@ button#toggleEditTools {
   float: left;
   line-height: 30px;
   text-align: right;
+  margin-bottom: 5px;
 }
 
-.accordianMenuForm form input:not([type='checkbox']) {
+.accordianMenuForm form input:not([type='checkbox']), .accordianMenuForm form select {
   display: inline-block;
   width: 70%;
   float: right;
-}
-
-.accordianMenuForm form select {
-  display: inline-block;
-  width: 70%;
-  float: right;
+  margin-bottom: 5px;
 }
 
 .accordianMenutop {
