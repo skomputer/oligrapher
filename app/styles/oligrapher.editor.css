@@ -134,11 +134,38 @@ button#toggleEditTools {
   top: 50%;
   margin-top: -50px;
   margin-left: -100px;
-  padding: 10px;
 }
 
 #addTools.editMode{
   background-color: rgba(122, 216, 190, 0.8);
+}
+
+.addToolsCloser{
+  position: absolute;
+  right: 2px;
+  color:#fff;
+  cursor: pointer;
+}
+
+.addToolsHeader{
+  position: absolute;
+  width: 100%;
+  background-color: #00805c;
+  color: #fff;
+  height:30px;
+  padding-left: 10px;
+}
+
+.addToolsHeader h1{
+  font-size: 18px;
+  top: 0px;
+  padding-top: 0px;
+  margin-top: initial;
+  line-height: 30px;
+}
+
+.addContainer{
+  margin-top:50px;
 }
 
 #addInterlocksButton {

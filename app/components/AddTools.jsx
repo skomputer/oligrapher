@@ -41,12 +41,16 @@ export default class AddTools extends BaseComponent {
 	  }
 
   	render() {
-  		console.log(this.props);
+  		console.log(this);
     	return (
 	    	<div id = "addTools"
 	    		className = {this.props.showEditTools ? "editMode" : null}>
-	    		<div>
+	    		<div className = "addToolsHeader">
 	    			<h1>{this.props.addForm}</h1>
+	    		</div>
+	    		<div className = "addToolsCloser"
+	    			onClick={() => this._closeAddForm()}>
+	    			<span className="glyphicon glyphicon-remove"></span>
 	    		</div>
 	    		<div className = "addContainer">
 		    		{
