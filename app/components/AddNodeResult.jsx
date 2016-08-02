@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import BaseComponent from './BaseComponent';
-import merge from 'lodash/object/merge';
 
 export default class AddNodeResult extends BaseComponent {
   constructor(props) {
@@ -21,11 +20,10 @@ export default class AddNodeResult extends BaseComponent {
       let nodeIds = Object.keys(nodes);
 
       let callback = (data) => {
-        let theDisplay = merge({ scale: scale }, data.node.display);
-        data.node.display = theDisplay;
-        this.props.addNode(data.node);
-        data.edges.forEach(edge => this.props.addEdge(edge));
-        this.props.clearResults();
+        // this.props.addNode(data.node);
+        // data.edges.forEach(edge => this.props.addEdge(edge));
+        // this.props.clearResults();
+        this.props.updateForm(data);
       };
 
       source.getNodeWithEdges(node.id, nodeIds, callback);

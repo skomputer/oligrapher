@@ -7,7 +7,8 @@ import { HotKeys } from 'react-hotkeys';
 export default class AddNodeInput extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleSubmit', '_handleSearch');
+    this.bindAll('_handleSubmit', '_handleSearch', '_updateForm');
+
   }
 
   render() {
@@ -47,7 +48,8 @@ export default class AddNodeInput extends BaseComponent {
                     nodes={this.props.nodes} 
                     addNode={this.props.addNode}
                     addEdge={this.props.addEdge}
-                    clearResults={() => this.clear()} />
+                    clearResults={() => this.clear()}
+                    updateForm = {(vals) => this._updateForm(vals)}/>
                   ) }
               </ul> : null }
               <label>Image:</label>
@@ -93,13 +95,22 @@ export default class AddNodeInput extends BaseComponent {
 
   _handleSubmit(e) {
     let name = this.refs.name.value.trim();
+    let image = this.refs.image.value.trim();
     let scale = parseFloat(this.refs.scale.value);
-    this.props.addNode({ display: { name, scale } });
+    let url = this.refs.url.value.trim();
+    this.props.addNode({ display: { name, image, scale, url } });
     this.clear();
     this.props.closeAddForm();
     if (e != undefined){
       e.preventDefault();
     }
+  }
+
+  _updateForm(vals) {
+    this.refs.name.value = vals.node.display.name;
+    this.refs.url.value = vals.node.display.url;
+    this.refs.image.value = vals.node.display.image;
+    this.props.setNodeResults([]);
   }
 
   _handleSearch() {
