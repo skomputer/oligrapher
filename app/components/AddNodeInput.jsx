@@ -44,7 +44,6 @@ export default class AddNodeInput extends BaseComponent {
               <ul className="addNodeResults dropdown-menu" style={{ display: (results.length > 0) ? "block" : "none" }} ref="results">
                 { results.map((node, i) =>
                   <AddNodeResult 
-                    scale={parseFloat(this.refs.scale.value)}
                     key={node.id}
                     node={node} 
                     source={this.props.source} 
@@ -96,6 +95,7 @@ export default class AddNodeInput extends BaseComponent {
       this.setState({hasSubmitted: false, pending_edges: []});
       this.clear();
       this.props.closeAddForm();
+      this.props.setNodeResults([]);
     }
 
   }

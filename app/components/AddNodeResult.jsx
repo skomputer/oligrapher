@@ -14,7 +14,7 @@ export default class AddNodeResult extends BaseComponent {
   }
 
   _handleClick(e) {
-    let { source, node, nodes, scale } = this.props;
+    let { source, node, nodes } = this.props;
 
     if (source) {
       let nodeIds = Object.keys(nodes);
