@@ -7,7 +7,7 @@ import { HotKeys } from 'react-hotkeys';
 export default class AddNodeInput extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleSubmit', '_handleSearch', '_updateForm');
+    this.bindAll('_handleSubmit', '_handleSearch', '_updateForm', '_closeSearch');
     this.state = {"hasSubmitted": false, "pending_edges": [], "pending_node_id": null};
 
   }
@@ -37,7 +37,9 @@ export default class AddNodeInput extends BaseComponent {
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
           <form onSubmit={this._handleSubmit}>
             <label>Node:</label>
-            <input type="text" className="form-control input-sm" placeholder="search for node" ref="name" onChange={this._handleSearch} />
+            <input type="text" className="form-control input-sm" 
+                   placeholder="search for node" ref="name" 
+                   onChange={this._handleSearch} onBlur={this._closeSearch} />
             { this.props.source ? 
               <ul className="addNodeResults dropdown-menu" style={{ display: results.length > 0 ? "block" : "none" }} ref="results">
                 { results.map((node, i) =>
@@ -104,6 +106,10 @@ export default class AddNodeInput extends BaseComponent {
     this.refs.name.blur();
     this.props.setNodeResults([]);
     this.props.closeAddForm();
+  }
+
+  _closeSearch(){
+    this.props.setNodeResults([]);
   }
 
   _handleSubmit(e) {
