@@ -31,17 +31,17 @@ export default class AddNodeInput extends BaseComponent {
       'esc': () => this.clear()
     };
 
-
     return (
       <div id="addNodeInput" className="accordianMenuForm">
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
           <form onSubmit={this._handleSubmit}>
             <label>Node:</label>
-            <input type="text" className="form-control input-sm" 
+            <input type="text" className="form-control input-sm"
+                   id = "nodeNameInput" 
                    placeholder="search for node" ref="name" 
-                   onChange={this._handleSearch} onBlur={this._closeSearch} />
+                   onChange={this._handleSearch} />
             { this.props.source ? 
-              <ul className="addNodeResults dropdown-menu" style={{ display: results.length > 0 ? "block" : "none" }} ref="results">
+              <ul className="addNodeResults dropdown-menu" style={{ display: (results.length > 0) ? "block" : "none" }} ref="results">
                 { results.map((node, i) =>
                   <AddNodeResult 
                     scale={parseFloat(this.refs.scale.value)}
@@ -56,7 +56,8 @@ export default class AddNodeInput extends BaseComponent {
                   ) }
               </ul> : null }
               <label>Image:</label>
-              <input 
+              <input
+              onFocus={this._closeSearch} 
               type="text" 
               title="input image URL"
               className="form-control input-sm"
@@ -64,6 +65,7 @@ export default class AddNodeInput extends BaseComponent {
               ref="image" />
               <label>Link:</label>
               <input
+              onFocus={this._closeSearch}
               id="nodeUrlInput"
               type="text"
               title="edit node link"
@@ -86,6 +88,7 @@ export default class AddNodeInput extends BaseComponent {
   }
 
   componentDidUpdate(){
+
     if (this.state.hasSubmitted){
       if (this.state.pending_edges.length > 0){
         this.state.pending_edges.forEach(edge => this.props.addEdge(edge));
