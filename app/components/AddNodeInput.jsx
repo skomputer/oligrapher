@@ -7,14 +7,12 @@ import { HotKeys } from 'react-hotkeys';
 export default class AddNodeInput extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleSubmit', '_handleSearch', '_updateForm', 'componentWillUnmount', 'componentDidUpdate', 'shouldComponentUpdate');
-
-    this.state = {"edges": [], "prevResults": [], "hasSubmitted": false }
+    this.bindAll('_handleSubmit', '_handleSearch', '_updateForm');
+    this.state = {"hasSubmitted": false, "pending_edges": [], "pending_node_id": null};
 
   }
 
   render() {
-    console.log("render", this.state);
     // filter existing nodes out of results
     const results = this.props.results.filter(node => !this.props.nodes[node.id]);
 
@@ -85,30 +83,27 @@ export default class AddNodeInput extends BaseComponent {
     );
   }
 
+  componentDidUpdate(){
+    if (this.state.hasSubmitted){
+      if (this.state.pending_edges.length > 0){
+        this.state.pending_edges.forEach(edge => this.props.addEdge(edge));
+      }
+      this.setState({hasSubmitted: false, pending_edges: []});
+      this.clear();
+      this.props.closeAddForm();
+    }
+
+  }
+
   componentWillUnmount() {
-    // if (this.state.edges.length > 0){
-    //   this.state.edges.forEach(edge => this.props.addEdge(edge));
-    //   this.setState({"edges": []});
-    // }
     window.clearTimeout(this.timeout);
   }
-
-  shouldComponentUpdate(){
-    console.log("should", this.state);
-    return this.state.prevResults != this.props.results || this.state.hasSubmitted;
-  }
-
-  componentDidUpdate(){
-        console.log("hi", this.state.hasSubmitted);
-  }
-
 
   clear() {
     this.refs.name.value = '';
     this.refs.name.blur();
     this.props.setNodeResults([]);
     this.props.closeAddForm();
-    // this.state = {"edges": []};
   }
 
   _handleSubmit(e) {
@@ -116,29 +111,33 @@ export default class AddNodeInput extends BaseComponent {
     let image = this.refs.image.value.trim();
     let scale = parseFloat(this.refs.scale.value);
     let url = this.refs.url.value.trim();
-    this.props.addNode({ display: { name, image, scale, url } });
-    // this.state.edges.forEach(edge => console.log(edge));
-    // this.state.edges.forEach(edge => this.props.addEdge(edge));
-    console.log("is it teee?", this);
-    this.setState = ({"hasSubmitted": true});
-    // this.state = {"edges": []};
-    // if (e != undefined){
-    //   e.preventDefault();
-    // }
-    // this.clear();
-    // this.props.closeAddForm();
+    if (this.state.pending_node != null){
+      //update the pending node with values based on the forms
+      //in case the user has changed a value from the default
+      let updated_node = this.state.pending_node;
+      updated_node.display = { name, image, scale, url };
+      this.props.addNode(updated_node);
+    } else {
+      this.props.addNode({ display: { name, image, scale, url } });
+    }
+    this.setState({hasSubmitted: true, pending_node: null});
+    if (e != undefined){
+      e.preventDefault();
+    }
   }
 
   _updateForm(vals) {
     this.refs.name.value = vals.node.display.name;
     this.refs.url.value = vals.node.display.url;
     this.refs.image.value = vals.node.display.image;
-    console.log("or this?", this);
-    this.setState({"edges": vals.edges});
+    this.setState({pending_edges: vals.edges, pending_node: vals.node});
     this.props.setNodeResults([]);
   }
 
   _handleSearch() {
+    if (this.state.pending_node != null){
+      this.setState({pending_node: null, pending_edges: []})
+    }
     // text and source required for search
     if (this.props.source) {
       let that = this;
@@ -153,6 +152,7 @@ export default class AddNodeInput extends BaseComponent {
         if (query) {
           that.props.source.findNodes(query, nodes => that._addResults(nodes));          
         } else {
+          this.setState({ results: [] })
         }
       }, 200);
     }
@@ -160,7 +160,5 @@ export default class AddNodeInput extends BaseComponent {
 
   _addResults(nodes) {
     this.props.setNodeResults(nodes);
-    console.log("is it this?", this);
-    this.setState({ prevResults: nodes })
   }
 }
