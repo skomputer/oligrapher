@@ -1,14 +1,15 @@
 import { TOGGLE_ACCORDION_MENU_EXPANDED } from '../actions';
 
 const initState = { 
-  expanded: true
+  expanded: false
 };
 
 export default function toggleAccordionMenuExpanded(state = false, action) {
   switch (action.type) {
 
   case TOGGLE_ACCORDION_MENU_EXPANDED:
-    return typeof action.value == "undefined" ? !state : action.value;
+    let expanded = typeof action.value === "undefined" ? !state.expanded : action.value;
+    return Object.assign({}, state, { expanded });
 
   default:
     return state;

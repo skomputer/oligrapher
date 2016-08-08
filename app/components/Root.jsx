@@ -50,7 +50,8 @@ class Root extends Component {
 
   render() {
     let { dispatch, graph, selection, isEditor, isLocked, title,
-          showEditTools, isEditMenuExpanded, addForm, showSaveButton, showHelpScreen, 
+          showEditTools, isEditMenuExpanded, isAccordionMenuExpanded, 
+          addForm, showSaveButton, showHelpScreen, 
           hasSettings, graphSettings, showSettings, onSave,
           currentIndex, annotation, annotations, visibleAnnotations } = this.props;
     let that = this;
@@ -218,7 +219,7 @@ class Root extends Component {
                      setNodeResults={(nodes) => dispatch(setNodeResults(nodes))}
                      toggleAddForm={(form) => dispatch(toggleAddForm(form))} />
 
-              } 
+              } {console.log(isAccordionMenuExpanded)}
               {
                 graph && 
                 <AccordionMenu
@@ -241,6 +242,7 @@ class Root extends Component {
                     save={() => this.handleSave()}
                     settings={graphSettings}
                     updateSettings={updateSettings}
+                    isExpanded={isAccordionMenuExpanded}
                     toggleExpanded={() => dispatch(toggleAccordionMenuExpanded())}/>
                     }
               }
@@ -414,6 +416,7 @@ function select(state) {
     zoom: state.zoom,
     showEditTools: state.editTools.visible,
     isEditMenuExpanded: state.editTools.expanded,
+    isAccordionMenuExpanded: state.accordionMenu.expanded,
     addForm: state.editTools.addForm,
     showAddForm: state.editTools.addVisible,
     nodeResults: state.editTools.nodeResults,
