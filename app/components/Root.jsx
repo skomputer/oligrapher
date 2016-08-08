@@ -71,7 +71,10 @@ class Root extends Component {
       'shiftDown': { sequence: 'shift', action: 'keydown' },
       'shiftUp': { sequence: 'shift', action: 'keyup' },
       'delete': ['alt+d', 'ctrl+d', 'command+d', 'del', 'backspace'],
-      'helpScreen': ['alt+h', 'ctrl+h']
+      'helpScreen': ['alt+h', 'ctrl+h'],
+      'showAddNode': ['alt+n', 'ctrl+n', 'command+n'],
+      'showAddEdge': ['alt+e', 'ctrl+e', 'command+e'],
+      'showAddCaption': ['alt+c', 'ctrl+c', 'command+c']
     };
 
 
@@ -90,7 +93,10 @@ class Root extends Component {
         event.preventDefault();
         dispatch(deleteSelection(selection));
       },
-      'helpScreen': () => dispatch(toggleHelpScreen())
+      'helpScreen': () => dispatch(toggleHelpScreen()),
+      'showAddNode': () => dispatch(toggleAddForm("Add Node")),
+      'showAddEdge': () => dispatch(toggleAddForm("Add Edge")),
+      'showAddCaption': () => dispatch(toggleAddForm("Add Caption"))
     };
 
     let graphApi = {

@@ -4,6 +4,7 @@ import AddCaptionForm from './AddCaptionForm';
 import React, { Component, PropTypes } from 'react';
 import BaseComponent from './BaseComponent';
 
+
 export default class AddTools extends BaseComponent {
 
 	constructor(props) {
@@ -55,24 +56,26 @@ export default class AddTools extends BaseComponent {
 
 
   	render() {
+	    
+
     	return (
-	    	<div id = "addTools"
-	    		className = {this.props.showEditTools ? "editMode" : null}>
-	    		<div className = "addToolsHeader">
-	    			<h1>{this.props.addForm}</h1>
-	    		</div>
-	    		<div className = "addToolsCloser"
-	    			onClick={() => this._closeAddForm()}>
-	    			<span className="glyphicon glyphicon-remove"></span>
-	    		</div>
-	    		<div className = "addContainer">
-		    		{
-		    			this._renderForm(this.props.addForm)
-		    		}
+		    <div id = "addTools"
+		    	className = {this.props.showEditTools ? "editMode" : null}>
+		    	<div className = "addToolsHeader">
+		    		<h1>{this.props.addForm}</h1>
 		    	</div>
-		    	<button className="btn btn-sm btn-default"
-		    		onClick={() => this._submitForm(this.props.addForm)}>Submit</button>
-	    	</div>
+		    	<div className = "addToolsCloser"
+		    		onClick={() => this._closeAddForm()}>
+		    		<span className="glyphicon glyphicon-remove"></span>
+		    	</div>
+		    	<div className = "addContainer">
+			   		{
+			   			this._renderForm(this.props.addForm)
+			   		}
+			   	</div>
+			   	<button className="btn btn-sm btn-default"
+			   		onClick={() => this._submitForm(this.props.addForm)}>Submit</button>
+		    </div>
 	    );
 	}
 }
