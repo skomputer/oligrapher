@@ -2,13 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import BaseComponent from './BaseComponent';
 import AddNodeResult from './AddNodeResult';
+import ChangeColorInput from './ChangeColorInput';
 import { HotKeys } from 'react-hotkeys';
+import ds from '../NodeDisplaySettings';
+
 
 export default class AddNodeInput extends BaseComponent {
   constructor(props) {
     super(props);
     this.bindAll('_handleSubmit', '_handleSearch', '_updateForm', '_closeSearch');
-    this.state = {"hasSubmitted": false, "pending_edges": [], "pending_node_id": null};
+    this.state = {"hasSubmitted": false, "pendingEdges": [], "pendingNodeId": null, "color": ds.circleColor["faded"]};
 
   }
 
@@ -30,6 +33,7 @@ export default class AddNodeInput extends BaseComponent {
     const keyHandlers = {
       'esc': () => this.clear()
     };
+
 
     return (
       <div id="addNodeInput" className="accordianMenuForm">
@@ -62,6 +66,25 @@ export default class AddNodeInput extends BaseComponent {
               className="form-control input-sm"
               placeholder="image URL" 
               ref="image" />
+            <span>
+              <label
+               style ={{"marginRight": "5px"}}>Color:</label>
+              <ChangeColorInput
+                ref="color"
+                value={this.state.color}
+                status={"faded"}
+                onChange={(color) => this._updateColor(color)} />
+              <label
+                style ={{"width": "22%"}}>Scale:</label>
+              <select
+              title="change node size"
+              className="form-control input-sm nodeSize" 
+              ref="scale">
+              { scales.map((scale, i) =>
+                <option key={scale[1]} value={scale[0]}>{scale[1]}</option>
+              ) }
+            </select>
+            </span>
               <label>Link:</label>
               <input
               onFocus={this._closeSearch}
@@ -71,15 +94,6 @@ export default class AddNodeInput extends BaseComponent {
               className="form-control input-sm"
               placeholder="link URL"
               ref="url"/>
-              <label>Scale:</label>
-              <select
-              title="change node size"
-              className="form-control input-sm nodeSize" 
-              ref="scale">
-              { scales.map((scale, i) =>
-                <option key={scale[1]} value={scale[0]}>{scale[1]}</option>
-              ) }
-            </select>
           </form>
         </HotKeys>
       </div>
@@ -89,10 +103,10 @@ export default class AddNodeInput extends BaseComponent {
   componentDidUpdate(){
 
     if (this.state.hasSubmitted){
-      if (this.state.pending_edges.length > 0){
-        this.state.pending_edges.forEach(edge => this.props.addEdge(edge));
+      if (this.state.pendingEdges.length > 0){
+        this.state.pendingEdges.forEach(edge => this.props.addEdge(edge));
       }
-      this.setState({hasSubmitted: false, pending_edges: []});
+      this.setState({hasSubmitted: false, pendingEdges: []});
       this.clear();
       this.props.closeAddForm();
       this.props.setNodeResults([]);
@@ -111,6 +125,10 @@ export default class AddNodeInput extends BaseComponent {
     this.props.closeAddForm();
   }
 
+  _updateColor(color){
+    this.setState({color: color});
+  }
+
   _closeSearch(){
     this.props.setNodeResults([]);
   }
@@ -120,16 +138,19 @@ export default class AddNodeInput extends BaseComponent {
     let image = this.refs.image.value.trim();
     let scale = parseFloat(this.refs.scale.value);
     let url = this.refs.url.value.trim();
-    if (this.state.pending_node != null){
-      //update the pending node with values based on the forms
-      //in case the user has changed a value from the default
-      let updated_node = this.state.pending_node;
-      updated_node.display = { name, image, scale, url };
-      this.props.addNode(updated_node);
-    } else {
-      this.props.addNode({ display: { name, image, scale, url } });
+    let color = this.state.color;
+    if (name.trim().length > 0){
+      if (this.state.pendingNode != null){
+        //update the pending node with values based on the forms
+        //in case the user has changed a value from the default
+        let updated_node = this.state.pendingNode;
+        updated_node.display = { name, image, scale, url, color };
+        this.props.addNode(updated_node);
+      } else {
+        this.props.addNode({ display: { name, image, scale, url, color } });
+      }
     }
-    this.setState({hasSubmitted: true, pending_node: null});
+    this.setState({hasSubmitted: true, pendingNode: null});
     if (e != undefined){
       e.preventDefault();
     }
@@ -139,13 +160,13 @@ export default class AddNodeInput extends BaseComponent {
     this.refs.name.value = vals.node.display.name;
     this.refs.url.value = vals.node.display.url;
     this.refs.image.value = vals.node.display.image;
-    this.setState({pending_edges: vals.edges, pending_node: vals.node});
+    this.setState({pendingEdges: vals.edges, pendingNode: vals.node});
     this.props.setNodeResults([]);
   }
 
   _handleSearch() {
-    if (this.state.pending_node != null){
-      this.setState({pending_node: null, pending_edges: []})
+    if (this.state.pendingNode != null){
+      this.setState({pendingNode: null, pendingEdges: []})
     }
     // text and source required for search
     if (this.props.source) {

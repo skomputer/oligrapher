@@ -29,18 +29,23 @@ export default class AddCaptionForm extends BaseComponent {
     return (
       <div id="addCaption" className="editForm accordianMenuForm">
           <form onSubmit={this._handleSubmit}>
-            <label>Caption:</label>
-            <input type="text" className="form-control input-sm" placeholder="add caption" ref="text" /><br />
-             &nbsp;<select 
-            title="text size for new caption"
-            value={this.state.scale} 
-            className="form-control input-sm" 
-            ref="scale" 
-            onChange={this._handleScaleChange}>
-            { scales.map((scale, i) =>
-              <option key={scale[1]} value={scale[0]}>{scale[1]}</option>
-            ) }
-            </select>
+            <span>
+              <label>Caption:</label>
+              <input type="text" className="form-control input-sm" placeholder="add caption" ref="text" />
+            </span>
+            <span>
+              <label>Size:</label>
+              <select 
+              title="text size for new caption"
+              value={this.state.scale} 
+              className="form-control input-sm" 
+              ref="scale" 
+              onChange={this._handleScaleChange}>
+              { scales.map((scale, i) =>
+                <option key={scale[1]} value={scale[0]}>{scale[1]}</option>
+              ) }
+              </select>
+            </span>
           </form>
       </div>
     );

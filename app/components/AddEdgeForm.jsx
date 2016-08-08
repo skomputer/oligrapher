@@ -45,13 +45,16 @@ export default class AddEdgeForm extends BaseComponent {
       <div id="addEdgeForm" className="editForm accordianMenuForm">
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
           <form onSubmit={this._handleSubmit}>
-            <label>From:</label>
-            <select defaultValue={node1Id} className="form-control input-sm" ref="node1Id">
-              <option value="">Node 1</option>
-              { nodes.map((node, i) =>
-                <option key={node.id} value={node.id}>{node.display.name}</option>
-              ) }
-            </select>
+            <span>
+              <label>From:</label>
+              <select defaultValue={node1Id} className="form-control input-sm" ref="node1Id">
+                <option value="">Node 1</option>
+                { nodes.map((node, i) =>
+                  <option key={node.id} value={node.id}>{node.display.name}</option>
+                ) }
+              </select>
+            </span>
+            <span>
             <label>To:</label>
             <select defaultValue={node2Id} className="form-control input-sm" ref="node2Id">
               <option value="">Node 2</option>
@@ -59,6 +62,7 @@ export default class AddEdgeForm extends BaseComponent {
                 <option key={node.id} value={node.id}>{node.display.name}</option>
               ) }
             </select>
+            </span>
             <span className = "addToolsCheckboxes">
               <label>Arrow:</label>
               <input 
@@ -69,18 +73,25 @@ export default class AddEdgeForm extends BaseComponent {
                 type="checkbox" 
                 ref="dash" />
             </span>
-            <label>Weight:</label>
-            <select 
-              className="form-control input-sm" 
-              ref="scale" >
-              { scales.map((scale, i) =>
-                <option key={scale[1]} value={scale[0]}>{scale[1]}</option>
-              ) }
-            </select>
-            <label>Link:</label>
-            <input type="text" placeholder="link URL" className="form-control input-sm" ref="url" />
-            <label>Label:</label>
-            <input type="text" placeholder="label" className="form-control input-sm" ref="label" />
+            <span>
+              <label>Weight:</label>
+              <select
+                defaultValue={1} 
+                className="form-control input-sm" 
+                ref="scale" >
+                { scales.map((scale, i) =>
+                  <option key={scale[1]} value={scale[0]}>{scale[1]}</option>
+                ) }
+              </select>
+            </span>
+            <span>
+              <label>Link:</label>
+              <input type="text" placeholder="link URL" className="form-control input-sm" ref="url" />
+            </span>
+            <span>
+              <label>Label:</label>
+              <input type="text" placeholder="label" className="form-control input-sm" ref="label" />
+            </span>
           </form>
         </HotKeys>
       </div>
