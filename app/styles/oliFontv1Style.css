@@ -21,81 +21,81 @@
 }
 
 .icon-selectedit:before {
-    content: "\e90c";
-}
-.icon-selectannotations:before {
-    content: "\e917";
-}
-.icon-selectdelete:before {
-    content: "\e918";
-}
-.icon-delete:before {
-    content: "\e913";
-}
-.icon-selectforceLayout:before {
-    content: "\e911";
-}
-.icon-selectcircleLayout:before {
-    content: "\e912";
-}
-.icon-selectaddNode:before {
-    content: "\e90f";
-}
-.icon-selectaddEdge:before {
-    content: "\e910";
-}
-.icon-selectaddCaption:before {
-    content: "\e914";
-}
-.icon-selectClear:before {
-    content: "\e915";
-}
-.icon-interlocks:before {
-    content: "\e90e";
-}
-.icon-prune:before {
-    content: "\e91c";
-}
-.icon-selectprune:before {
-    content: "\e916";
-}
-.icon-circleLayout:before {
-    content: "\e904";
-}
-.icon-forceLayout:before {
-    content: "\e905";
-}
-.icon-addNode:before {
-    content: "\e902";
-}
-.icon-addEdge:before {
-    content: "\e903";
-}
-.icon-addCaption:before {
-    content: "\e90b";
-}
-.icon-clear:before {
-    content: "\e907";
-}
-.icon-undo:before {
-    content: "\e908";
-}
-.icon-selectinterlocks:before {
-    content: "\e906";
-}
-.icon-redo:before {
-    content: "\e909";
-}
-.icon-save:before {
-    content: "\e90d";
+  content: "\e901";
 }
 .icon-edit:before {
-    content: "\e901";
+  content: "\e90c";
+}
+.icon-selectannotations:before {
+  content: "\e917";
+}
+.icon-selectdelete:before {
+  content: "\e918";
+}
+.icon-delete:before {
+  content: "\e913";
+}
+.icon-selectforceLayout:before {
+  content: "\e911";
+}
+.icon-selectcircleLayout:before {
+  content: "\e912";
+}
+.icon-selectaddNode:before {
+  content: "\e90f";
+}
+.icon-selectaddEdge:before {
+  content: "\e910";
+}
+.icon-selectaddCaption:before {
+  content: "\e914";
+}
+.icon-selectClear:before {
+  content: "\e915";
+}
+.icon-interlocks:before {
+  content: "\e90e";
+}
+.icon-prune:before {
+  content: "\e91c";
+}
+.icon-selectprune:before {
+  content: "\e916";
+}
+.icon-circleLayout:before {
+  content: "\e904";
+}
+.icon-forceLayout:before {
+  content: "\e905";
+}
+.icon-addNode:before {
+  content: "\e902";
+}
+.icon-addEdge:before {
+  content: "\e903";
+}
+.icon-addCaption:before {
+  content: "\e90b";
+}
+.icon-clear:before {
+  content: "\e907";
+}
+.icon-undo:before {
+  content: "\e908";
+}
+.icon-selectinterlocks:before {
+  content: "\e906";
+}
+.icon-redo:before {
+  content: "\e909";
+}
+.icon-save:before {
+  content: "\e90d";
 }
 .icon-annotations:before {
-    content: "\e900";
+  content: "\e900";
 }
 .icon-help:before {
-    content: "\e90a";
+  content: "\e90a";
 }
 
