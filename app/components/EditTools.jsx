@@ -47,7 +47,7 @@ export default class EditTools extends BaseComponent {
         { currentForm == null &&
           <div>
             <p>
-              Select a node, link, or caption to edit it!
+              Select a node, link, or caption to edit it, or, select two nodes to search for interlocks!
             </p>
           </div>
         }     

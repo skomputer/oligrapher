@@ -31,26 +31,26 @@ export default class Editor extends BaseComponent {
       resetZoom = () => this.props.graphApi.resetZoom();    
     }
 
-    const keyMap = { 
-      'altP': ['alt+p', 'ctrl+p'],
-      'altO': ['alt+o', 'ctrl+o'],
-      'altN': ['alt+n', 'ctrl+n'],
-      'altE': ['alt+e', 'ctrl+e'],
-      'altH': ['alt+h', 'ctrl+h'],
-      'altR': ['alt+r', 'ctrl+r'],
-      'esc': 'esc',
-      'enter': 'enter'
-    };
+    // const keyMap = { 
+    //   'altP': ['alt+p', 'ctrl+p'],
+    //   'altO': ['alt+o', 'ctrl+o'],
+    //   'altN': ['alt+n', 'ctrl+n'],
+    //   'altE': ['alt+e', 'ctrl+e'],
+    //   'altH': ['alt+h', 'ctrl+h'],
+    //   'altR': ['alt+r', 'ctrl+r'],
+    //   'esc': 'esc',
+    //   'enter': 'enter'
+    // };
 
-    const keyHandlers = {
-      'altP': () => this.props.graphApi.prune(),
-      'altO': () => this.props.graphApi.circleLayout(),
-      'altN': () => this._focusAddNodeInput(),
-      'altE': () => this._toggleAddEdgeForm(),
-      'altH': () => this._toggleHelpScreen(),
-      'altR': () => this._toggleAddConnectedNodesForm(),
-      'esc': () => this._clearForms()
-    };
+    // const keyHandlers = {
+    //   'altP': () => this.props.graphApi.prune(),
+    //   'altO': () => this.props.graphApi.circleLayout(),
+    //   'altN': () => this._focusAddNodeInput(),
+    //   'altE': () => this._toggleAddEdgeForm(),
+    //   'altH': () => this._toggleHelpScreen(),
+    //   'altR': () => this._toggleAddConnectedNodesForm(),
+    //   'esc': () => this._clearForms()
+    // };
 
     let _closeAddForm = () => this.props.toggleAddForm(null);
 
@@ -79,7 +79,7 @@ export default class Editor extends BaseComponent {
           </div>
           {this.state.open &&
             <div id="oligrapherEditorContainer">
-              <HotKeys focused={true} attach={window} keyMap={keyMap} handlers={keyHandlers}>
+              {/*<HotKeys focused={true} attach={window} keyMap={keyMap} handlers={keyHandlers}>*/}
                 { this.props.showEditButton && this.props.isEditor && 
                   <button 
                     id="toggleEditTools" 
@@ -104,7 +104,7 @@ export default class Editor extends BaseComponent {
                     fetchInterlocks={fetchInterlocks}
                     delete={this.props.delete} />
                 }       
-              </HotKeys>
+              {/*</HotKeys>*/}
             </div>
           }
           {!this.state.open &&

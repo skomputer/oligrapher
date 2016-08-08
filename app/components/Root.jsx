@@ -57,8 +57,12 @@ class Root extends Component {
     // apply annotation highlights to graph if available
     let annotatedGraph = graph && annotation ? GraphModel.setHighlights(graph, annotation, !isEditor) : graph;
 
+    /*not using command+h command for helpscreen as on mac that's mapped to 
+    "hide current window" command*/
     const keyMap = { 
-      'force': 'ctrl+f',
+      'force': ['alt+f', 'ctrl+f', 'command+f'],
+      'circle': ['alt+o', 'ctrl+o', 'command+o'],
+      'prune': ['alt+p', 'ctrl+p', 'command+p'],
       'undo': 'ctrl+,',
       'redo': 'ctrl+.',
       'zoomIn': 'ctrl+=',
@@ -66,12 +70,15 @@ class Root extends Component {
       'resetZoom': 'ctrl+0',
       'shiftDown': { sequence: 'shift', action: 'keydown' },
       'shiftUp': { sequence: 'shift', action: 'keyup' },
-      'delete': ['alt+d', 'ctrl+d', 'command+d', 'del', 'backspace']
+      'delete': ['alt+d', 'ctrl+d', 'command+d', 'del', 'backspace'],
+      'helpScreen': ['alt+h', 'ctrl+h']
     };
 
 
     const keyHandlers = {
       'force': () => dispatch(layoutForce(true)),
+      'circle': () => dispatch(layoutCircle()),
+      'prune': () => dispatch(pruneGraph()),
       'undo': () => { dispatch(ActionCreators.undo()) },
       'redo': () => { dispatch(ActionCreators.redo()) },
       'zoomIn': () => dispatch(zoomIn()),
@@ -82,7 +89,8 @@ class Root extends Component {
       'delete': (event) => {
         event.preventDefault();
         dispatch(deleteSelection(selection));
-      }
+      },
+      'helpScreen': () => dispatch(toggleHelpScreen())
     };
 
     let graphApi = {
