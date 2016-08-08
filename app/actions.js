@@ -51,6 +51,8 @@ export const SET_TITLE = 'SET_TITLE';
 export const SET_SETTINGS = 'SET_SETTINGS';
 export const TOGGLE_HELP_SCREEN = 'TOGGLE_HELP_SCREEN';
 export const TOGGLE_SETTINGS = 'TOGGLE_SETTINGS';
+export const TOGGLE_ACCORDIAN_MENU_EXPANDED = 'TOGGLE_ACCORDIAN_MENU_EXPANDED';
+export const TOGGLE_EDIT_MENU_EXPANDED = 'TOGGLE_EDIT_MENU_EXPANDED';
 
 /*
  * action creators
@@ -252,4 +254,12 @@ export function toggleHelpScreen(value) {
 
 export function toggleSettings(value) {
   return { type: TOGGLE_SETTINGS, value };
+}
+
+export function toggleAccordianMenuExpanded(value) {
+  return { type: TOGGLE_ACCORDIAN_MENU_EXPANDED, value };
+}
+
+export function toggleEditMenuExpanded(value) {
+  return { type: TOGGLE_EDIT_MENU_EXPANDED, value };
 }

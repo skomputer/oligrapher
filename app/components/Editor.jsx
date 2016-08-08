@@ -14,10 +14,6 @@ require('../styles/oligrapher.editor.css');
 export default class Editor extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = { 
-      helpScreen: false,
-      open: true
-    }
 
   }
 
@@ -50,12 +46,12 @@ export default class Editor extends BaseComponent {
 
     return (
         <div id="oligrapherEditorWrapper"
-              className={this.state.open ? null : "closedMenu"}>
+              className={this.props.isEditMenuExpanded ? null : "closedMenu"}>
           <div className = "dragMenuButton"
-                onClick={() => this._toggleOpen()}>
-            <span className={"glyphicon glyphicon-" + (this.state.open ? "forward" : "backward")}></span>
+                onClick={this.props.toggleExpanded}>
+            <span className={"glyphicon glyphicon-" + (this.props.isEditMenuExpanded ? "forward" : "backward")}></span>
           </div>
-          {this.state.open &&
+          {this.props.isEditMenuExpanded &&
             <div id="oligrapherEditorContainer">
                 { this.props.showEditButton && this.props.isEditor && 
                   <button 
@@ -83,9 +79,9 @@ export default class Editor extends BaseComponent {
                 }       
             </div>
           }
-          {!this.state.open &&
+          {!this.props.isEditMenuExpanded &&
             <div className ="largeEditButton"
-                  onClick={() => this._toggleOpen()}>
+                  onClick={this.props.toggleExpanded}>
               <i className="icon-edit"/>
               <p>Edit</p>
             </div>
@@ -164,9 +160,9 @@ export default class Editor extends BaseComponent {
     this.refs.editTools.refs.editButtons.refs.addNodeInput.refs.name.focus();
   }
 
-  _toggleOpen() {
-    this.setState({"open": !this.state.open});
-  }
+  // _toggleExpandedEditor() {
+  //   this.setState({"expandedEditor": !this.state.expandedEditor});
+  // }
 
 
 }

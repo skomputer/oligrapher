@@ -32,7 +32,7 @@ const structure = [
 export default class AccordianMenu extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = {"open": false};
+    this.state = {"accordianExpanded": false};
   }
 
   render() {
@@ -41,10 +41,10 @@ export default class AccordianMenu extends BaseComponent {
 
 
     return (
-      <div className={"accordianMenu " + (this.props.showEditTools ? "editMenu" : "selectMenu") + " " + (this.state.open ? null : "closedAccordian")}>
+      <div className={"accordianMenu " + (this.props.showEditTools ? "editMenu" : "selectMenu") + " " + (this.state.accordianExpanded ? null : "closedAccordian")}>
         <div className = "showHideMenuButton"
             onClick={() => this._toggleOpen()}>
-            <span className={"glyphicon glyphicon-" + (this.state.open ? "backward" : "forward")}></span>
+            <span className={"glyphicon glyphicon-" + (this.state.accordianExpanded ? "backward" : "forward")}></span>
         </div>
         {this._renderButtons()}
       </div>
@@ -91,7 +91,7 @@ export default class AccordianMenu extends BaseComponent {
     return structure.map((i) =>  
       <AccordianButton 
         key={i.value} 
-        parentOpen={this.state.open}
+        parentOpen={this.state.accordianExpanded}
         class="accordianButton"
         value={i.value}
         glyphName={i.glyphName} 
@@ -109,7 +109,7 @@ export default class AccordianMenu extends BaseComponent {
   _renderChildren(whichFunc){
     if (whichFunc == "Add Element"){
         return ( <AddElementsForm
-                    parentOpen={this.state.open}
+                    parentOpen={this.state.accordianExpanded}
                     addNode={this.props.graphApi.addNode}
                     addEdge={this.props.graphApi.addEdge}
                     addCaption={this.props.graphApi.addCaption}
@@ -121,7 +121,7 @@ export default class AccordianMenu extends BaseComponent {
                     nodeResults={this.props.nodeResults} />);
     } else if (whichFunc == "Layout"){
         return ( <LayoutButtons
-                  parentOpen={this.state.open} 
+                  parentOpen={this.state.accordianExpanded} 
                   prune={this.props.graphApi.prune} 
                   forceLayout={this.props.graphApi.forceLayout} 
                   circleLayout={this.props.graphApi.circleLayout} 
@@ -130,7 +130,7 @@ export default class AccordianMenu extends BaseComponent {
     } else if (whichFunc == "Save"){
         return ( <div>
                     <GraphSettingsForm
-                    parentOpen={this.state.open}
+                    parentOpen={this.state.accordianExpanded}
                     settings={this.props.settings}
                     updateSettings={this.props.updateSettings}
                     save={() => this.handleSave()} />
@@ -146,7 +146,7 @@ export default class AccordianMenu extends BaseComponent {
   }
 
   _toggleOpen() {
-    this.setState({"open": !this.state.open});
+    this.setState({"accordianExpanded": !this.state.accordianExpanded});
   }
 
 }

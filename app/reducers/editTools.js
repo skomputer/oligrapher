@@ -1,11 +1,12 @@
 import { TOGGLE_EDIT_TOOLS, TOGGLE_ADD_FORM, SET_NODE_RESULTS, 
-         CREATE_ANNOTATION } from '../actions';
+         CREATE_ANNOTATION, TOGGLE_EDIT_MENU_EXPANDED } from '../actions';
 
 const initState = { 
   visible: false,
   addVisible: false,
   addForm: null,
-  nodeResults: []
+  nodeResults: [],
+  expanded: true
 };
 
 export default function editTools(state = initState, action) {
@@ -25,6 +26,10 @@ export default function editTools(state = initState, action) {
 
   case CREATE_ANNOTATION:
     return Object.assign({}, state, { visible: false });
+
+  case TOGGLE_EDIT_MENU_EXPANDED:
+    let expanded = typeof action.value === "undefined" ? !state.expanded : action.value;
+    return Object.assign({}, state, { expanded });
 
   default:
     return state;

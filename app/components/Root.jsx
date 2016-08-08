@@ -18,7 +18,8 @@ import { loadGraph, showGraph,
          loadAnnotations, showAnnotation, createAnnotation,
          toggleAnnotations, updateAnnotation,
          deleteAnnotation, moveAnnotation,
-         toggleHelpScreen, setSettings, toggleSettings } from '../actions';
+         toggleHelpScreen, toggleAccordianMenuExpanded,
+         toggleEditMenuExpanded, setSettings, toggleSettings } from '../actions';
 import Graph from './Graph';
 import Editor from './Editor';
 import AddTools from './AddTools';
@@ -49,7 +50,7 @@ class Root extends Component {
 
   render() {
     let { dispatch, graph, selection, isEditor, isLocked, title,
-          showEditTools, addForm, showSaveButton, showHelpScreen, 
+          showEditTools, isEditMenuExpanded, addForm, showSaveButton, showHelpScreen, 
           hasSettings, graphSettings, showSettings, onSave,
           currentIndex, annotation, annotations, visibleAnnotations } = this.props;
     let that = this;
@@ -204,7 +205,9 @@ class Root extends Component {
                      toggleHelpScreen={() => dispatch(toggleHelpScreen())}
                      undo={() => dispatch(ActionCreators.undo())}
                      redo={() => dispatch(ActionCreators.redo())} 
-                     fetchInterlocks={fetchInterlocksCallback} />
+                     fetchInterlocks={fetchInterlocksCallback}
+                     toggleExpanded={() => dispatch(toggleEditMenuExpanded())}
+                     isEditMenuExpanded={isEditMenuExpanded} />
 
                    }
               {
@@ -409,6 +412,7 @@ function select(state) {
     selection: state.selection,
     zoom: state.zoom,
     showEditTools: state.editTools.visible,
+    isEditMenuExpanded: state.editTools.expanded,
     addForm: state.editTools.addForm,
     showAddForm: state.editTools.addVisible,
     nodeResults: state.editTools.nodeResults,
