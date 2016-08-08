@@ -137,7 +137,7 @@ export default class Editor extends BaseComponent {
     let captionCount = Object.keys(captions).length;
 
     if (nodeCount == 1 && edgeCount == 0 && captionCount == 0) {
-      if (addForm != 'AddEdgeForm') { currentForm = 'UpdateNodeForm'; }
+      currentForm = 'UpdateNodeForm';
       formData = values(nodes)[0];
     } else if (nodeCount == 0 && edgeCount == 1 && captionCount == 0) {
       currentForm = 'UpdateEdgeForm';
@@ -148,8 +148,8 @@ export default class Editor extends BaseComponent {
       addForm = null;
       formData = values(captions)[0];
     } else if (nodeCount == 2 && edgeCount == 0 && captionCount == 0) {
-      currentForm = null;
-      addForm = 'AddEdgeForm';
+      currentForm = 'AddInterlocksForm';
+      addForm = null;
       formData = values(nodes);
     } else {
       currentForm = null;

@@ -43,7 +43,17 @@ export default class EditTools extends BaseComponent {
             updateEdge={updateEdge} 
             getGraph={getGraph} 
             data={data}
-            deselect={deselectAll} /> }  
+            deselect={deselectAll} /> }
+        { currentForm == 'AddInterlocksForm' &&
+          <div>
+            <p>
+              Search for and add interlocks: entities with relationships to both of the selected nodes.
+            </p>
+            <button id="addInterlocksButton" 
+              className="btn btn-sm btn-default" 
+              title="search for entities related to both of selected" 
+              onClick={this.props.fetchInterlocks}>Add Interlocks</button>
+          </div>}  
         { currentForm == null &&
           <div>
             <p>
