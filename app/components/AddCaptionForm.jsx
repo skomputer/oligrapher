@@ -27,7 +27,7 @@ export default class AddCaptionForm extends BaseComponent {
     ];
 
     return (
-      <div id="addCaption" className="editForm accordianMenuForm">
+      <div id="addCaption" className="editForm accordionMenuForm">
           <form onSubmit={this._handleSubmit}>
             <span>
               <label>Caption:</label>

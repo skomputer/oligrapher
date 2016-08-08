@@ -5,7 +5,7 @@ export default class GraphSettingsForm extends Component {
 
   render() {
     return (
-      <div id="oligrapherSettingsForm" className="accordianMenuForm">
+      <div id="oligrapherSettingsForm" className="accordionMenuForm">
         { Object.keys(this.props.settings).map(key => 
           <div key={key}>
             {titleize(key.replace(/[_-]+/, " "))}&nbsp;

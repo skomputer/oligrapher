@@ -175,11 +175,11 @@ button#toggleEditTools {
   display: inline-block;
 }
 
-.accordianMenuForm .addToolsCheckboxes label, .accordianMenuForm .addToolsCheckboxes input{
+.accordionMenuForm .addToolsCheckboxes label, .accordionMenuForm .addToolsCheckboxes input{
   float: none;
 } 
 
-.accordianMenuForm .addToolsCheckboxes input {
+.accordionMenuForm .addToolsCheckboxes input {
   width:10%;
   padding-left: 10px;
 }
@@ -222,7 +222,7 @@ button#toggleEditTools {
   width: 100%;
 }
 
-.accordianMenu {
+.accordionMenu {
   position: absolute;
   left: -15px;
   top: 0px;
@@ -230,20 +230,20 @@ button#toggleEditTools {
   height:100%;
 }
 
-.accordianMenu.closedAccordian {
+.accordionMenu.closedAccordion {
   left: -186px;
 }
 
-.accordianMenuForm {
+.accordionMenuForm {
   padding-bottom: 10px;
   width: 95%
 }
 
-.accordianMenuForm form {
+.accordionMenuForm form {
   height: 35px;
 }
 
-.accordianMenuForm form label {
+.accordionMenuForm form label {
   font-size: 0.7em;
   display: inline-block;
   width: 27%;
@@ -253,31 +253,31 @@ button#toggleEditTools {
   margin-bottom: 5px;
 }
 
-.accordianMenuForm form input:not([type='checkbox']), .accordianMenuForm form select {
+.accordionMenuForm form input:not([type='checkbox']), .accordionMenuForm form select {
   display: inline-block;
   width: 70%;
   float: right;
   margin-bottom: 5px;
 }
 
-.accordianMenutop {
+.accordionMenutop {
   padding-left: 15px;
   cursor: pointer;
 }
 
-.accordianSegment > div p {
+.accordionSegment > div p {
   display: inline-block;
 }
 
-.accordianSegment > div.large p {
+.accordionSegment > div.large p {
   line-height: 35px;
 }
 
-.accordianSegment > div.small p {
+.accordionSegment > div.small p {
   line-height: 24px;
 }
 
-.accordianButton {
+.accordionButton {
   width: calc(100% - 25px);
   background-color: #fbc836;
   position: relative;
@@ -288,24 +288,24 @@ button#toggleEditTools {
   display: inline-block;
 }
 
-.editMenu .accordianButton {
+.editMenu .accordionButton {
   background-color: #00a779;
   border-bottom: #00543c 1px solid;
 }
 
-.accordianButton.large {
+.accordionButton.large {
   height: 35px;
 }
 
-.accordianButton.small {
+.accordionButton.small {
   height: 25px;
 }
 
-.accordianButton p {
+.accordionButton p {
   color:#fff;
 }
 
-.accordianFoldOutArrow {
+.accordionFoldOutArrow {
   color: #fff;
   position: absolute;
   right: 15px;
@@ -333,11 +333,11 @@ button#toggleEditTools {
   color: #001710;
 }
 
-.addButton .accordianFoldOutArrow {
+.addButton .accordionFoldOutArrow {
   color:#503700;
 }
 
-.editMenu .addButton .accordianFoldOutArrow {
+.editMenu .addButton .accordionFoldOutArrow {
   color: #001710;
 }
 
@@ -409,11 +409,11 @@ button#toggleEditTools {
   margin-left: -20px;
 }
 
-.accordianSegment {
+.accordionSegment {
   height: auto;
 }
 
-.accordianFoldOut {
+.accordionFoldOut {
   padding-left: 15px;
   padding-top: 4px;
   width: 100%;
@@ -421,11 +421,11 @@ button#toggleEditTools {
   height:100%;
 }
 
-.editMenu .accordianFoldOut {
+.editMenu .accordionFoldOut {
   background-color: rgba(122, 216, 190, 0.5);
 }
 
-.accordianFoldOut .accordianFoldOut {
+.accordionFoldOut .accordionFoldOut {
   padding-left: 0px;
   width: 100%;
 }

@@ -36,7 +36,7 @@ export default class AddNodeInput extends BaseComponent {
 
 
     return (
-      <div id="addNodeInput" className="accordianMenuForm">
+      <div id="addNodeInput" className="accordionMenuForm">
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
           <form onSubmit={this._handleSubmit}>
             <label>Node:</label>

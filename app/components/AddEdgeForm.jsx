@@ -42,7 +42,7 @@ export default class AddEdgeForm extends BaseComponent {
     let nodes = sortBy(values(this.props.nodes), (node) => node.display.name);
 
     return (
-      <div id="addEdgeForm" className="editForm accordianMenuForm">
+      <div id="addEdgeForm" className="editForm accordionMenuForm">
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
           <form onSubmit={this._handleSubmit}>
             <span>

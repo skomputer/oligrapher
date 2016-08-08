@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { HotKeys } from 'react-hotkeys';
 import BaseComponent from './BaseComponent';
-import AccordianButton from './AccordianButton';
+import AccordionButton from './AccordionButton';
 
 
 const structure = [
@@ -34,7 +34,7 @@ export default class AddElementsForm extends BaseComponent {
 
   _renderButtons(){
     return structure.map((i) =>  
-      <AccordianButton 
+      <AccordionButton 
         key={i.value} 
         parentOpen={this.props.parentOpen}
         class="addButton"
@@ -43,7 +43,7 @@ export default class AddElementsForm extends BaseComponent {
         size={"small"}
         hasFoldOut={i.hasFoldOut}
         buttonFunc={() => this._doToggle(i.value)}>
-    </AccordianButton>);
+    </AccordionButton>);
 
   }
 

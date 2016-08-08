@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BaseComponent from './BaseComponent';
-import AccordianButton from './AccordianButton';
+import AccordionButton from './AccordionButton';
 
 const structure = [
         {"value": "Circle Layout", "glyphName": "circleLayout", "hasFoldOut": false, "func": "circleLayout"},
@@ -25,7 +25,7 @@ export default class LayoutButtonsexport extends BaseComponent {
 
   _renderButtons(){
     return structure.map((i) =>  
-      <AccordianButton 
+      <AccordionButton 
         key={i.value} 
         parentOpen={this.props.parentOpen}
         class="addButton"

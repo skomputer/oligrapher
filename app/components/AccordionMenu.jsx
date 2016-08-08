@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { HotKeys } from 'react-hotkeys';
-import AccordianButton from './AccordianButton';
+import AccordionButton from './AccordionButton';
 import BaseComponent from './BaseComponent';
 import AddElementsForm from './AddElementsForm';
 import AddNodeInput from './AddNodeInput';
@@ -29,10 +29,10 @@ const structure = [
     ]
 
 
-export default class AccordianMenu extends BaseComponent {
+export default class AccordionMenu extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = {"accordianExpanded": false};
+    this.state = {"accordionExpanded": false};
   }
 
   render() {
@@ -41,10 +41,10 @@ export default class AccordianMenu extends BaseComponent {
 
 
     return (
-      <div className={"accordianMenu " + (this.props.showEditTools ? "editMenu" : "selectMenu") + " " + (this.state.accordianExpanded ? null : "closedAccordian")}>
+      <div className={"accordionMenu " + (this.props.showEditTools ? "editMenu" : "selectMenu") + " " + (this.state.accordionExpanded ? null : "closedAccordion")}>
         <div className = "showHideMenuButton"
             onClick={() => this._toggleOpen()}>
-            <span className={"glyphicon glyphicon-" + (this.state.accordianExpanded ? "backward" : "forward")}></span>
+            <span className={"glyphicon glyphicon-" + (this.state.accordionExpanded ? "backward" : "forward")}></span>
         </div>
         {this._renderButtons()}
       </div>
@@ -89,10 +89,10 @@ export default class AccordianMenu extends BaseComponent {
 
   _renderButtons(){
     return structure.map((i) =>  
-      <AccordianButton 
+      <AccordionButton 
         key={i.value} 
-        parentOpen={this.state.accordianExpanded}
-        class="accordianButton"
+        parentOpen={this.state.accordionExpanded}
+        class="accordionButton"
         value={i.value}
         glyphName={i.glyphName} 
         size={"small"}
@@ -102,14 +102,14 @@ export default class AccordianMenu extends BaseComponent {
         options={i.options}
         optionClick={(val, par) => this._enactOptionFunction(val, par)}>
         {this._renderChildren(i.value)}
-    </AccordianButton>);
+    </AccordionButton>);
 
   }
 
   _renderChildren(whichFunc){
     if (whichFunc == "Add Element"){
         return ( <AddElementsForm
-                    parentOpen={this.state.accordianExpanded}
+                    parentOpen={this.state.accordionExpanded}
                     addNode={this.props.graphApi.addNode}
                     addEdge={this.props.graphApi.addEdge}
                     addCaption={this.props.graphApi.addCaption}
@@ -121,7 +121,7 @@ export default class AccordianMenu extends BaseComponent {
                     nodeResults={this.props.nodeResults} />);
     } else if (whichFunc == "Layout"){
         return ( <LayoutButtons
-                  parentOpen={this.state.accordianExpanded} 
+                  parentOpen={this.state.accordionExpanded} 
                   prune={this.props.graphApi.prune} 
                   forceLayout={this.props.graphApi.forceLayout} 
                   circleLayout={this.props.graphApi.circleLayout} 
@@ -130,7 +130,7 @@ export default class AccordianMenu extends BaseComponent {
     } else if (whichFunc == "Save"){
         return ( <div>
                     <GraphSettingsForm
-                    parentOpen={this.state.accordianExpanded}
+                    parentOpen={this.state.accordionExpanded}
                     settings={this.props.settings}
                     updateSettings={this.props.updateSettings}
                     save={() => this.handleSave()} />
@@ -146,7 +146,7 @@ export default class AccordianMenu extends BaseComponent {
   }
 
   _toggleOpen() {
-    this.setState({"accordianExpanded": !this.state.accordianExpanded});
+    this.setState({"accordionExpanded": !this.state.accordionExpanded});
   }
 
 }

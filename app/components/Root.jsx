@@ -18,7 +18,7 @@ import { loadGraph, showGraph,
          loadAnnotations, showAnnotation, createAnnotation,
          toggleAnnotations, updateAnnotation,
          deleteAnnotation, moveAnnotation,
-         toggleHelpScreen, toggleAccordianMenuExpanded,
+         toggleHelpScreen, toggleAccordionMenuExpanded,
          toggleEditMenuExpanded, setSettings, toggleSettings } from '../actions';
 import Graph from './Graph';
 import Editor from './Editor';
@@ -28,7 +28,7 @@ import GraphAnnotations from './GraphAnnotations';
 import EditButton from './EditButton';
 import HelpButton from './HelpButton';
 import HelpScreen from './HelpScreen';
-import AccordianMenu from './AccordianMenu';
+import AccordionMenu from './AccordionMenu';
 import SettingsButton from './SettingsButton';
 import GraphSettingsForm from './GraphSettingsForm';
 import SaveButton from './SaveButton';
@@ -221,7 +221,7 @@ class Root extends Component {
               } 
               {
                 graph && 
-                <AccordianMenu
+                <AccordionMenu
                   {...this.props}
                     graphApi={graphApi}
                     isEditor={isEditor} 
@@ -241,7 +241,8 @@ class Root extends Component {
                     save={() => this.handleSave()}
                     settings={graphSettings}
                     updateSettings={updateSettings}
-                     />
+                    toggleExpanded={() => dispatch(toggleAccordionMenuExpanded())}/>
+                    }
               }
               </div>
             </div>

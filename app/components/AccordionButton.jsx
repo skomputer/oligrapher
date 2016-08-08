@@ -14,7 +14,7 @@ require('../styles/oliFontv1Style.css');
 
 
 
-export default class AccordianButton extends BaseComponent {
+export default class AccordionButton extends BaseComponent {
   constructor(props) {
     super(props);
     if (this.props.hasFoldOut){
@@ -37,7 +37,7 @@ export default class AccordianButton extends BaseComponent {
 
 
     return (
-      <div className="accordianSegment">
+      <div className="accordionSegment">
         <div className={this.props.class + " " + this.props.size}
               onClick={this.props.hasFoldOut ? this._toggleOpen : (!this.props.isDisabled ? this.props.buttonFunc : null)}>
           {
@@ -51,13 +51,13 @@ export default class AccordianButton extends BaseComponent {
           </p>
           {
             this.props.hasFoldOut &&
-            <div className="accordianFoldOutArrow">
+            <div className="accordionFoldOutArrow">
               <span className={isOpen ? "glyphicon glyphicon-chevron-up" : "glyphicon glyphicon-chevron-down"}></span>
             </div>
           }
         </div>
           {
-            this.props.class == "accordianButton" &&
+            this.props.class == "accordionButton" &&
             <div className={this.props.isDisabled ? "extendingButton disabledExtendingButton" : "extendingButton"}
                   onClick = {this.props.options ? null : (!this.props.isDisabled ? this.props.buttonFunc : null)}>
               <i className={"icon-" + this.props.glyphName}></i>
@@ -80,7 +80,7 @@ export default class AccordianButton extends BaseComponent {
             </div>
           }
           { isOpen &&
-            <div className = "accordianFoldOut">
+            <div className = "accordionFoldOut">
               {this.props.children}
             </div>
           }
