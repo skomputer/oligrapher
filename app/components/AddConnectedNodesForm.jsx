@@ -21,14 +21,23 @@ export default class AddConnectedNodesForm extends BaseComponent {
     return (
       <div id="addConnectedNodes" className="editForm form-inline">
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>  
-          <input 
+          <label>
+            Max: 
+          </label>
+          <input
+            style = {{"marginLeft": "3px"}}
             id="addConnectedNodesNum" 
             type="text" 
             title="maximum number of nodes to add"
             className="form-control input-sm" 
             defaultValue="5" 
             ref="num" />
-          { this._renderOptions() }
+          <span style={{"float": "right"}}>
+            <label>
+              Relationship: 
+            </label>
+            { this._renderOptions() }
+          </span>
           &nbsp;<button onClick={this._handleSubmit} title="search for given number of nodes" className="btn btn-sm btn-default">Add Connections</button>
         </HotKeys>
       </div>

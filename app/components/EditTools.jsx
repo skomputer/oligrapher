@@ -6,6 +6,7 @@ import DeleteSelectedButton from './DeleteSelectedButton';
 import UpdateNodeForm from './UpdateNodeForm';
 import UpdateEdgeForm from './UpdateEdgeForm';
 import UpdateCaptionForm from './UpdateCaptionForm';
+import AddConnectedNodesForm from './AddConnectedNodesForm';
 
 export default class EditTools extends BaseComponent {
 
@@ -34,10 +35,23 @@ export default class EditTools extends BaseComponent {
         </div>
 
         { currentForm == 'UpdateNodeForm' && 
-            <UpdateNodeForm 
-              updateNode={updateNode} 
-              data={data} 
-              deselect={deselectAll} /> }
+            <div>
+              <UpdateNodeForm 
+                updateNode={updateNode} 
+                data={data} 
+                deselect={deselectAll} />
+              <p style={{"marginTop": "15px"}}>
+                Search for, and add, entities related this node from the database.
+              </p>
+              <AddConnectedNodesForm
+                data={data}
+                source={source} 
+                closeAddForm={closeAddForm} 
+                graph={graph}
+                addSurroundingNodes={addSurroundingNodes} 
+                addEdge={addEdge} />
+            </div>
+             }
         { currentForm == 'UpdateEdgeForm' && 
           <UpdateEdgeForm 
             updateEdge={updateEdge} 

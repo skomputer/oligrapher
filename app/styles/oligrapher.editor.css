@@ -468,11 +468,6 @@ button#toggleEditTools {
   width: 100%;
 }
 
-#addConnectedNodes {
-  margin-top: 80px;
-  z-index: 2;
-}
-
 #addConnectedNodesNum {
   width: 40px;
 }
