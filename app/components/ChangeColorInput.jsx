@@ -25,7 +25,9 @@ export default class ChangeColorInput extends BaseComponent {
   handleClearClick(e) {
     this.handleClose();
     this.onChange(ds.circleColor[this.props.status]);
-    e.preventDefault();
+    if (e != undefined){
+      e.preventDefault();
+    }
   }
 
   handleValueChange(color) {

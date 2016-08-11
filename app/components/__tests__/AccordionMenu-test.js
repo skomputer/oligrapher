@@ -11,16 +11,16 @@ import AccordionButton from '../AccordionButton';
 
 describe("Node Component", () => {
 
-  let wrapper;
+  // let wrapper;
 
-  beforeEach(() => {
-    wrapper = shallow(
-      <AccordionMenu />
-    )
-  });
+  // beforeEach(() => {
+  //   wrapper = shallow(
+  //     <AccordionMenu />
+  //   )
+  // });
 
-  it("should do something", () => {
-    console.log(wrapper);
-  })
+  // it("should do something", () => {
+  //   console.log(wrapper);
+  // })
 
 });
