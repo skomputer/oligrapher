@@ -253,7 +253,6 @@ class Root extends Component {
                     canRedo={this.props.canRedo}
                     undo={() => dispatch(ActionCreators.undo())}
                     redo={() => dispatch(ActionCreators.redo())} 
-                    fetchInterlocks={fetchInterlocksCallback}
                     turnOffEditTools={() => this.toggleEditTools(false)}
                     turnOnEditTools={() => this.toggleEditTools(true)}
                     updateSettings={updateSettings}
@@ -263,8 +262,6 @@ class Root extends Component {
                     isExpanded={isAccordionMenuExpanded}
                     toggleExpanded={() => dispatch(toggleAccordionMenuExpanded())}/>
                     }
-                  }
-              }
               </div>
             </div>
             { showAnnotations &&
