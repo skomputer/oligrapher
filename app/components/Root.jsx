@@ -216,8 +216,13 @@ class Root extends Component {
               {
                   (graph && (this.props.addForm != null) && isEditor) &&
                    <AddTools 
-                     {...this.props}
+                     addForm={this.props.addForm}
+                     showEditTools={this.props.showEditTools}
+                     data={this.props.data}
+                     dataSource={this.props.dataSource}
+                     graph={this.props.graph}
                      graphApi={graphApi}
+                     nodeResults={this.props.nodeResults}
                      setNodeResults={(nodes) => dispatch(setNodeResults(nodes))}
                      toggleAddForm={(form) => dispatch(toggleAddForm(form))}
                      setHasNodeSubmitted = {(bool) => dispatch(hasAddNodeSubmitted(bool))}
@@ -230,6 +235,7 @@ class Root extends Component {
                      pendingNodeColor = {this.props.pendingNodeColor} />
 
               } 
+
               {
                 graph && 
                 <AccordionMenu

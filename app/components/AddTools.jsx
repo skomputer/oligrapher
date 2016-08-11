@@ -27,6 +27,7 @@ export default class AddTools extends BaseComponent {
   	}
 
   	_renderForm(whichFunc){
+  		console.log(whichFunc);
 	    if (whichFunc == "Add Node"){
 	        return ( <AddNodeInput
 	                ref="addNodeInput"
