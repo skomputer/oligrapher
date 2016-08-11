@@ -27,7 +27,8 @@ const structure = [
     ]
 
 
-export default class AccordionMenu extends BaseComponent {
+
+class AccordionMenu extends BaseComponent {
   constructor(props) {
     super(props);
 
@@ -144,3 +145,5 @@ export default class AccordionMenu extends BaseComponent {
   }
 
 }
+
+export { AccordionMenu as default, structure };
