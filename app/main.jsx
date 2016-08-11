@@ -21,6 +21,7 @@ import merge from 'lodash/object/merge';
 import assign from 'lodash/object/assign';
 import difference from 'lodash/array/difference';
 require ('./styles/oligrapher.css');
+require('./styles/oliFontv1Style.css');
 
 class Oligrapher {
   constructor(config = {}) {

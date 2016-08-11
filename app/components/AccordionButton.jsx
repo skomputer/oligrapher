@@ -9,7 +9,6 @@ import AddCaptionForm from './AddCaptionForm';
 import GraphSettingsForm from './GraphSettingsForm';
 import LayoutButtons from './LayoutButtons';
 import SaveButton from './SaveButton';
-require('../styles/oliFontv1Style.css');
 
 
 

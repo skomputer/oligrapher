@@ -15,7 +15,6 @@ import findIndex from 'lodash/array/findIndex';
 
 import MenuStructure from '../MenuStructure';
 
-require('../styles/oliFontv1Style.css');
 
 const structure = [
         {"value": "Mode", "glyphName": "selectannotations", "hasFoldOut": false, "func": null, "options": [{"glyphName": "annotations"}, {"glyphName": "edit"}]},
