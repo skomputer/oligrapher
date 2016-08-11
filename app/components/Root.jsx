@@ -19,7 +19,8 @@ import { loadGraph, showGraph,
          toggleAnnotations, updateAnnotation,
          deleteAnnotation, moveAnnotation,
          toggleHelpScreen, toggleAccordionMenuExpanded,
-         toggleEditMenuExpanded, setSettings, toggleSettings } from '../actions';
+         toggleEditMenuExpanded, setSettings, toggleSettings,
+         hasAddNodeSubmitted, setAddNodePendingEdges, setPendingNode, setNewNodeColor } from '../actions';
 import Graph from './Graph';
 import Editor from './Editor';
 import AddTools from './AddTools';
@@ -53,7 +54,8 @@ class Root extends Component {
           showEditTools, isEditMenuExpanded, isAccordionMenuExpanded, 
           addForm, showSaveButton, showHelpScreen, 
           hasSettings, graphSettings, showSettings, onSave,
-          currentIndex, annotation, annotations, visibleAnnotations } = this.props;
+          currentIndex, annotation, annotations, visibleAnnotations,
+          hasNodeSubmitted, pendingEdges, pendingNode, pendingNodeColor } = this.props;
     let that = this;
 
     // apply annotation highlights to graph if available
@@ -217,9 +219,17 @@ class Root extends Component {
                      {...this.props}
                      graphApi={graphApi}
                      setNodeResults={(nodes) => dispatch(setNodeResults(nodes))}
-                     toggleAddForm={(form) => dispatch(toggleAddForm(form))} />
+                     toggleAddForm={(form) => dispatch(toggleAddForm(form))}
+                     setHasNodeSubmitted = {(bool) => dispatch(hasAddNodeSubmitted(bool))}
+                     hasNodeSubmitted = {this.props.hasNodeSubmitted}
+                     setPendingEdges = {(edges) => dispatch(setAddNodePendingEdges(edges))}
+                     pendingEdges = {this.props.pendingEdges}
+                     setPendingNode = {(node) => dispatch(setPendingNode(node))}
+                     pendingNode = {this.props.pendingNode}
+                     setPendingNodeColor = {(color) => dispatch(setNewNodeColor(color))}
+                     pendingNodeColor = {this.props.pendingNodeColor} />
 
-              } {console.log(isAccordionMenuExpanded)}
+              } 
               {
                 graph && 
                 <AccordionMenu
@@ -429,7 +439,11 @@ function select(state) {
     graphSettings: state.settings,
     hasSettings: Object.keys(state.settings).length > 0,
     showHelpScreen: state.showHelpScreen,
-    showSettings: state.showSettings
+    showSettings: state.showSettings,
+    hasNodeSubmitted: state.addNodeInput.hasSubmitted,
+    pendingEdges: state.addNodeInput.pendingEdges,
+    pendingNode: state.addNodeInput.pendingNode,
+    pendingNodeColor: state.addNodeInput.nodeColor
   };
 }
 

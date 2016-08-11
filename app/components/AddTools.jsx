@@ -36,7 +36,15 @@ export default class AddTools extends BaseComponent {
 	                source={this.props.dataSource} 
 	                nodes={this.props.graph.nodes}
 	                results={this.props.nodeResults}
-	                setNodeResults={this.props.setNodeResults} />);
+	                setNodeResults={this.props.setNodeResults}
+	                setHasNodeSubmitted={this.props.setHasNodeSubmitted}
+	                hasNodeSubmitted={this.props.hasNodeSubmitted}
+	                pendingEdges = {this.props.pendingEdges}
+	                setPendingEdges = {this.props.setPendingEdges}
+	                pendingNode = {this.props.pendingNode}
+	                setPendingNode = {this.props.setPendingNode}
+	                pendingNodeColor = {this.props.pendingNodeColor}
+	                setPendingNodeColor = {this.props.setPendingNodeColor} />);
 	    } else if (whichFunc == "Add Edge"){
 	        return ( <AddEdgeForm
 	        		ref="addEdgeInput"
@@ -56,7 +64,7 @@ export default class AddTools extends BaseComponent {
 
 
   	render() {
-	    
+
 
     	return (
 		    <div id = "addTools"

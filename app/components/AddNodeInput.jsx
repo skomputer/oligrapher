@@ -11,11 +11,11 @@ export default class AddNodeInput extends BaseComponent {
   constructor(props) {
     super(props);
     this.bindAll('_handleSubmit', '_handleSearch', '_updateForm', '_closeSearch');
-    this.state = {"hasSubmitted": false, "pendingEdges": [], "pendingNodeId": null, "color": ds.circleColor["faded"]};
 
   }
 
   render() {
+    // console.log(this.props);
     // filter existing nodes out of results
     const results = this.props.results.filter(node => !this.props.nodes[node.id]);
 
@@ -71,7 +71,7 @@ export default class AddNodeInput extends BaseComponent {
                style ={{"marginRight": "5px"}}>Color:</label>
               <ChangeColorInput
                 ref="color"
-                value={this.state.color}
+                value={this.props.pendingNodeColor}
                 status={"faded"}
                 onChange={(color) => this._updateColor(color)} />
               <label
@@ -100,13 +100,20 @@ export default class AddNodeInput extends BaseComponent {
     );
   }
 
-  componentDidUpdate(){
+  componentDidMount(){
+    this.props.setPendingNodeColor(ds.circleColor["faded"]);
+  }
 
-    if (this.state.hasSubmitted){
-      if (this.state.pendingEdges.length > 0){
-        this.state.pendingEdges.forEach(edge => this.props.addEdge(edge));
+  componentDidUpdate(){
+    if (this.props.hasNodeSubmitted){
+      if (this.props.pendingEdges != null && this.props.pendingEdges != undefined){
+        if (this.props.pendingEdges.length > 0){
+          this.props.pendingEdges.forEach(edge => this.props.addEdge(edge));
+        }
       }
-      this.setState({hasSubmitted: false, pendingEdges: []});
+      this.props.setHasNodeSubmitted(false);
+      //***
+      this.props.setPendingEdges(null);
       this.clear();
       this.props.closeAddForm();
       this.props.setNodeResults([]);
@@ -126,7 +133,7 @@ export default class AddNodeInput extends BaseComponent {
   }
 
   _updateColor(color){
-    this.setState({color: color});
+    this.props.setPendingNodeColor(color);
   }
 
   _closeSearch(){
@@ -138,19 +145,21 @@ export default class AddNodeInput extends BaseComponent {
     let image = this.refs.image.value.trim();
     let scale = parseFloat(this.refs.scale.value);
     let url = this.refs.url.value.trim();
-    let color = this.state.color;
+    let color = this.props.pendingNodeColor;
     if (name.trim().length > 0){
-      if (this.state.pendingNode != null){
+      if (this.props.pendingNode != null && this.props.pendingNode != undefined){
         //update the pending node with values based on the forms
         //in case the user has changed a value from the default
-        let updated_node = this.state.pendingNode;
+        let updated_node = this.props.pendingNode;
         updated_node.display = { name, image, scale, url, color };
         this.props.addNode(updated_node);
       } else {
         this.props.addNode({ display: { name, image, scale, url, color } });
       }
     }
-    this.setState({hasSubmitted: true, pendingNode: null});
+    this.props.setHasNodeSubmitted(true);
+    this.props.setPendingNode(null);
+    this.props.setPendingNodeColor(ds.circleColor["faded"]);
     if (e != undefined){
       e.preventDefault();
     }
@@ -160,13 +169,15 @@ export default class AddNodeInput extends BaseComponent {
     this.refs.name.value = vals.node.display.name;
     this.refs.url.value = vals.node.display.url;
     this.refs.image.value = vals.node.display.image;
-    this.setState({pendingEdges: vals.edges, pendingNode: vals.node});
+    this.props.setPendingEdges(vals.edges);
+    this.props.setPendingNode(vals.node);
     this.props.setNodeResults([]);
   }
 
   _handleSearch() {
-    if (this.state.pendingNode != null){
-      this.setState({pendingNode: null, pendingEdges: []})
+    if (this.props.pendingNode != null && this.props.pendingNode != undefined){
+      this.props.setPendingEdges(null);
+      this.props.setPendingNode(null);
     }
     // text and source required for search
     if (this.props.source) {

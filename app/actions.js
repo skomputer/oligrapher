@@ -53,6 +53,10 @@ export const TOGGLE_HELP_SCREEN = 'TOGGLE_HELP_SCREEN';
 export const TOGGLE_SETTINGS = 'TOGGLE_SETTINGS';
 export const TOGGLE_ACCORDION_MENU_EXPANDED = 'TOGGLE_ACCORDION_MENU_EXPANDED';
 export const TOGGLE_EDIT_MENU_EXPANDED = 'TOGGLE_EDIT_MENU_EXPANDED';
+export const HAS_ADD_NODE_SUBMITTED = 'HAS_ADD_NODE_SUBMITTED';
+export const SET_ADD_NODE_PENDING_EDGES = 'SET_ADD_NODE_PENDING_EDGES';
+export const SET_PENDING_NODE = 'SET_PENDING_NODE';
+export const SET_NEW_NODE_COLOR = 'SET_NEW_NODE_COLOR';
 
 /*
  * action creators
@@ -262,4 +266,20 @@ export function toggleAccordionMenuExpanded(value) {
 
 export function toggleEditMenuExpanded(value) {
   return { type: TOGGLE_EDIT_MENU_EXPANDED, value };
+}
+
+export function hasAddNodeSubmitted(value) {
+  return { type: HAS_ADD_NODE_SUBMITTED, value };
+}
+
+export function setAddNodePendingEdges(value) {
+  return { type: SET_ADD_NODE_PENDING_EDGES, value };
+}
+
+export function setPendingNode(value) {
+  return { type: SET_PENDING_NODE, value };
+}
+
+export function setNewNodeColor(value) {
+  return { type: SET_NEW_NODE_COLOR, value };
 }
