@@ -13,7 +13,6 @@ import SaveButton from './SaveButton';
 import findIndex from 'lodash/array/findIndex';
 
 
-import MenuStructure from '../MenuStructure';
 
 
 const structure = [
