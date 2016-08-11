@@ -8,7 +8,6 @@ import AddEdgeForm from './AddEdgeForm';
 import AddCaptionForm from './AddCaptionForm';
 import GraphSettingsForm from './GraphSettingsForm';
 import LayoutButtons from './LayoutButtons';
-import SaveButton from './SaveButton';
 
 
 

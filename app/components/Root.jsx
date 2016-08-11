@@ -233,7 +233,7 @@ class Root extends Component {
               {
                 graph && 
                 <AccordionMenu
-                  {...this.props}
+                    graph={this.props.graph}
                     graphApi={graphApi}
                     isEditor={isEditor} 
                     showEditTools={showEditTools} 
@@ -243,6 +243,8 @@ class Root extends Component {
                     setNodeResults={(nodes) => dispatch(setNodeResults(nodes))}
                     toggleAddForm={(form) => dispatch(toggleAddForm(form))}
                     toggleHelpScreen={() => dispatch(toggleHelpScreen())}
+                    canUndo={this.props.canUndo}
+                    canRedo={this.props.canRedo}
                     undo={() => dispatch(ActionCreators.undo())}
                     redo={() => dispatch(ActionCreators.redo())} 
                     fetchInterlocks={fetchInterlocksCallback}
@@ -255,6 +257,7 @@ class Root extends Component {
                     isExpanded={isAccordionMenuExpanded}
                     toggleExpanded={() => dispatch(toggleAccordionMenuExpanded())}/>
                     }
+                  }
               }
               </div>
             </div>

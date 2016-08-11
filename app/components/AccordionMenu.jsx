@@ -131,7 +131,7 @@ export default class AccordionMenu extends BaseComponent {
                     parentOpen={this.props.isExpanded}
                     settings={this.props.settings}
                     updateSettings={this.props.updateSettings}
-                    save={() => this.handleSave()} />
+                    save={this.props.save} />
                 </div> );
     } 
   }
