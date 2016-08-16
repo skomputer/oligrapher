@@ -22,7 +22,7 @@ a.nodeLabel text tspan {
   display: none;
 }
 
-#oligrapherContainer:hover .edge:hover text, .edge.selected text, .edge.highlighted text {
+#oligrapherContainer:hover .edge:hover text, .edge.selected text, .edge.highlighted text,  #oligrapherContainer:hover .edge.hoveredOn text{
   display: inline;
 }
 

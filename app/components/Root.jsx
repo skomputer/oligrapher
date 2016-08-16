@@ -10,13 +10,13 @@ import { loadGraph, showGraph,
          deleteSelection, deselectAll,
          pruneGraph, layoutCircle, 
          addNode, addEdge, addCaption,
-         updateNode, updateEdge, updateCaption,
+         updateNode, updateEdge, updateCaption, setHoveredNode,
          deleteAll, addSurroundingNodes,
          fetchInterlocks,
          toggleEditTools, toggleAddForm,
          setNodeResults, setTitle,
          loadAnnotations, showAnnotation, createAnnotation,
-         toggleAnnotations, updateAnnotation,
+         toggleAnnotations, updateAnnotation, 
          deleteAnnotation, moveAnnotation,
          toggleHelpScreen, setSettings, toggleSettings } from '../actions';
 import Graph from './Graph';
@@ -45,7 +45,7 @@ class Root extends Component {
   }
 
   render() {
-    let { dispatch, graph, selection, isEditor, isLocked, title,
+    let { dispatch, graph, selection, isEditor, hoveredNode, isLocked, title,
           showEditTools, showSaveButton, showHelpScreen, 
           hasSettings, graphSettings, showSettings, onSave,
           currentIndex, annotation, annotations, visibleAnnotations } = this.props;
@@ -157,6 +157,8 @@ class Root extends Component {
                   <Graph 
                     ref={(c) => { this.graph = c; if (c) { c.root = this; } }}
                     {...this.props}
+                    setHoveredNode={(nodeId) => dispatch(setHoveredNode(nodeId))}
+                    hoveredNode={this.props.hoveredNode}
                     graph={annotatedGraph ? annotatedGraph : graph}
                     isEditor={isEditor}
                     isLocked={isLocked}
@@ -360,6 +362,7 @@ function select(state) {
     graph: state.graph.present,
     canUndo: state.graph.past.length > 0,
     canRedo: state.graph.future.length > 0,
+    hoveredNode: state.editTools.hoveredNode,
     selection: state.selection,
     zoom: state.zoom,
     showEditTools: state.editTools.visible,

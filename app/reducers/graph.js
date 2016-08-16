@@ -9,8 +9,13 @@ import { LOAD_GRAPH, SHOW_GRAPH, NEW_GRAPH,
          SET_HIGHLIGHTS, TOGGLE_EDIT_TOOLS } from '../actions';
 import Graph from '../models/Graph';
 import Edge from '../models/Edge';
+import merge from 'lodash/object/merge';
 
-export default function graph(state = null, action) {
+const initState = { 
+  hoveredNode: null
+};
+
+export default function graph(state = initState, action) {
   let newState, graph;
 
   switch (action.type) {
@@ -97,6 +102,7 @@ export default function graph(state = null, action) {
 
   case SET_HIGHLIGHTS:
     return Graph.setHighlights(state, action.highlights, action.otherwiseFaded);
+
 
   default:
     return state;

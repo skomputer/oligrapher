@@ -598,6 +598,7 @@ class Graph {
     let sin = Math.sin(angle);
     return { x: x * cos - y * sin, y: x * sin + y * cos };
   }
+
 }
 
 module.exports = Graph;

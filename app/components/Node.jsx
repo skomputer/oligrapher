@@ -12,7 +12,7 @@ import Helpers from '../models/Helpers';
 export default class Node extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleDragStart', '_handleDrag', '_handleDragStop', '_handleClick');
+    this.bindAll('_handleDragStart', '_handleDrag', '_handleDragStop', '_handleClick', '_highlightEdges', '_removeHighlightEdges');
     this.state = props.node.display;
   }
 
@@ -33,7 +33,9 @@ export default class Node extends BaseComponent {
           id={groupId} 
           className="node" 
           transform={transform}
-          onClick={this._handleClick}>
+          onClick={this._handleClick}
+          onMouseEnter={this._highlightEdges}
+          onMouseLeave={this._removeHighlightEdges}>
           <NodeCircle node={n} selected={this.props.selected} />
           { this.state.name ?  <NodeLabel node={n} /> : null }
         </g>
@@ -58,6 +60,14 @@ export default class Node extends BaseComponent {
       x: this.state.x,
       y: this.state.y
     };
+  }
+
+  _highlightEdges(){
+    this.props.setHoveredNode(this.props.node.id);
+  }
+
+  _removeHighlightEdges(){
+    this.props.setHoveredNode(null);
   }
 
   // while dragging node and its edges are updated only in state, not store
