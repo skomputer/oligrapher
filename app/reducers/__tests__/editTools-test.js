@@ -48,6 +48,56 @@ describe("editTools reducer", ()=>{
 	      	})).toEqual({addForm: "Add Node"})
 	    });
 
+	    it('sets addForm to null when sent a string identical to the current form', ()=>{
+	    	expect(reducer({addForm: "Add Node"}, {
+	        	type: "TOGGLE_ADD_FORM", form: "Add Node"
+	      	})).toEqual({addForm: null})
+	    });
+
+	    it('sets addForm to a new value when sent a string other than the current form', ()=>{
+	    	expect(reducer({addForm: "Add Node"}, {
+	        	type: "TOGGLE_ADD_FORM", form: "Add Edge"
+	      	})).toEqual({addForm: "Add Edge"})
+	    });
+
+	    it('sets addForm to null when sent a null value for form', ()=>{
+	    	expect(reducer({addForm: "Add Node"}, {
+	        	type: "TOGGLE_ADD_FORM", form: null
+	      	})).toEqual({addForm: null})
+	    });
+
+
+  	});
+
+  	describe('SET_NODE_RESULTS', ()=>{
+
+	    it('sets the nodeResults array to the array passed in', ()=>{
+	    	let sampleNodeArray =  [{ id: "nodeA", display: { name: "Node A" } },
+	        						{ id: "nodeB", display: { name: "Node B" } }];
+
+	    	expect(reducer({nodeResults: []}, { 
+		        type: 'SET_NODE_RESULTS',
+		        nodes: sampleNodeArray
+	      	})).toEqual({nodeResults: sampleNodeArray})
+	    });
+
+  	});
+
+  	describe('CREATE_ANNOTATION', ()=>{
+
+	    it('sets visible to false regardless of what is passed in', ()=>{
+
+	    	expect(reducer({visible: true}, { 
+		        type: 'CREATE_ANNOTATION',
+		        newIndex: 6
+	      	})).toEqual({visible: false});
+
+	      	expect(reducer({visible: true}, { 
+		        type: 'CREATE_ANNOTATION',
+		        newIndex: "pancakes"
+	      	})).toEqual({visible: false});
+	    });
+
   	});
 
     describe('TOGGLE_EDIT_MENU_EXPANDED', ()=>{
@@ -77,34 +127,6 @@ describe("editTools reducer", ()=>{
 
   });
 
-  /*
-  
-  it('stores the annotations in state.list when LOAD_ANNOTATIONS is triggered', () =>{
-    let annotations = [{
-      id: '123',
-      header: "header",
-      text: "some text here",
-      nodeIds: ["x1","33180","15957"],
-      edgeIds: [],
-      captionIds: []
-    }];
-    
-    
-    expect(reducer(undefined, loadAnnotations(annotations))).toEqual({
-      list: [{
-        id: '123',
-        header: "header",
-        text: "some text here",
-        nodeIds: ["x1","33180","15957"],
-        edgeIds: [],
-        captionIds: []
-      }],
-      visible: true,
-      currentIndex: 0
-    });
-
-  });
-  */
   
 
 });
