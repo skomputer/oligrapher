@@ -434,7 +434,6 @@ function select(state) {
     isEditMenuExpanded: state.editTools.expanded,
     isAccordionMenuExpanded: state.accordionMenu.expanded,
     addForm: state.editTools.addForm,
-    showAddForm: state.editTools.addVisible,
     nodeResults: state.editTools.nodeResults,
     title: state.title,
     currentIndex: state.annotations.currentIndex,

@@ -209,7 +209,7 @@ export function toggleEditTools(value) {
 }
 
 export function toggleAddForm(form) {
-  return { type: TOGGLE_ADD_FORM, form, form: form };
+  return { type: TOGGLE_ADD_FORM, form };
 }
 
 export function setNodeResults(nodes) {
