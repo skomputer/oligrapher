@@ -11,11 +11,8 @@ import Graph from '../models/Graph';
 import Edge from '../models/Edge';
 import merge from 'lodash/object/merge';
 
-const initState = { 
-  hoveredNode: null
-};
 
-export default function graph(state = initState, action) {
+export default function graph(state = null, action) {
   let newState, graph;
 
   switch (action.type) {
