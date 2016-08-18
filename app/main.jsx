@@ -21,6 +21,7 @@ import merge from 'lodash/object/merge';
 import assign from 'lodash/object/assign';
 import difference from 'lodash/array/difference';
 require ('./styles/oligrapher.css');
+import 'react-select/dist/react-select.css';
 
 class Oligrapher {
   constructor(config = {}) {

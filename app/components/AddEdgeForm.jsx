@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BaseComponent from './BaseComponent';
+import Select from 'react-select';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy';
 import { HotKeys } from 'react-hotkeys';
@@ -33,22 +34,35 @@ export default class AddEdgeForm extends BaseComponent {
 
     let nodes = sortBy(values(this.props.nodes), (node) => node.display.name);
 
+    let nodesMapped = nodes.map(function(node, i) {
+            return (
+              { key: node.id, value: node.id, label: node.display.name }
+            );
+          });
+
     return (
       <div id="addEdgeForm" className="editForm">
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
           <form onSubmit={this._handleSubmit}>
-            <select defaultValue={node1Id} className="form-control input-sm" ref="node1Id">
+            <Select
+                ref="node1Id"
+                value={node1Id}
+                name="node 1"
+                options={nodesMapped}
+            />
+            {/*<select defaultValue={node1Id} className="form-control input-sm" ref="node1Id">
               <option value="">Node 1</option>
               { nodes.map((node, i) =>
                 <option key={node.id} value={node.id}>{node.display.name}</option>
               ) }
-            </select>
-            <select defaultValue={node2Id} className="form-control input-sm" ref="node2Id">
+            </select>*/}
+            {/*<select defaultValue={node2Id} className="form-control input-sm" ref="node2Id">
               <option value="">Node 2</option>
               { nodes.map((node, i) =>
                 <option key={node.id} value={node.id}>{node.display.name}</option>
               ) }
             </select>
+          */}
             <input type="text" placeholder="label" className="form-control input-sm" ref="label" />
           </form>
         </HotKeys>
