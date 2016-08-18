@@ -80,7 +80,7 @@ export default class Caption extends BaseComponent {
 
   _handleDragStart(e, ui) {
     e.preventDefault();
-    this._startDrag = ui.position;
+    this._startDrag = ui;
     this._startPosition = {
       x: this.state.x,
       y: this.state.y
@@ -92,8 +92,8 @@ export default class Caption extends BaseComponent {
 
     this._dragging = true;
 
-    let deltaX = (ui.position.clientX - this._startDrag.clientX) / this.graph.state.actualZoom;
-    let deltaY = (ui.position.clientY - this._startDrag.clientY) / this.graph.state.actualZoom;
+    let deltaX = (ui.x - this._startDrag.x) / this.graph.state.actualZoom;
+    let deltaY = (ui.y - this._startDrag.y) / this.graph.state.actualZoom;
     let x = this._startPosition.x + deltaX;
     let y = this._startPosition.y + deltaY;
 
