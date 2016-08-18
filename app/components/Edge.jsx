@@ -86,7 +86,7 @@ export default class Edge extends BaseComponent {
   }
 
   _handleDragStart(event, ui) {
-    this._startDrag = ui.position;
+    this._startDrag = ui;
     this._startPosition = {
       x: this.state.cx,
       y: this.state.cy
@@ -99,8 +99,8 @@ export default class Edge extends BaseComponent {
     this._dragging = true; // so that _handleClick knows it's not just a click
 
     let e = this.props.edge;
-    let deltaX = (ui.position.clientX - this._startDrag.clientX) / this.graph.state.actualZoom;
-    let deltaY = (ui.position.clientY - this._startDrag.clientY) / this.graph.state.actualZoom;
+    let deltaX = (ui.x - this._startDrag.x) / this.graph.state.actualZoom;
+    let deltaY = (ui.y - this._startDrag.y) / this.graph.state.actualZoom;
     let cx = this._startPosition.x + deltaX;
     let cy = this._startPosition.y + deltaY;
 
