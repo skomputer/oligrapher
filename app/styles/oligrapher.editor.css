@@ -213,3 +213,29 @@ button#toggleEditTools {
 #edgeUrlInput {
   width: 337px;
 }
+
+/*overwriting react-select styles*/
+
+.Select-control {
+  font-size: 12px;
+}
+
+.Select-menu-outer {
+  font-size: 0.8em;
+}
+
+.Select-input {
+  height: 30px;
+}
+
+.Select .Select-placeholder{
+  line-height: 30px;
+}
+
+.Select .Select-input > input {
+  height: 30px;
+}
+
+.Select {
+  margin-bottom: 10px;
+}
