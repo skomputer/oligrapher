@@ -224,7 +224,7 @@ button#toggleEditTools {
   font-size: 0.8em;
 }
 
-.Select-input {
+.Select .Select-input {
   height: 30px;
 }
 
