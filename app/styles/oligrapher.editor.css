@@ -216,8 +216,9 @@ button#toggleEditTools {
 
 /*overwriting react-select styles*/
 
-.Select-control {
+.Select .Select-control {
   font-size: 12px;
+  height: 32px;
 }
 
 .Select-menu-outer {
