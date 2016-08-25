@@ -41,6 +41,12 @@ a.nodeLabel text tspan {
   position: relative;
 }
 
+/* overwrite bootstrap 'row' margins to eliminate horz scroll */
+#oligrapherContainer .row {
+  margin: 0px -10px;
+  padding: 0px;
+}
+
 #oligrapherGraphContainer {
   position: relative;
   border: 1px solid #f8f8f8;

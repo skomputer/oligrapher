@@ -85,9 +85,9 @@
 }
 
 #oligrapherSaveButton {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
+  position: absolute;
+  bottom: 10px;
+  left: 25px;
   background-color: #f8f8f8;
 }
 
