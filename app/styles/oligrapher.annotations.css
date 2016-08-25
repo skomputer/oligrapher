@@ -112,7 +112,7 @@
 
 #oligrapherNavButtons {
   margin-top: 5px;
-  height: 60px;
+  margin-bottom: 10px
 }
 
 #oligrapherNavButtons button {
@@ -156,12 +156,14 @@
 }
 
 #oligrapherGraphAnnotations {
-  height: calc(100vh - 30px);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 #oligrapherAnnotationList {
   overflow: scroll;
-  height: calc(100% - 275px);
+  flex: 1 0;
 }
 
 #oligrapherAnnotationListItems {
@@ -208,7 +210,8 @@
 #oligrapherGraphAnnotationForm {
   margin-top: 10px;
   margin-left: -10px;
-  height: 225px;
+  align-self: flex-end;
+  width: 100%;
 }
 
 #oligrapherGraphAnnotationForm textarea {
@@ -225,7 +228,8 @@
 
 #oligrapherGraphAnnotationFormText {
   margin-bottom: 10px;
-  max-height: 100px;
+  min-height: 25px;
+  max-height: 125px;
   overflow: scroll;
 }
 
@@ -558,17 +562,20 @@
 
 /* Corresponds to bootstrap "breaking point" */
 @media screen and (max-width: 992px) { 
-  #oligrapherAnnotationList {
+  #oligrapherGraphAnnotations {
     height: auto;
-  }  
-
-  #oligrapherGraphAnnotationForm {
-    height: 300px;
+    display: initial;
+    flex-direction: initial;
   }
 
-  #oligrapherGraphAnnotationFormText {
-    max-height: 175px;
+  #oligrapherNavButtons, #oligrapherAnnotationList, #oligrapherGraphAnnotationForm {
+    width: calc(100% - 20px);
+    margin-left: auto;
+    margin-right: auto;
+
   }
+
+
 
 }
 

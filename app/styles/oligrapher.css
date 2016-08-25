@@ -52,6 +52,7 @@ a.nodeLabel text tspan {
 }
 
 #oligrapherGraphCol {
+  min-height: 350px;
   height: 100vh;
 }
 
