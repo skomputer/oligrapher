@@ -1,5 +1,15 @@
+html, body{
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+
 #oligrapherContainer:focus, #oligrapherContainer :focus {
   outline: none;
+}
+
+#oligrapher {
+  min-height: 100%;
 }
 
 a.nodeLabel {
@@ -41,6 +51,10 @@ a.nodeLabel text tspan {
   position: relative;
 }
 
+#oligrapherGraphCol{
+  height: 100vh;
+}
+
 /* overwrite bootstrap 'row' margins to eliminate horz scroll */
 #oligrapherContainer .row {
   margin: 0px -10px;
@@ -50,6 +64,11 @@ a.nodeLabel text tspan {
 #oligrapherGraphContainer {
   position: relative;
   border: 1px solid #f8f8f8;
+  height: 85%
+}
+
+#oligrapherGraphContainer svg {
+  height: 100%;
 }
 
 #oligrapherHeader {
@@ -61,6 +80,12 @@ a.nodeLabel text tspan {
   font-weight: 300;
   margin-top: 3px;
   margin-bottom: 5px;
+}
+
+#oligrapherEditorContainer {
+  height: 100%;
+  position: absolute;
+  top: 0px;
 }
 
 #oligrapherTitle.oligrapherTitleInput {
