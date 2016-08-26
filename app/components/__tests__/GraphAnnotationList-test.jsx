@@ -25,7 +25,6 @@ describe("GraphAnnotationList", () => {
           annotations={annotations}
           currentIndex={currentIndex}
           isEditor={true}
-          create={jest.genMockFunction()}
           show={jest.genMockFunction()}
           move={jest.genMockFunction()}
           hideEditTools={jest.genMockFunction()} />
@@ -45,10 +44,6 @@ describe("GraphAnnotationList", () => {
       });
     });
 
-    it("shows add button", () => {
-      let button = wrapper.find("button");
-      expect(button.text()).toBe("New Annotation");
-    });
   });
 
   describe("behavior", () => {
@@ -56,7 +51,6 @@ describe("GraphAnnotationList", () => {
     let create, show, move, hideEditTools;
 
     beforeEach(() => {
-      create = jest.genMockFunction();
       show = jest.genMockFunction();
       move = jest.genMockFunction();
       hideEditTools = jest.genMockFunction();
@@ -65,7 +59,6 @@ describe("GraphAnnotationList", () => {
           annotations={annotations}
           currentIndex={currentIndex}
           isEditor={true}
-          create={create}
           show={show}
           move={move}
           hideEditTools={hideEditTools} />
@@ -83,11 +76,6 @@ describe("GraphAnnotationList", () => {
       expect(hideEditTools.mock.calls.length).toBe(items.length);
     });
 
-    it("creates annotation", () => {
-      let button = wrapper.find("button");
-      button.simulate("click");
-      expect(create.mock.calls.length).toBe(1);
-    });
 
     // TODO: test dragging
   });
