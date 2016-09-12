@@ -8,7 +8,7 @@ import merge from 'lodash/object/merge';
 export default class Caption extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleDragStart', '_handleDrag', '_handleDragStop', '_handleClick');
+    this.bindAll('_handleDragStart', '_handleDrag', '_handleDragStop', '_doDragStart', '_doDrag', '_doDragStop', '_handleClick');
     this.state = props.caption.display;
   }
 
@@ -78,8 +78,19 @@ export default class Caption extends BaseComponent {
     }
   }
 
+
+  // keep initial position for comparison with drag position
   _handleDragStart(e, ui) {
     e.preventDefault();
+    var isOnlyOne = (this.graph.props.selection["nodeIds"].length + this.graph.props.selection["captionIds"].length + this.graph.props.selection["edgeIds"].length) < 2;
+    if (!this.graph.props.showEditTools || !this.props.selected || isOnlyOne) {
+        this._doDragStart(e, ui);
+    } else {
+      this.props.onStart(e, ui, this);
+    }
+  }
+
+  _doDragStart(e, ui) {
     this._startDrag = ui.position;
     this._startPosition = {
       x: this.state.x,
@@ -87,9 +98,19 @@ export default class Caption extends BaseComponent {
     };
   }
 
+  // while dragging node and its edges are updated only in state, not store
   _handleDrag(e, ui) {
-    if (this.props.isLocked) return;
 
+    if (this.props.isLocked) return;
+    var isOnlyOne = (this.graph.props.selection["nodeIds"].length + this.graph.props.selection["captionIds"].length + this.graph.props.selection["edgeIds"].length) < 2;
+    if (!this.graph.props.showEditTools || !this.props.selected || isOnlyOne) {
+      this._doDrag(e, ui, false);
+    } else {
+      this.props.onDrag(e, ui, this);
+    }
+  }
+
+  _doDrag(e, ui, isMultiple) {
     this._dragging = true;
 
     let deltaX = (ui.position.clientX - this._startDrag.clientX) / this.graph.state.actualZoom;
@@ -98,10 +119,29 @@ export default class Caption extends BaseComponent {
     let y = this._startPosition.y + deltaY;
 
     this.setState({ x, y });
+
+    //update throughout drag so nodes know their siblings' positions when
+    //multiple nodes are dragged simultaneously
+    if (isMultiple){
+      if (this._dragging) {
+        this.props.moveCaption(this.props.caption.id, this.state.x, this.state.y);
+      }
+    }
   }
 
+  // store updated once dragging is done
   _handleDragStop(e, ui) {
     // event fires every mouseup so we check for actual drag before updating store
+    var isOnlyOne = (this.graph.props.selection["nodeIds"].length + this.graph.props.selection["captionIds"].length + this.graph.props.selection["edgeIds"].length) < 2;
+    if (!this.graph.props.showEditTools || !this.props.selected || isOnlyOne) {
+      this._doDragStop(e, ui);
+    } else {
+      this.props.onStop(e, ui, this);
+    }
+  }
+
+  _doDragStop(e, ui){
+     // event fires every mouseup so we check for actual drag before updating store
     if (this._dragging) {
       this.props.moveCaption(this.props.caption.id, this.state.x, this.state.y);
     }

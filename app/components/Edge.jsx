@@ -9,7 +9,7 @@ import classNames from 'classnames';
 export default class Edge extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleDragStart', '_handleDrag', '_handleDragStop', '_handleClick', '_handleTextClick');
+    this.bindAll('_handleDragStart', '_handleDrag', '_handleDragStop', '_doDragStart', '_doDrag', '_doDragStop', '_handleClick', '_handleTextClick');
     // need control point immediately for dragging
     let { cx, cy } = this._calculateGeometry(props.edge.display);
     this.state = merge({}, props.edge.display, { cx, cy });
@@ -85,7 +85,7 @@ export default class Edge extends BaseComponent {
            JSON.stringify(nextState) !== JSON.stringify(this.state);
   }
 
-  _handleDragStart(event, ui) {
+  _doDragStart(event, ui) {
     event.preventDefault();
     this._startDrag = ui.position;
     this._startPosition = {
@@ -94,7 +94,7 @@ export default class Edge extends BaseComponent {
     }
   }
 
-  _handleDrag(event, ui) {
+  _doDrag(event, ui, isMultiple) {
     if (this.props.isLocked) return;
 
     this._dragging = true; // so that _handleClick knows it's not just a click
@@ -106,12 +106,42 @@ export default class Edge extends BaseComponent {
     let cy = this._startPosition.y + deltaY;
 
     this.setState({ cx, cy });
+
+    if (isMultiple){
+      if (this._dragging) {
+        this.props.moveEdge(this.props.edge.id, this.state.cx, this.state.cy);
+      }
+    }
+  }
+
+  _doDragStop(event, ui) {
+    if (this._dragging) {
+      this.props.moveEdge(this.props.edge.id, this.state.cx, this.state.cy);
+    }
+  }
+
+  _handleDragStart(event, ui) {
+    if (!this.graph.props.showEditTools || !this.props.selected) {
+      this._doDragStart(event, ui, false);
+    } else {
+      this.props.onStart(event, ui, this);
+    }
+  }
+
+  _handleDrag(event, ui) {
+    if (!this.graph.props.showEditTools || !this.props.selected) {
+      this._doDrag(event, ui);
+    } else {
+      this.props.onDrag(event, ui, this);
+    }
   }
 
   _handleDragStop(e, ui) {
     // event fires every mouseup so we check for actual drag before updating store
-    if (this._dragging) {
-      this.props.moveEdge(this.props.edge.id, this.state.cx, this.state.cy);
+    if (!this.graph.props.showEditTools || !this.props.selected) {
+      this._doDragStop(event, ui);
+    } else {
+      this.props.onStop(event, ui, this);
     }
   }
 

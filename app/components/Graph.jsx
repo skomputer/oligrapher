@@ -10,21 +10,24 @@ import values from 'lodash/object/values';
 import min from 'lodash/collection/min';
 import max from 'lodash/collection/max';
 import includes from 'lodash/collection/includes';
+import filter from 'lodash/collection/filter';
+
 
 export default class Graph extends BaseComponent {
   constructor(props) {
     super(props);
-    this.bindAll('_handleDragStart', '_handleDrag', '_handleDragStop');
+    this.bindAll('_handleDragStart', '_handleDrag', '_handleDragStop', '_handleDragGroupStart', '_handleDragGroup', '_handleDragGroupStop', '_manageDragStage');
     this.nodes = {};
     this.edges = {};
+    this.captions = {};
     this.mounted = false;
     let viewBox = this._computeViewbox(props.graph, props.zoom, props.viewOnlyHighlighted);
     this.state = { x: 0, y: 0, viewBox, height: props.height };
+
   }
 
   render() {
     let { x, y, prevGraph, viewBox, height } = this.state;
-
     return (
       <svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" className="Graph" width="100%" height={height} viewBox={viewBox} preserveAspectRatio="xMidYMid">
         <DraggableCore
@@ -69,7 +72,10 @@ export default class Graph extends BaseComponent {
         selected={this.props.selection && includes(this.props.selection.edgeIds, e.id)}
         clickEdge={this.props.clickEdge}
         moveEdge={this.props.moveEdge} 
-        isLocked={this.props.isLocked} />);
+        isLocked={this.props.isLocked}
+        onStart={this._handleDragGroupStart}
+        onDrag={this._handleDragGroup}
+        onStop={this._handleDragGroupStop} />);
   }
 
   _renderNodes() {
@@ -83,20 +89,26 @@ export default class Graph extends BaseComponent {
         selected={this.props.selection && includes(this.props.selection.nodeIds, n.id)}
         clickNode={this.props.clickNode} 
         moveNode={this.props.moveNode} 
-        isLocked={this.props.isLocked} />);
+        isLocked={this.props.isLocked}
+        onStart={this._handleDragGroupStart}
+        onDrag={this._handleDragGroup}
+        onStop={this._handleDragGroupStop} />);
   }
 
   _renderCaptions() {
     return values(this.props.graph.captions).map((c, i) => 
       <Caption 
-        ref={(c) => { if (c) { c.graph = this; } }}
+        ref={(a) => { this.captions[c.id] = a; if (a) { a.graph = this; }} }
         key={c.id} 
         caption={c}
         graphId={this.props.graph.id}
         selected={this.props.selection && includes(this.props.selection.captionIds, c.id)}
         moveCaption={this.props.moveCaption} 
         clickCaption={this.props.clickCaption} 
-        isLocked={this.props.isLocked} />);
+        isLocked={this.props.isLocked}
+        onStart={this._handleDragGroupStart}
+        onDrag={this._handleDragGroup}
+        onStop={this._handleDragGroupStop} />);
   }
 
   _renderMarkers() {
@@ -213,6 +225,47 @@ export default class Graph extends BaseComponent {
     let y = deltaY + this._startPosition.y;
     return { x, y };
   }
+
+  //GROUP DRAGGING
+  // keep initial position for comparison with drag position
+  _handleDragGroupStart(e, ui, that) {
+     this._manageDragStage(e, ui, that, "start");
+  }
+
+  _handleDragGroup(e, ui, that) {
+    this._manageDragStage(e, ui, that, "drag");
+  }
+
+  _handleDragGroupStop(e, ui, that) {
+    this._manageDragStage(e, ui, that, "stop");
+  }
+
+  _manageDragStage(e, ui, that, stage){
+    var theSelection = this.props.selection;
+    var elements = ["node", "caption", "edge"];
+    //cycle through elements and move selected elements
+    for (var i = 0; i < elements.length; i++){
+      var thisElement = theSelection[elements[i] + "Ids"];
+      var selectedElements = _.filter(this[elements[i] + "s"], function(d){
+        return _.indexOf(thisElement, d.props[elements[i]]["id"]) != -1;
+      })
+
+      if (stage == "start"){
+        _.forEach(selectedElements, function(d){
+          d._doDragStart(e, ui);
+        })
+      } else if (stage == "drag"){
+        _.forEach(selectedElements, function(d){
+          d._doDrag(e, ui, true);
+        })
+      } else {
+        _.forEach(selectedElements, function(d){
+          d._doDragStop(e, ui);
+        })
+      }
+    }
+  }
+
 
   // TRANSITION ANIMATION
 
