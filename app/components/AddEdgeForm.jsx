@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BaseComponent from './BaseComponent';
+import Select from 'react-select';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy';
 import { HotKeys } from 'react-hotkeys';
@@ -33,23 +34,34 @@ export default class AddEdgeForm extends BaseComponent {
 
     let nodes = sortBy(values(this.props.nodes), (node) => node.display.name);
 
+    let nodesMapped = nodes.map(function(node, i) {
+            return (
+              { key: node.id, value: node.id, label: node.display.name }
+            );
+          });
+
+    //note the keypress listener on input so it submits the form on enter
+    //due to Select library elements containing input forms
     return (
       <div id="addEdgeForm" className="editForm">
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
           <form onSubmit={this._handleSubmit}>
-            <select defaultValue={node1Id} className="form-control input-sm" ref="node1Id">
-              <option value="">Node 1</option>
-              { nodes.map((node, i) =>
-                <option key={node.id} value={node.id}>{node.display.name}</option>
-              ) }
-            </select>
-            <select defaultValue={node2Id} className="form-control input-sm" ref="node2Id">
-              <option value="">Node 2</option>
-              { nodes.map((node, i) =>
-                <option key={node.id} value={node.id}>{node.display.name}</option>
-              ) }
-            </select>
-            <input type="text" placeholder="label" className="form-control input-sm" ref="label" />
+            <Select
+                ref="node1Id"
+                value={node1Id}
+                name="node 1"
+                options={nodesMapped}
+                placeholder="First node"
+            />
+            <Select
+                ref="node2Id"
+                value={node2Id}
+                name="node 2"
+                options={nodesMapped}
+                placeholder="Second node"
+            />
+            <input type="text" placeholder="label" className="form-control input-sm" ref="label"
+                    onKeyPress={(e) => e.key == "Enter" ? this._handleSubmit(e) : null } />
           </form>
         </HotKeys>
       </div>
@@ -57,8 +69,8 @@ export default class AddEdgeForm extends BaseComponent {
   }
 
   _handleSubmit(e) {
-    let node1Id = this.refs.node1Id.value;
-    let node2Id = this.refs.node2Id.value;
+    let node1Id = this.refs.node1Id.state.value;
+    let node2Id = this.refs.node2Id.state.value;
     let label = this.refs.label.value.trim();
 
     if (node1Id && node2Id && label) {

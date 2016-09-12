@@ -38,7 +38,8 @@
     "redux-undo": "^0.6.0",
     "shortid": "^2.2.4",
     "springy": "^2.7.1",
-    "titleize": "^1.0.0"
+    "titleize": "^1.0.0",
+    "react-select": "^0.9.1"
   },
   "devDependencies": {
     "babel-core": "^6.7.7",
