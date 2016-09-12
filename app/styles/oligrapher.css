@@ -2,6 +2,23 @@
   outline: none;
 }
 
+.oligrapherCursorPan {
+  cursor: grab;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+}
+
+.oligrapherCursorPan:active {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+}
+
+.oligrapherCursorLasso {
+  cursor: crosshair;
+}
+
+
 a.nodeLabel {
   cursor: pointer;
 }

@@ -4,6 +4,7 @@ import BaseComponent from './BaseComponent';
 import Node from './Node';
 import Edge from './Edge';
 import Caption from './Caption';
+import Lasso from './Lasso';
 import GraphModel from '../models/Graph';
 import { DraggableCore } from 'react-draggable';
 import values from 'lodash/object/values';
@@ -24,20 +25,28 @@ export default class Graph extends BaseComponent {
 
   render() {
     let { x, y, prevGraph, viewBox, height } = this.state;
-
     return (
       <svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" className="Graph" width="100%" height={height} viewBox={viewBox} preserveAspectRatio="xMidYMid">
         <DraggableCore
           handle="#zoom-handle"
           moveOnStartChange={false}
-          onStart={this._handleDragStart}
-          onDrag={this._handleDrag}
-          onStop={this._handleDragStop}>
+          onStart={!this.props.isLasso ? this._handleDragStart : null}
+          onDrag={!this.props.isLasso ? this._handleDrag : null}
+          onStop={!this.props.isLasso ? this._handleDragStop : null}
+          >
           <g id="zoom" transform={`translate(${x}, ${y})`}>
             <rect id="zoom-handle" x="-5000" y="-5000" width="10000" height="10000" fill="#fff" />
             { this._renderEdges() }
             { this._renderNodes() }
             { this._renderCaptions() }
+            {this.props.isLasso &&
+              <Lasso graph={this}
+                selectNode={this.props.clickNode}
+                selectEdge={this.props.clickEdge}
+                selectCaption={this.props.clickCaption}
+                simulateShiftKeyDown={this.props.simulateShiftKeyDown}
+                simulateShiftKeyUp={this.props.simulateShiftKeyUp}
+                toggleLasso={this.props.toggleLasso} />}
           </g>
         </DraggableCore>
         <defs dangerouslySetInnerHTML={ { __html: this._renderMarkers() } }/>
@@ -68,7 +77,8 @@ export default class Graph extends BaseComponent {
         zoom={this.props.zoom}
         selected={this.props.selection && includes(this.props.selection.edgeIds, e.id)}
         clickEdge={this.props.clickEdge}
-        moveEdge={this.props.moveEdge} 
+        moveEdge={this.props.moveEdge}
+        updateEndPoints={this.props.updateEndPoints} 
         isLocked={this.props.isLocked} />);
   }
 

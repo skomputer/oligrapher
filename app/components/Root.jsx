@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { ActionCreators } from 'redux-undo';
 import { loadGraph, showGraph, 
          zoomIn, zoomOut, resetZoom, 
-         moveNode, moveEdge, moveCaption,
+         moveNode, moveEdge, moveCaption, updateEndPoints,
          swapNodeHighlight, swapEdgeHighlight, swapCaptionHighlight,
          swapNodeSelection, swapEdgeSelection, swapCaptionSelection,
          deleteSelection, deselectAll,
@@ -27,6 +27,7 @@ import EditButton from './EditButton';
 import HelpButton from './HelpButton';
 import HelpScreen from './HelpScreen';
 import SettingsButton from './SettingsButton';
+import LassoButton from './LassoButton';
 import GraphSettingsForm from './GraphSettingsForm';
 import SaveButton from './SaveButton';
 import GraphModel from '../models/Graph';
@@ -41,7 +42,7 @@ import filter from 'lodash/collection/filter';
 export class Root extends Component {
   constructor(props) {
     super(props);
-    this.state = { shiftKey: false };
+    this.state = { shiftKey: false, lasso: false };
   }
 
   render() {
@@ -156,7 +157,8 @@ export class Root extends Component {
                   updateTitle={updateTitle}
                   isEditor={isEditor} /> }
 
-              <div id="oligrapherGraphContainer">
+              <div id="oligrapherGraphContainer"
+                    className={this.state.lasso ? "oligrapherCursorLasso" : "oligrapherCursorPan"}>
                 { graph && 
                   <Graph 
                     ref={(c) => { this.graph = c; if (c) { c.root = this; } }}
@@ -164,12 +166,18 @@ export class Root extends Component {
                     graph={annotatedGraph ? annotatedGraph : graph}
                     isEditor={isEditor}
                     isLocked={isLocked}
+                    isLasso={this.state.lasso}
                     clickNode={clickNode}
                     clickEdge={clickEdge}
                     clickCaption={clickCaption}
+                    toggleLasso={() => this.toggleLasso(!this.state.lasso)}
                     moveNode={(graphId, nodeId, x, y) => dispatch(moveNode(graphId, nodeId, x, y))} 
-                    moveEdge={(graphId, edgeId, cx, cy) => dispatch(moveEdge(graphId, edgeId, cx, cy))} 
-                    moveCaption={(graphId, captionId, x, y) => dispatch(moveCaption(graphId, captionId, x, y))} /> 
+                    moveEdge={(graphId, edgeId, cx, cy) => dispatch(moveEdge(graphId, edgeId, cx, cy))}
+                    updateEndPoints={(graphId, edgeId, xa, ya, xb, yb) => dispatch(updateEndPoints(graph, edgeId, xa, ya, xb, yb))}  
+                    moveCaption={(graphId, captionId, x, y) => dispatch(moveCaption(graphId, captionId, x, y))}
+                    simulateShiftKeyDown={() => this.simulateShiftKeyDown()}
+                    simulateShiftKeyUp={() => this.simulateShiftKeyUp()}
+                     /> 
                 }
 
                 { graph &&
@@ -191,6 +199,8 @@ export class Root extends Component {
                 <div id="oligrapherMetaButtons">
                   { isEditor && 
                     <EditButton toggle={() => this.toggleEditTools()} showEditTools={showEditTools} /> }
+                  { isEditor && 
+                    <LassoButton toggle={() => this.toggleLasso(!this.state.lasso)} lassoActive={this.state.lasso} showEditTools={showEditTools} /> }
                   { isEditor && hasSettings && 
                     <SettingsButton toggleSettings={(value) => dispatch(toggleSettings(value))} /> }
                   { isEditor && 
@@ -307,6 +317,10 @@ export class Root extends Component {
     this.props.dispatch(toggleEditTools(value));
   };
 
+  toggleLasso(value)  { 
+    this.setState({ lasso: value})
+  };
+
 
   prevIndex() {
     let { currentIndex, numAnnotations } = this.props;
@@ -345,6 +359,14 @@ export class Root extends Component {
       captionIds: keys(highlights.captions) 
     }
     this.props.dispatch(updateAnnotation(this.props.currentIndex, updateData));    
+  }
+
+  simulateShiftKeyDown() {
+    this.setState({"shiftKey": true});
+  }
+
+  simulateShiftKeyUp() {
+    this.setState({"shiftKey": false});
   }
 
   handleSave() {

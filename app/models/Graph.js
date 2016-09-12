@@ -158,6 +158,7 @@ class Graph {
   }
 
   static updateEdgePosition(edge, graph) {
+
     // get nodes connected by edge
     let n1 = graph.nodes[edge.node1_id];
     let n2 = graph.nodes[edge.node2_id];
@@ -365,7 +366,6 @@ class Graph {
         merge({}, graph.edges[edgeId], omit(data, "id"))
       )
     );
-
     let edges = assign({}, graph.edges, { [edgeId]: edge });
 
     return assign({}, graph, { edges });
@@ -584,9 +584,13 @@ class Graph {
     return Math.atan2(y2 - y1, x2 - x1);
   }
 
+  static updateEndPoints(graph, edgeId, xa, ya, xb, yb) {
+    return this.updateEdge(graph, edgeId, { display: { xa, ya, xb, yb } });
+  }
+
   static moveEdgeNode(edge, nodeNum, x, y) {
     let angle = this.calculateEdgeAngle(edge);
-    let newEdge = merge({}, edge, { display: (nodeNum == 1 ? { x1: x, y1: y } : { x2: x, y2: y }) });
+    let newEdge = merge({}, edge, { display: (nodeNum == 1 ? { x1: x, y1: y, xa: edge.display.xa, ya: edge.display.ya, xb: edge.display.xb, yb: edge.display.yb } : { x2: x, y2: y, xa: edge.display.xa, ya: edge.display.ya, xb: edge.display.xb, yb: edge.display.yb }) });
     let newAngle = this.calculateEdgeAngle(newEdge);
     let deltaAngle = newAngle - angle;
     let rotatedPoint = this.rotatePoint(edge.display.cx, edge.display.cy, deltaAngle);

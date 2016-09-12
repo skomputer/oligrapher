@@ -52,6 +52,11 @@ button#toggleEditTools {
   outline: none;
 }
 
+button#oligrapherLassoButton svg {
+  margin-top: 1px;
+  margin-left: -1px;
+}
+
 #buttons {
   position: absolute;
   top: 15px;
@@ -65,6 +70,14 @@ button#toggleEditTools {
   margin-right: 10px;
   margin-bottom: 10px;
   pointer-events: all;
+}
+
+#oligrapherLassoButton.editContentMode {
+  background-color: rgba(0, 255, 0, 0.5);
+}
+
+#oligrapherLassoButton.editAnnotationsMode {
+  background-color: rgba(255, 255, 0, 0.5);
 }
 
 #addNodeInput {

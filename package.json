@@ -24,6 +24,7 @@
   "homepage": "https://github.com/skomputer/oligrapher2/",
   "dependencies": {
     "classnames": "^2.2.0",
+    "kld-affine": "^1.0.0",
     "lodash": "^3.10.1",
     "react": "^0.14.8",
     "react-anything-sortable": "^1.1.0",
@@ -38,6 +39,7 @@
     "redux-undo": "^0.6.0",
     "shortid": "^2.2.4",
     "springy": "^2.7.1",
+    "svg-intersections": "^0.2.4",
     "titleize": "^1.0.0"
   },
   "devDependencies": {
