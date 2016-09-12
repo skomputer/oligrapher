@@ -1,10 +1,11 @@
 import { TOGGLE_EDIT_TOOLS, TOGGLE_ADD_FORM, SET_NODE_RESULTS, 
-         CREATE_ANNOTATION } from '../actions';
+         CREATE_ANNOTATION, SET_HOVERED_NODE } from '../actions';
 
 const initState = { 
   visible: false,
   addForm: null,
-  nodeResults: []
+  nodeResults: [],
+  hoveredNode: null
 };
 
 export default function editTools(state = initState, action) {
@@ -23,6 +24,9 @@ export default function editTools(state = initState, action) {
 
   case CREATE_ANNOTATION:
     return Object.assign({}, state, { visible: false });
+
+  case SET_HOVERED_NODE:
+    return Object.assign({}, state, { hoveredNode: action.node });
 
   default:
     return state;

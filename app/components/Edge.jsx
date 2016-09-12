@@ -12,7 +12,7 @@ export default class Edge extends BaseComponent {
     this.bindAll('_handleDragStart', '_handleDrag', '_handleDragStop', '_handleClick', '_handleTextClick');
     // need control point immediately for dragging
     let { cx, cy } = this._calculateGeometry(props.edge.display);
-    this.state = merge({}, props.edge.display, { cx, cy });
+    this.state = merge({}, props.edge.display, { cx, cy }, {"hoveringOnNode": props.hoveringOnConnectedNode});
   }
 
   render() {
@@ -21,7 +21,8 @@ export default class Edge extends BaseComponent {
     let width = 1 + (e.display.scale - 1) * 5;
     let selected = this.props.selected;
     let highlighted = e.display.status == "highlighted";
-
+    let hoveredOn = this.props.hoveringOnConnectedNode ? "hoveredOn" : null;
+    
     return (
       <DraggableCore
         ref={(c) => this.draggable = c}
@@ -30,7 +31,7 @@ export default class Edge extends BaseComponent {
         onStart={this._handleDragStart}
         onDrag={this._handleDrag}
         onStop={this._handleDragStop}>
-        <g id={sp.groupId} className={classNames({ edge: true, selected, highlighted })}>
+        <g id={sp.groupId} className={classNames({ edge: true, selected, highlighted, hoveredOn })}>
           { selected ? <path 
             className="edge-selection" 
             d={sp.curve} 
@@ -76,7 +77,7 @@ export default class Edge extends BaseComponent {
   }
 
   componentWillReceiveProps(props) {
-    let newState = merge({ label: null, url: null }, props.edge.display);
+    let newState = merge({ label: null, url: null }, props.edge.display, {"hoveringOnNode": props.hoveringOnConnectedNode});
     this.setState(newState);
   }
 
@@ -181,7 +182,6 @@ export default class Edge extends BaseComponent {
       yb = y1;
       is_reverse = true;
     }
-
     // generate curve offset if it doesn't exist
     if (!cx || !cy) {
       cx = -(ya - y) * eds.curveStrength;

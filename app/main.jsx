@@ -15,7 +15,7 @@ import { loadGraph, showGraph, newGraph,
          pruneGraph, layoutCircle,
          setHighlights, clearHighlights,
          loadAnnotations, setTitle,
-         toggleEditTools } from './actions';
+         toggleEditTools, setHoveredNode } from './actions';
 import Graph from './models/Graph';
 import merge from 'lodash/object/merge';
 import assign from 'lodash/object/assign';
@@ -221,6 +221,10 @@ class Oligrapher {
   updateCaption(captionId, data) {
     this.root.dispatchProps.dispatch(updateCaption(captionId, data));
     return this.root.getWrappedInstance().props.graph.captions[captionId];
+  }
+
+  setHoveredNode(node) {
+    this.root.dispatchProps.dispatch(setHoveredNode(node));
   }
 
   prune() {

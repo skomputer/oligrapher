@@ -45,7 +45,15 @@ export default class Graph extends BaseComponent {
     );
   }
 
+  hasHovered(){
+
+  }
+
   // COMPONENT LIFECYCLE
+
+  shouldComponentUpdate() {
+    return true;
+  }
   
   componentDidMount() {
     this.mounted = true;
@@ -59,8 +67,10 @@ export default class Graph extends BaseComponent {
   // RENDERING
 
   _renderEdges() {
+    let connected = GraphModel.edgesConnectedToNode(this.props.graph, this.props.hoveredNode);
     return values(this.props.graph.edges).map((e, i) =>  
       <Edge 
+        hoveringOnConnectedNode={includes(connected, e)}
         ref={(c) => { this.edges[e.id] = c; if (c) { c.graph = this; } }} 
         key={e.id} 
         edge={e} 
@@ -77,7 +87,8 @@ export default class Graph extends BaseComponent {
       <Node 
         ref={(c) => { this.nodes[n.id] = c; if (c) { c.graph = this; } }} 
         key={n.id} 
-        node={n} 
+        node={n}
+        setHoveredNode={this.props.setHoveredNode} 
         graph={this.props.graph} 
         zoom={this.props.zoom} 
         selected={this.props.selection && includes(this.props.selection.nodeIds, n.id)}

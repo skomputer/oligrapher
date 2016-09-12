@@ -32,6 +32,7 @@ export const DELETE_SELECTION = 'DELETE_SELECTION';
 export const UPDATE_NODE = 'UPDATE_NODE';
 export const UPDATE_EDGE = 'UPDATE_EDGE';
 export const UPDATE_CAPTION = 'UPDATE_CAPTION';
+export const SET_HOVERED_NODE = 'SET_HOVERED_NODE';
 export const PRUNE_GRAPH = 'PRUNE_GRAPH';
 export const LAYOUT_CIRCLE = 'LAYOUT_CIRCLE';
 export const DELETE_ALL = 'DELETE_ALL';
@@ -174,6 +175,10 @@ export function updateEdge(edgeId, data) {
 
 export function updateCaption(captionId, data) {
   return { type: UPDATE_CAPTION, captionId, data };
+}
+
+export function setHoveredNode(node) {
+  return { type: SET_HOVERED_NODE, node };
 }
 
 export function pruneGraph() {
