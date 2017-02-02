@@ -11,15 +11,18 @@ describe("GraphAnnotationForm", () => {
   };
   let remove;
   let update;
+  let create;
 
   beforeEach(() => {
     remove = jest.genMockFunction();
     update = jest.genMockFunction();
+    create = jest.genMockFunction();
     wrapper = mount(
       <GraphAnnotationForm
         annotation={annotation}
         remove={remove}
-        update={update} />
+        update={update}
+        create={create} />
     );
   });
 
@@ -35,8 +38,13 @@ describe("GraphAnnotationForm", () => {
     });
 
     it("shows delete button", () => {
-      let button = wrapper.find("button");
+      let button = wrapper.find("button.btn-danger");
       expect(button.text()).toBe("Remove");
+    });
+
+    it("shows add button", () => {
+      let button = wrapper.find("button.btn-primary");
+      expect(button.text()).toBe("New Annotation");
     });
   });
 
@@ -59,8 +67,14 @@ describe("GraphAnnotationForm", () => {
       expect(update.mock.calls[0][0].text).toBe(newText);
     });
 
+    it("creates annotation when create annotation button is pressed", () => {
+      let button = wrapper.find("button.btn-primary");
+      button.simulate("click");
+      expect(create.mock.calls.length).toBe(1);
+    });
+
     it("removes annotation when delete button is clicked", () => {
-      let button = wrapper.find("button");
+      let button = wrapper.find("button.btn-danger");
       spyOn(window, 'confirm').and.returnValue(true);
       button.simulate("click");
 

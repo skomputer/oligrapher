@@ -34,7 +34,6 @@ class Oligrapher {
       logActions: false, 
       viewOnlyHighlighted: true 
     }, config);
-    config.height = config.graphHeight || config.root.offsetHeight;
 
     this.rootElement = config.root;
 

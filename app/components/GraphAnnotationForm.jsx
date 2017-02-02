@@ -21,7 +21,7 @@ export default class GraphAnnotationForm extends BaseComponent {
 
 
     return (
-      <div id="oligrapherGraphAnnotationForm">
+      <div id="oligrapherGraphAnnotationForm"> 
         <textarea
           id="oligrapherGraphAnnotationFormHeader"
           ref="header"
@@ -39,7 +39,16 @@ export default class GraphAnnotationForm extends BaseComponent {
           text={this.props.annotation.text}
           options={editorOptions}
           onChange={this._handleTextChange} />
+        <button
+            style={{"float": "left"}} 
+            title="add annotation"
+            id="oligrapherCreateGraphAnnotationButton"
+            className="btn btn-sm btn-primary" 
+            onClick={this.props.create}>
+            New Annotation
+        </button>
         <button 
+          style={{"float": "right"}} 
           title="remove selected annotation"
           className="btn btn-danger btn-sm" 
           onClick={this._handleRemove}>Remove</button>

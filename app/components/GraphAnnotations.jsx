@@ -26,7 +26,8 @@ export default class GraphAnnotations extends BaseComponent {
       <GraphAnnotationForm 
         annotation={this.props.annotation}
         remove={this._remove} 
-        update={this._update} />
+        update={this._update}
+        create={this.props.create} />
     );
 
     let annotationComponent = (

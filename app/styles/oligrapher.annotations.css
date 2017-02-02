@@ -79,9 +79,9 @@
 }
 
 #oligrapherSaveButton {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
+  position: absolute;
+  bottom: 10px;
+  left: 25px;
   background-color: #f8f8f8;
 }
 
@@ -106,7 +106,7 @@
 
 #oligrapherNavButtons {
   margin-top: 5px;
-  margin-bottom: 25px;
+  margin-bottom: 10px
 }
 
 #oligrapherNavButtons button {
@@ -147,6 +147,17 @@
   0%   { color: #666; background-color:#eee; text-shadow: 0 0 9px rgba(255,255,255,0); }
   50%  { color: #666; background-color:#ffd; text-shadow: 0 0 9px rgba(255,255,128,0.75); }
   100% { color: #666; background-color:#eee; text-shadow: 0 0 9px rgba(255,255,255,0); }
+}
+
+#oligrapherGraphAnnotations {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#oligrapherAnnotationList {
+  overflow: scroll;
+  flex: 1 0;
 }
 
 #oligrapherAnnotationListItems {
@@ -192,6 +203,9 @@
 
 #oligrapherGraphAnnotationForm {
   margin-top: 10px;
+  margin-left: -10px;
+  align-self: flex-end;
+  width: 100%;
 }
 
 #oligrapherGraphAnnotationForm textarea {
@@ -199,7 +213,6 @@
 }
 
 #oligrapherGraphAnnotationFormText, #oligrapherGraphAnnotationFormHeader {
-  /* height: 400px; */
   padding: 10px;
   padding-left: 16px;
   padding-right: 16px;
@@ -208,7 +221,14 @@
 }
 
 #oligrapherGraphAnnotationFormText {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  min-height: 25px;
+  max-height: 125px;
+  overflow: scroll;
+}
+
+#oligrapherCreateGraphAnnotationButton {
+  margin-bottom: 10px;
 }
 
 #oligrapherSettingsForm {
@@ -531,3 +551,25 @@
 
 .medium-editor-placeholder:after {
   color: #b3b3b1; }
+
+
+
+/* Corresponds to bootstrap "breaking point" */
+@media screen and (max-width: 992px) { 
+  #oligrapherGraphAnnotations {
+    height: auto;
+    display: initial;
+    flex-direction: initial;
+  }
+
+  #oligrapherNavButtons, #oligrapherAnnotationList, #oligrapherGraphAnnotationForm {
+    width: calc(100% - 20px);
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+
+
+
+}
+

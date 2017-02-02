@@ -200,7 +200,9 @@ export class Root extends Component {
                 </div>
 
                 { (isEditor && showSettings && hasSettings) &&  <GraphSettingsForm settings={graphSettings} updateSettings={updateSettings} /> }
+              
               </div>
+              { showSaveButton && isEditor && onSave && <SaveButton save={() => this.handleSave()} /> }
             </div>
             { showAnnotations &&
               <GraphAnnotations 
@@ -230,7 +232,6 @@ export class Root extends Component {
               </button>
             </div> 
           }
-          { showSaveButton && isEditor && onSave && <SaveButton save={() => this.handleSave()} /> }
           { showHelpScreen && <HelpScreen source={this.props.dataSource} close={() => dispatch(toggleHelpScreen(false))} /> }
         </HotKeys>
       </div>
