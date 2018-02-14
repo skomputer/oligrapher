@@ -1,3 +1,7 @@
+# NEW URL: [public-accountability/oligrapher](https://github.com/public-accountability/oligrapher)
+
+This project has moved to [public-accountability/oligrapher](https://github.com/public-accountability/oligrapher). Please post any issues there. Thanks! 
+
 # Oligrapher 2
 
 Oligrapher is a JavaScript app for visualizing network graphs. It allows a user to design a nice-looking network graph using a combination of imported or manually entered data, and to create a collection of annotations for a graph.
